@@ -292,7 +292,7 @@ You will also need to add prefixes even if you're working on a Frame 2 or 3 proj
   // Includes
   @include transition(0.5s);
   // Properties in alphabetical order
-  // Frame 2.0 auto-prefixes so no need to include them
+  // Frame 2+ auto-prefixes so no need to include them
   // Otherwise prefixed versions are listed under the main property
   background-color: transparent;
   border: 0;
@@ -350,7 +350,7 @@ The order should be as follows, all items within each group should be sorted alp
 1. Pseudo-selectors (e.g. `&:hover`), this way they can change nested elements
 1. Modifiers (e.g. `&#{&}--big`), this gives them precedence over all nested elements
 1. Parents (e.g. `.parent &`), so that they have the greatest priority
-1. Media queries (e.g. `@include mq($from: large) {}`)
+1. Media queries (e.g. `@include mq($from: large)`)
 
 ### [Pseudo-elements & -selectors](#pseudo-elements-selectors)
 
