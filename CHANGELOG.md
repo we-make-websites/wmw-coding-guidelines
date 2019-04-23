@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.2 – 2019-04-23
+* SCSS/CSS – Fixed incorrect CSS in examples
+
 ## 1.0.1 – 2019-04-23
 * SCSS/CSS – Minor formatting and naming fixes
 

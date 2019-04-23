@@ -680,10 +680,8 @@ $GRID_MARGIN: 20px;
 .foo {
   box-shadow: 0 0 rgba(0, 0, 0, 0.5);
   color: rgb(255, 0, 0);
-  font: {
-   size: 1rem;
-   weight: 700;
-  }
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .foo, .foobar,
