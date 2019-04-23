@@ -1,4 +1,8 @@
 # Changelog
 
-## 1.0.0 - 2019-04-23
-* Initial release of updated guidelines
+## 1.0.1 – 2019-04-23
+* SCSS/CSS – Minor formatting and naming fixes
+
+## 1.0.0 – 2019-04-23
+* JS – Linked to Shopify's guidelines
+* SCSS/CSS – Initial release of updated guidelines

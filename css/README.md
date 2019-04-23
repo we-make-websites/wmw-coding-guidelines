@@ -20,7 +20,7 @@ Visit [@we-make-websites/stylelint-config](https://www.npmjs.com/package/@we-mak
 
 ## General
 
-* [DRY (Do Not Repeat Yourself)](#dry)
+* [DRY (Don't Repeat Yourself)](#dry)
 * [Notes on Frame](#notes-on-frame)
 
 ### [DRY (Do Not Repeat Yourself)](#dry)
@@ -72,7 +72,7 @@ Not all of these guidelines will be possible when working with an existing site 
 * [Mobile first](#mobile-first)
 * [Responsive banner padding](#responsive-banner-padding)
 * [Fullscreen elements](#fullscreen-elements)
-* [Magic Numbers](#magic-numbers)
+* [Magic numbers](#magic-numbers)
 
 ### [Mobile first](#mobile-first)
 
@@ -149,7 +149,7 @@ Not all of these guidelines will be possible when working with an existing site 
 * Don't define all four positioning properties to set an element to fullscreen as these do not work on button elements
 * Instead use `height: 100%` and `width: 100%`
 
-### [Magic Numbers](#magic-numbers)
+### [Magic numbers](#magic-numbers)
 
 #### Don't
 ```scss
@@ -397,7 +397,7 @@ Common properties that benefit from variables are:
 ## Naming
 
 * [BEM & CSS](#bem-css)
-* [BEM Modifiers](#bem-modifiers)
+* [BEM modifiers](#bem-modifiers)
 * [BEM naming](#bem-naming)
 * [HTML naming](#html-naming)
 * [Descriptive naming](#descriptive-naming)
@@ -482,7 +482,7 @@ The below example will only work when you are using Frame 2 or higher as previou
 }
 ```
 
-### [BEM Modifiers](#bem-modifiers)
+### [BEM modifiers](#bem-modifiers)
 
 #### Don't
 ```html
@@ -630,8 +630,6 @@ $GRID_MARGIN: 20px;
 > **🗒 Note:** Local variables are only available in the declaration they are defined in.
 
 ## Spacing
-
-* CSS selectors should describe hierarchy, not the look as the look can change
 
 * [Indenting](#indenting)
 * [Whitespace](#whitespace)
