@@ -1,8 +1,8 @@
 # CSS Guidelines
 
-## styelint & NPM
+## stylelint & NPM
 
-There is an NPM module available to import our CSS guidelines rules into stylelint. Simply use `yarn add @we-make-websites/stylelint-config` to install.
+There is an NPM module available to import our CSS guidelines into stylelint. Simply use `yarn add @we-make-websites/stylelint-config` to install (Frame 3 already includes this package).
 
 Visit [@we-make-websites/stylelint-config](https://www.npmjs.com/package/@we-make-websites/stylelint-config) or the [repo](https://github.com/we-make-websites/stylelint-config) for more information.
 
@@ -715,7 +715,8 @@ $GRID_MARGIN: 20px;
 
 * [Calculations](#calculation)
 * [Capitalisation](#capitalisation)
-* [Commenting](#commenting)
+* [Commenting (inline)](#commenting-inline)
+* [Commenting (introductory)](#commenting-introductory)
 * [Zero values & units](#zero-values-units)
 * [Parenthesise on @includes](#parenthesise-on-includes)
 
@@ -772,7 +773,7 @@ $GRID_MARGIN: 20px;
 * Use lowercase for selectors and properties
 * Refer to [Variable naming](#variable-naming) for global and local variables
 
-### [Commenting](#commenting)
+### [Commenting (inline)](#commenting-inline)
 
 #### Don't
 ```scss
@@ -797,6 +798,22 @@ $GRID_MARGIN: 20px;
 * It's easier to un-comment
 * Inline comments should start on a new line preceding the property they're describing
 * Use sentence case for your comments
+* Do not end with a full stop
+
+### [Commenting (introductory)](#commenting-introductory)
+
+```css
+/**
+ * Component: Footer Social
+ * -----------------------------------------------------------------------------
+ * Social icons and links in footer.
+ *
+ */
+```
+
+* Include an introductory comment at the start of each file
+* Describe what folder it's in, the file's name, and list any special features or conditions
+* All lines except the first one should have a full stop
 
 ### [Zero values & units](#zero-values-units)
 
