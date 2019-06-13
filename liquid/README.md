@@ -13,13 +13,16 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 1. [Characters](#characters)
 1. [Commenting (inline)](#commenting-inline)
 1. [Commenting (introductory)](#commenting-introductory)
+1. [Conditional settings](#conditional-settings)
+1. [DRY (Don't Repeat Yourself)](#dry)
 1. [If or Case](#if-or-case)
 1. [Indenting](#indenting)
+1. [Modularise](#modularise)
 1. [Schema settings](#schema-settings)
 1. [Spacing](#spacing)
 1. [Variable grouping](#variable-group)
 1. [Variable naming](#variable-naming)
-1. [Whitespace operators](#whitespace-operators)
+1. [Whitespace control](#whitespace-control)
 
 ## [Characters](#characters)
 
@@ -83,6 +86,116 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 ------------------------------------------------------------------------------
 {%- endcomment -%}
 ```
+
+## [Conditional settings](#conditional-settings)
+
+### Don't
+```html
+{% for block in section.blocks %}
+  <div class="block">
+    <img src="{{ block.settings.image | img_url: '2000x' }}" alt="{{ block.settings.image.alt }}">
+
+    <h2 class="block__title">{{ block.settings.title }}</h2>
+    <div class="block__text rte">{{ block.settings.text }}</div>
+
+    <a class="block__button" href="{{ block.settings.button_url }}">
+      {{ block.settings.button_text }}
+    </a>
+  </div>
+{% endfor %}
+```
+
+### Do
+```html
+{% for block in section.blocks %}
+  <div class="block">
+    {% if block.settings.image != '' %}
+      <img src="{{ block.settings.image | img_url: '2000x' }}" alt="{{ block.settings.image.alt }}">
+    {% endif %}
+
+    {% if block.settings.title != '' %}
+      <h2 class="block__title">{{ block.settings.title }}</h2>
+    {% endif %}
+
+    {% if block.settings.text != '' %}
+      <div class="block__text rte">{{ block.settings.text }}</div>
+    {% endif %}
+
+    {% if block.settings.button url != '' and block.settings.button_text != '' %}
+      <a class="block__button" href="{{ block.settings.button_url }}">
+        {{ block.settings.button_text }}
+      </a>
+    {% endif %}
+  </div>
+{% endfor %}
+```
+
+* In areas where client can customise the content do not assume that they will want to display every part of a section's settings
+* Wrap each setting in a `{% if %}` to hide it if no content is entered
+* When testing make sure the styling maintains, clients will expect it to work with missing settings
+
+## [DRY (Don't Repeat Yourself)](#dry)
+
+### Don't
+```html
+<!-- A custom page slider so four slides have been hard-coded in section settings -->
+<!-- This means we can't use {% for block in section.blocks %} -->
+<div class="slide slide--1">
+  <div class="slide__background" style="background-image: url({{ block.settings.slide_1_image | img_url: '2000x' }});">
+
+  <div class="slide__text">
+    <h2 class="slide__heading">{{ block.settings.slide_1_text }}</h2>
+    <p class="slide__copy">{{ block.settings.slide_1_text }}</p>
+
+    <div class="slide__buttons">
+      <a class="slide__button" href="{{ block.settings.slide_1_button_1_url }}">
+        {{ block.settings.slide_1_button_1_text }}
+      </a>
+
+      <a class="slide__button" href="{{ block.settings.slide_1_button_2_url }}">
+        {{ block.settings.slide_1_button_2_text }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- All of the code is repeat for each hard-coded slide instance -->
+<div class="slide slide--2">...</div>
+<div class="slide slide--3">...</div>
+<div class="slide slide--4">...</div>
+```
+
+### Do
+```html
+{% for i in (1..4) %}
+  {% assign slide_image = 'slide_#_image' | replace: '#', i %}
+  {% assign slide_heading = 'slide_#_heading' | replace: '#', i %}
+  {% assign slide_text = 'slide_#_text' | replace: '#', i %}
+
+  <div class="slide slide--{{ i }}">
+    <div class="slide__background" style="background-image: url({{ block.settings[slide_image] | img_url: '2000x' }});">
+
+    <div class="slide__text">
+      <h2 class="slide__heading">{{ block.settings[slide_heading] }}</h2>
+      <p class="slide__copy">{{ block.settings[slide_text] }}</p>
+
+      <div class="slide__buttons">
+        {% for j in (1..2) %}
+          {% assign slide_button_url = 'slide_#_button_%_url' | replace: '#', i | replace: '%', j %}
+          {% assign slide_button_text = 'slide_#_button_%_text' | replace: '#', i | replace: '%', j %}
+          <a class="slide__button" href="{{ block.settings[slide_button_url]}}">
+            {{ block.settings[slide_button_text] }}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+```
+
+* Use `{% for i in (1..#) %}` in combination with `{% assign %}` and replace to remove repetitive code
+* Use the iteration to set variables which are then used to call the block's settings
+* Use Liquid's built in tags to avoid repeating code
 
 ## [If or Case](#if-or-case)
 
@@ -196,6 +309,12 @@ Specific rules for certain settings of `type`:
 * `textarea` – Do not use for raw HTML, use `html` for this
 * `url` – Only use for all choices, use one of the limited selections if you are only expecting a certain output (`collection`, `product`, `blog`, `page`, and `article`), do not use for video, use `video_url` for this
 
+## [Snippets](#snippets)
+
+* Use Liquid snippets to keep files small and manageable
+* In the same way of block gets its own SCSS and JS file, consider splitting it into its own snippet
+* Snippets are especially useful for repeating content
+
 ## [Spacing](#spacing)
 
 ### Don't
@@ -287,23 +406,23 @@ Specific rules for certain settings of `type`:
 * Do not use abbreviations or shortened words
 * Keep the name easy to understand
 
-## [Whitespace operators](#whitespace-operators)
+## [Whitespace control](#whitespace-control)
 
 ### Don't
 ```html
 {%- if variable_name -%}
-  {% assign another_variable = false %}
+  {%- assign another_variable = false -%}
 {%- endif -%}
 ```
 
 ### Do
 ```html
 {% if variable_name %}
-  {%- assign another_variable = false -%}
+  {% assign another_variable = false %}
 {% endif %}
 ```
 
-* Only use [whitespace operators](https://help.shopify.com/en/themes/liquid/basics/whitespace_) on the `{% assign %}`, `{% capture %}`, and `{% comment %}` tags
-* If you need to trim whitespace from objects then you can use whitespace operators such as `{{- section.settings.body_copy -}}`
+* Do not use [whitespace control](https://help.shopify.com/en/themes/liquid/basics/whitespace_) on tags
+* If you need to trim whitespace from objects then you can use whitespace controls, e.g. `{{- section.settings.body_copy -}}`
 
-> **🗒 Note:** Not all apps support whitespace operators.
+> **🗒 Note:** Not all apps support whitespace controls.
