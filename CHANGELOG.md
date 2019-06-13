@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.1 – 2019-06-11
+## 1.1.1 – 2019-06-12
 * Liquid – Added rules for conditional settings, DRY, and snippets
 * Liquid – Updated whitespace control rule
 * Liquid – Corrected terminology

@@ -28,12 +28,12 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 ### Don't
 ```html
-{%- assign variable = "It's time for fun" -%}
+{% assign variable = "It's time for fun" %}
 ```
 
 ### Do
 ```html
-{%- assign variable = 'It\'s time for fun' -%}
+{% assign variable = 'It\'s time for fun' %}
 ```
 
 * Use apostrophes `'` in Liquid objects, tags, and filters, not quotations `"`
@@ -51,7 +51,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 ### Do
 ```html
-{%- comment -%} Only display description if tag is present {%- endcomment -%}
+{% comment %} Only display description if tag is present {% endcomment %}
 {% if has_tag %}
   <div class="foo">{{ product.description }}</div>
 {% endif %}
@@ -73,7 +73,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 * Describe what folder it's in, the file's name, and list any special features or conditions
 * If it's an include show an example include with its variables, e.g.
 ```html
-{%- comment -%}
+{% comment %}
 ------------------------------------------------------------------------------
   Snippet: Responsive image
   It creates a style tag and it restricts an image from growing larger than its max resolution.
@@ -84,7 +84,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
   In your liquid template file, copy the following line
   - {% include 'responsive-image' with image: featured_image, image_class: "css-class", wrapper_class: "wrapper-css-class", max_width: 700, max_height: 800 %}
 ------------------------------------------------------------------------------
-{%- endcomment -%}
+{% endcomment %}
 ```
 
 ## [Conditional settings](#conditional-settings)
@@ -343,19 +343,19 @@ Specific rules for certain settings of `type`:
 
 ### Don't
 ```html
-{%- assign variable_a = 'Hello world' -%}
+{% assign variable_a = 'Hello world' %}
 
 <h1>{{ product.title }}</h1>
 <div>{{ product.description }}</div>
-{%- assign variable_b = 'Hello world' -%}
-{%- assign variable_c = 'Hello world' -%}
+{% assign variable_b = 'Hello world' %}
+{% assign variable_c = 'Hello world' %}
 
 {% for variant in product.variants %}
   <h2>{{ variant.title }}</h2>
-  {%- assign variable_d = variant.title -%}
+  {% assign variable_d = variant.title %}
 {% endfor %}
 
-{%- assign variable_e = 'Hello world' -%}
+{% assign variable_e = 'Hello world' %}
 {% for product in recommendations.products %}
   <span>{{ product.title | link_to: product.url }}</span>
 {% endfor %}
@@ -363,17 +363,17 @@ Specific rules for certain settings of `type`:
 
 ### Do
 ```html
-{%- assign variable_a = 'Hello world' -%}
-{%- assign variable_b = 'Hello world' -%}
-{%- assign variable_c = 'Hello world' -%}
-{%- assign variable_e = 'Hello world' -%}
+{% assign variable_a = 'Hello world' %}
+{% assign variable_b = 'Hello world' %}
+{% assign variable_c = 'Hello world' %}
+{% assign variable_e = 'Hello world' %}
 
 <h1>{{ product.title }}</h1>
 <div>{{ product.description }}</div>
 
 {% for variant in product.variants %}
   <h2>{{ variant.title }}</h2>
-  {%- assign variable_d = variant.title -%}
+  {% assign variable_d = variant.title %}
 {% endfor %}
 
 {% for product in recommendations.products %}
@@ -388,18 +388,18 @@ Specific rules for certain settings of `type`:
 
 ### Don't
 ```html
-{%- assign variableName = 'Hello world' -%}
-{%- capture img-var -%}
+{% assign variableName = 'Hello world' %}
+{% capture img-var %}
   This isn't right
-{%- endcapture -%}
+{% endcapture %}
 ```
 
 ### Do
 ```html
-{%- assign variable_name = 'Hello world' -%}
-{%- capture another_name}
+{% assign variable_name = 'Hello world' %}
+{% capture another_name %}
   This is correct
-{%- endcapture -%}
+{% endcapture %}
 ```
 
 * Use snake case when naming variables

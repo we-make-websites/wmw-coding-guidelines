@@ -74,7 +74,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ### Do
 ```html
-{%- comment -%} Comment goes here {%- endcomment -%}
+{% comment %} Comment goes here {% endcomment %}
 ```
 
 * Do not use HTML comments, use the `{% comment %}` filter with whitespace operators
