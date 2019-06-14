@@ -17,12 +17,12 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 1. [DRY (Don't Repeat Yourself)](#dry)
 1. [If or Case](#if-or-case)
 1. [Indenting](#indenting)
-1. [Modularise](#modularise)
+1. [Language strings](#language-strings)
 1. [Schema settings](#schema-settings)
+1. [Snippets](#snippets)
 1. [Spacing](#spacing)
-1. [Variable grouping](#variable-group)
-1. [Variable naming](#variable-naming)
-1. [Whitespace control](#whitespace-control)
+1. [Variables](#variables)
+1. [Whitespace controls](#whitespace-controls)
 
 ## [Characters](#characters)
 
@@ -144,7 +144,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
   <div class="slide__background" style="background-image: url({{ block.settings.slide_1_image | img_url: '2000x' }});">
 
   <div class="slide__text">
-    <h2 class="slide__heading">{{ block.settings.slide_1_text }}</h2>
+    <h2 class="slide__title">{{ block.settings.slide_1_text }}</h2>
     <p class="slide__copy">{{ block.settings.slide_1_text }}</p>
 
     <div class="slide__buttons">
@@ -245,6 +245,42 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 * Treat opening Liquid tags the same as HTML elements; indent two spaces inside
 
+## [Language strings](#language-strings)
+
+### Don't
+```html
+<div class="product-card">
+  <h2 class="product-card__title">{{ product.title }}</h2>
+
+  <span class="product-card__stock">
+    {% if product.available %}
+      In stock
+    {% else %}
+      Out of stock
+    {% endif %}
+  </span>
+</div>
+```
+
+### Don't
+```html
+<div class="product-card">
+  <h2 class="product-card__title">{{ product.title }}</h2>
+
+  <span class="product-card__stock">
+    {% if product.available %}
+      {{ 'products.product.in_stock' | t }}
+    {% else %}
+      {{ 'products.product.out_of_stock' | t }}
+    {% endif %}
+  </span>
+</div>
+```
+
+* Never hard-code text in your template files
+* Always use Shopify's [translation filter](https://help.shopify.com/en/themes/development/theme-store-requirements/internationalizing/translation-filter)
+* Most of our clients are multi-lingual so it is expected that they will be able to translate their store without requiring additional development
+
 ## Schema settings
 
 * [`default` & `label`](#default-label)
@@ -339,9 +375,41 @@ Specific rules for certain settings of `type`:
 * If conditions should be on separate lines
 * Separate blocks of Liquid code with a newline
 
-## [Variable grouping](#variable-grouping)
+## Variables
 
-### Don't
+1. [Assigning](#variable-assigning)
+1. [Grouping](#variable-grouping)
+1. [Naming](#variable-naming)
+
+### [Variable assigning](#variable-assigning)
+
+#### Don't
+```html
+{% for product in collection.products %}
+  {% if product.tags contains 'shipping' %}
+    {% assign has_shipping_tag = true %}
+  {% endif %}
+{% endif %}
+```
+
+#### Do
+```html
+{% for product in collection.products %}
+  {% assign has_shipping_tag = false %}
+
+  {% if product.tags contains 'shipping' %}
+    {% assign has_shipping_tag = true %}
+  {% endif %}
+{% endif %}
+```
+
+* Assign the default state of a variable before you first use it
+* This avoids false positives in `{% for %}` loops as it resets the variable at the start of each item
+* In the Don't example above once one product had the tag the variable is set to `true`, but nothing resets it meaning all products after it will have the variable set to `true`
+
+### [Variable grouping](#variable-grouping)
+
+#### Don't
 ```html
 {% assign variable_a = 'Hello world' %}
 
@@ -361,7 +429,7 @@ Specific rules for certain settings of `type`:
 {% endfor %}
 ```
 
-### Do
+#### Do
 ```html
 {% assign variable_a = 'Hello world' %}
 {% assign variable_b = 'Hello world' %}
@@ -384,9 +452,9 @@ Specific rules for certain settings of `type`:
 * Group all variables which are not set inside specific `{% forloop %}` at the top of the file
 * If there are lots of variables consider placing them in a variables file, e.g. in the product section you would place them in a _product-variables.liquid_ snippet
 
-## [Variable naming](#variable-naming)
+### [Variable naming](#variable-naming)
 
-### Don't
+#### Don't
 ```html
 {% assign variableName = 'Hello world' %}
 {% capture img-var %}
@@ -394,10 +462,10 @@ Specific rules for certain settings of `type`:
 {% endcapture %}
 ```
 
-### Do
+#### Do
 ```html
-{% assign variable_name = 'Hello world' %}
-{% capture another_name %}
+{% assign variable_string = 'Hello world' %}
+{% capture another_string %}
   This is correct
 {% endcapture %}
 ```
@@ -406,7 +474,22 @@ Specific rules for certain settings of `type`:
 * Do not use abbreviations or shortened words
 * Keep the name easy to understand
 
-## [Whitespace control](#whitespace-control)
+#### More examples
+```html
+{% assign has_shipping_tag = true %}
+{% assign is_catalogue_product = false %}
+
+{% assign additional_handle_array = 'Item 1,Item 2,Item 3' | split: ',' %}
+
+{% assign installation_search_string = '' %}
+```
+
+* If a variable is a boolean then name it as a question, 'has the shipping tag' becomes `has_shipping_tag`
+* If the variable is an array, then append `_array` to the name
+* If it's a string than append `_string`
+* This makes it obvious what you're dealing with when you have a lot of variables
+
+## [Whitespace controls](#whitespace-controls)
 
 ### Don't
 ```html

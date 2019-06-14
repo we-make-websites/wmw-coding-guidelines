@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2 – 2019-06-14
+* Liquid – Added rules for language strings and variable assigning
+* Liquid – Grouped variables rules together
+* Liquid – Fixed broken links in TOC
+* Home – Added introductory text
+
 ## 1.1.1 – 2019-06-12
 * Liquid – Added rules for conditional settings, DRY, and snippets
 * Liquid – Updated whitespace control rule
