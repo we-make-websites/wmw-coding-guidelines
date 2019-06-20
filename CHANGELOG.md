@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.3 – 2019-06-20
+* Liquid – Added rules for inline if statements and conditional spacing
+* Liquid – Re-organised some existing rules
+* Liquid – Fixed broken links
+* HTML – Updated spacing rule
+* CSS – Fixed broken links
+* Home – Enabled HTML and Liquid links
+
 ## 1.1.2 – 2019-06-14
 * Liquid – Added rules for language strings and variable assigning
 * Liquid – Grouped variables rules together

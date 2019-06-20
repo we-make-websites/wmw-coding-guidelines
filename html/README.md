@@ -17,7 +17,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ### Don't
 ```html
-<textarea js-email="textarea" type="email" name="contact[email]" class="newsletter-modal__textarea" id="NewsletterModal-Email" value="{{ customer.email }}" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}" autocorrect="off" autocapitalize="off" data-show="true"></textarea>
+<textarea js-email="textarea" type="email" name="contact[email]" class="newsletter-modal__textarea" id="NewsletterModal-Email" value="{{ customer.email }}" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}" autocorrect="off" autocapitalize="off" data-show="true">{{ 'general.pages.contact_placeholder' | t }}</textarea>
 ```
 
 ### Do
@@ -34,7 +34,7 @@ The below guidelines cover only specific scenarios and should not be considered 
   data-show="true"
   js-email="textarea"
 >
-  // Content
+  {{ 'general.pages.contact_placeholder' | t }}
 </textarea>
 ```
 
@@ -55,12 +55,12 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ### Don't
 ```html
-<input class='foo'></input>
+<div class='foo'></div>
 ```
 
 ### Do
 ```html
-<input class="foo"></input>
+<div class="foo"></div>
 ```
 
 * Use quotations `"` HTML elements, not apostrophes `'`
@@ -85,16 +85,16 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ### Don't
 ```html
-<div class="foo">
-Content
-</div>
+<h1 class="foo">
+{{ product.title }}
+</h1>
 ```
 
 ### Do
 ```html
-<div class="foo">
-  Content
-</div>
+<h1 class="foo">
+  {{ product.title }}
+</h1>
 ```
 
 * Indent two spaces inside each opening HTML element
@@ -103,41 +103,60 @@ Content
 
 ### Don't
 ```html
-<span class="foo">Content</span>
-<span class="foo">Content</span>
-<div class="bar">
-  Content
-  More content
-</div>
-<div class="foobar">
-  <span class="foobar__inner">Content</span>
-  <img src="image.png" alt="">
-  <img src="image.png" alt="">
+<div id="Product" class="product" data-id="{{ product.id }}"js-product="container">
+  <h1 class="product__title">{{ product.title }}</h1>
+  <h2 class="product__subtitle">{{ product.vendor }}</h2>
+  <div class="product__content product-content">
+    <span class="product-content__info">{{ product.price | money }}</span><span class="product-content__info">{{ product.type }}</span>
+    <p class="product-content__copy">{{ product.description }}</p>
+  </div>
+  <div class="footer"><div class="footer__inner"><span class="footer__name">{{ shop.name }}</span></div></div>
 </div>
 ```
 
 ### Do
 ```html
-<span class="foo">Content</span>
-<span class="foo">Content</span>
+<div
+  id="Product"
+  class="product"
+  data-id="{{ product.id }}"
+  js-product="container"
+>
+  <h1 class="product__title">
+    {{ product.title }}
+  </h1>
 
-<div class="bar">
-  Content
-  More content
-</div>
+  <h2 class="product__subtitle">
+    {{ product.vendor }}
+  </h2>
 
-<div class="foobar">
-  <span class="foobar__inner">Content</span>
+  <div class="product__content product-content">
+    <span class="product-content__info">
+      {{ product.price | money }}
+    </span>
 
-  <img src="image.png" alt="">
-  <img src="image.png" alt="">
+    <span class="product-content__info">
+      {{ product.type }}
+    </span>
+
+    <p class="product-content__copy">
+      {{ product.description }}
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="footer__inner">
+      <span class="footer__name">
+        {{ shop.name }}
+      </span>
+    </div>
+  </div>
 </div>
 ```
 
 * Use spacing to improve the readability of your code
-* Single line elements can be placed next to each other
-* Multi-line elements should be padding with a newline before and after
-* If more than two single line elements are next to each other consider grouping them how they appear visually or by type
+* All elements should open onto a new line
+* All elements should have padding of a newline between them
 
 ## [Self-closing elements](#self-closing-elements)
 

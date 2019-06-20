@@ -20,10 +20,10 @@ Visit [@we-make-websites/stylelint-config](https://www.npmjs.com/package/@we-mak
 
 ## General
 
-* [DRY (Don't Repeat Yourself)](#dry)
+* [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
 * [Notes on Frame](#notes-on-frame)
 
-### [DRY (Do Not Repeat Yourself)](#dry)
+### [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
 
 #### Don't
 ```scss
@@ -188,7 +188,7 @@ Not all of these guidelines will be possible when working with an existing site 
 * [Longhand properties](#longhand-properties)
 * [Prefixes](#prefixes)
 * [Property order](#property-order)
-* [Pseudo-elements & -selectors](#pseudo-elements-selectors)
+* [Pseudo-elements & -selectors](#pseudo-elements-&--selectors)
 * [Variables](#variables)
 
 ### [#IDs](#ids)
@@ -352,7 +352,7 @@ The order should be as follows, all items within each group should be sorted alp
 1. Parents (e.g. `.parent &`), so that they have the greatest priority
 1. Media queries (e.g. `@include mq($from: large)`)
 
-### [Pseudo-elements & -selectors](#pseudo-elements-selectors)
+### [Pseudo-elements & -selectors](#pseudo-elements-&--selectors)
 
 #### Don't
 ```scss
@@ -396,14 +396,14 @@ Common properties that benefit from variables are:
 
 ## Naming
 
-* [BEM & CSS](#bem-css)
+* [BEM & CSS](#bem-&-css)
 * [BEM modifiers](#bem-modifiers)
 * [BEM naming](#bem-naming)
 * [HTML naming](#html-naming)
 * [Descriptive naming](#descriptive-naming)
 * [Variable naming](#variable-naming)
 
-### [BEM & CSS](#bem-css)
+### [BEM & CSS](#bem-&-css)
 
 #### About
 
@@ -717,7 +717,7 @@ $GRID_MARGIN: 20px;
 * [Capitalisation](#capitalisation)
 * [Commenting (inline)](#commenting-inline)
 * [Commenting (introductory)](#commenting-introductory)
-* [Zero values & units](#zero-values-units)
+* [Zero values & units](#zero-values-&-units)
 * [Parenthesise on @includes](#parenthesise-on-includes)
 
 ### [Calculations](#calculation)
@@ -815,7 +815,7 @@ $GRID_MARGIN: 20px;
 * Describe what folder it's in, the file's name, and list any special features or conditions
 * All lines except the first one should have a full stop
 
-### [Zero values & units](#zero-values-units)
+### [Zero values & units](#zero-values-&-units)
 
 #### Don't
 ```scss

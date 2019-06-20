@@ -13,9 +13,8 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 1. [Characters](#characters)
 1. [Commenting (inline)](#commenting-inline)
 1. [Commenting (introductory)](#commenting-introductory)
-1. [Conditional settings](#conditional-settings)
-1. [DRY (Don't Repeat Yourself)](#dry)
-1. [If or Case](#if-or-case)
+1. [Conditional statements](#conditional-statements)
+1. [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
 1. [Indenting](#indenting)
 1. [Language strings](#language-strings)
 1. [Schema settings](#schema-settings)
@@ -87,9 +86,16 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 {% endcomment %}
 ```
 
-## [Conditional settings](#conditional-settings)
+## Conditional statements
 
-### Don't
+* [Conditional settings](#conditional-settings)
+* [Conditional spacing](#conditional-spacing)
+* [`{% if %}` or `{% case %}`](#-if--or--case-)
+* [Inline `{% if %}` statements](#inline--if--statements)
+
+### [Conditional settings](#conditional-settings)
+
+#### Don't
 ```html
 {% for block in section.blocks %}
   <div class="block">
@@ -105,7 +111,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 {% endfor %}
 ```
 
-### Do
+#### Do
 ```html
 {% for block in section.blocks %}
   <div class="block">
@@ -132,9 +138,94 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 * In areas where client can customise the content do not assume that they will want to display every part of a section's settings
 * Wrap each setting in a `{% if %}` to hide it if no content is entered
+* Use `!= ''` rather than `{% if condition %}` or `!= blank` as it is more reliable, it is possible for a setting to existing if it previously had a value
 * When testing make sure the styling maintains, clients will expect it to work with missing settings
 
-## [DRY (Don't Repeat Yourself)](#dry)
+### [Conditional spacing](#conditional-spacing)
+
+#### Don't
+```html
+{% if condition %}
+  <!-- Multiple lines of code -->
+  <!-- Multiple lines of code -->
+  <!-- Multiple lines of code -->
+{% else %}
+  <!-- Multiple lines of code -->
+  <!-- Multiple lines of code -->
+  <!-- Multiple lines of code -->
+{% endif %}
+```
+
+#### Do
+```html
+{% if condition %}
+  <!-- Multiple lines of code -->
+  <!-- Multiple lines of code -->
+  <!-- Multiple lines of code -->
+
+{% else %}
+  <!-- Multiple lines of code -->
+  <!-- Multiple lines of code -->
+  <!-- Multiple lines of code -->
+{% endif %}
+```
+
+* When an `{% if %}` condition spans multiple lines add a newline before the `{% else %}` condition
+* This helps visually separate the code and make it easier to scan
+
+### [`{% if %}` or `{% case %}`](#-if--or--case-)
+
+#### Don't
+```html
+{% if variable == 'Hello' %}
+  Content
+{% elsif variable == 'Goodbye' %}
+  Content
+{% elsif variable == 'Good night' %}
+  Content
+{% else %}
+  Content
+{% endif %}
+```
+
+#### Do
+```html
+{% case variable %}
+  {% when 'Hello' %}
+    Content
+  {% when 'Goodbye' %}
+    Content
+  {% when 'Good night '%}
+    Content
+  {% else %}
+    Content
+{% endcase %}
+```
+
+* Do not use `{% if %}` for more than two conditions, use `{% case %}` instead
+* `{% case %}` can only be used when exactly matching a condition, you can't use it to test if something `contains`, use `{% if %}` for this purpose
+
+### [Inline `{% if %}` statements](#inline--if--statements)
+
+#### Don't
+```html
+<div class="row {% if section.settings.width == 'full' or section.settings.display == 'full' %}row--full-width{% endif %} {% if is_hidden %}is-hidden{% endif %}"></div>
+```
+
+#### Do
+```html
+{% if section.settings.width == 'full' or section.settings.display == 'full' %}
+  {% assign row_class = 'row--full-width' %}
+{% endif %}
+
+<div class="row {{ row_class }}{% if is_hidden %} is-hidden{% endif %}"></div>
+```
+
+* Do not put long `{% if %}` conditions inline, assign them separately
+* If the `{% if %}` condition is short you can put it inline
+* Include the space inside the `{% if %}` condition so it is only outputted when the if condition is met
+
+## [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
 
 ### Don't
 ```html
@@ -197,38 +288,6 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 * Use the iteration to set variables which are then used to call the block's settings
 * Use Liquid's built in tags to avoid repeating code
 
-## [If or Case](#if-or-case)
-
-### Don't
-```html
-{% if variable == 'Hello' %}
-  Content
-{% elsif variable == 'Goodbye' %}
-  Content
-{% elsif variable == 'Good night' %}
-  Content
-{% else %}
-  Content
-{% endif %}
-```
-
-### Do
-```html
-{% case variable %}
-  {% when 'Hello' %}
-    Content
-  {% when 'Goodbye' %}
-    Content
-  {% when 'Good night '%}
-    Content
-  {% else %}
-    Content
-{% endcase %}
-```
-
-* Do not use `{% if %}` for more than two conditions, use `{% case %}` instead
-* `{% case %}` can only be used when exactly matching a condition, you can't use it to test if something `contains`, use `{% if %}` for this purpose
-
 ## [Indenting](#indenting)
 ```html
 {% if variable %}
@@ -283,8 +342,8 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 ## Schema settings
 
-* [`default` & `label`](#default-label)
-* [Formatting & order](#formatting-order)
+* [`default` & `label`](#default-&-label)
+* [Formatting & order](#formatting-&-order)
 * [`type`](#type)
 
 ### [`default` & `label`](#default-label)
@@ -310,7 +369,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 * Don't try to fit everything into `label`, use `info` for more details
 * Add a default value where possible, this makes deployment easier
 
-### [Formatting & order](#formatting-order)
+### [Formatting & order](#formatting-&-order)
 
 #### Don't
 ```json
