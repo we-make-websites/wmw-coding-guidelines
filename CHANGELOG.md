@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.4 – 2019-06-20
+* HTML – Added `<div>` or `<span>` rule
+* HTML – Updated spacing and attributes rules
+* All – Added back to TOC links at the end of each section
+
 ## 1.1.3 – 2019-06-20
 * Liquid – Added rules for inline if statements and conditional spacing
 * Liquid – Re-organised some existing rules

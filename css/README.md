@@ -67,6 +67,8 @@ When building a new project using Frame 2.0 it is expected that if you build any
 #### Frame 1 and Old Workflow
 Not all of these guidelines will be possible when working with an existing site (or any site built before these guidelines). Frame 2.0 local concatenation of code allows us to use SASS features that are not available with Shopify's old version of SASS, these should be highlighted in the Notes or Exceptions are the end of the page.
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## Methods
 
 * [Mobile first](#mobile-first)
@@ -180,6 +182,8 @@ Not all of these guidelines will be possible when working with an existing site 
 * If you have to; leave a comment explaining why that number, it can be just because it works, but explain what will break if it's changed
 
 > **🗒 Note:** Read more on [CSS tricks](https://css-tricks.com/magic-numbers-in-css/).
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## Declarations
 
@@ -393,6 +397,8 @@ Common properties that benefit from variables are:
 * `font-weight`
 * `margin` (gutters, grid gutters)
 * `transition` (duration, easing) – consider a mixin
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## Naming
 
@@ -629,6 +635,8 @@ $GRID_MARGIN: 20px;
 
 > **🗒 Note:** Local variables are only available in the declaration they are defined in.
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## Spacing
 
 * [Indenting](#indenting)
@@ -710,6 +718,8 @@ $GRID_MARGIN: 20px;
 * It's easier to read
 * Whitespace is free
 * Code is minified anyway
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## Formatting
 
@@ -871,6 +881,8 @@ $GRID_MARGIN: 20px;
 
 * Do not include parenthesise on argument-less mixins
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## Colours
 
 * [Colour properties](#colour-properties)
@@ -926,6 +938,8 @@ $COLOR_IRON_2: rgb(212,215,217);
 * If you have two or more colours similar enough to share the same name then suffix them with a number where the 1 is the darkest variant of the colour
 
 > **🗒 Note:** VS Code automatically previews the colour.
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## Nesting
 
@@ -1049,6 +1063,8 @@ $COLOR_IRON_2: rgb(212,215,217);
 * Keep media queries at the root of the declaration, not nested inside each selector
 * This way it's easier to find media queries
 * Frame 2+ keeps CSS files small and modular so `@media`/`@include mq()` won't get lost
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## Properties
 
@@ -1237,3 +1253,5 @@ transition: [transition-property] [transition-duration] [transition-timing-funct
 * Avoid overusing it as it could have the opposite effect and hinder all animations
 
 > **⚠️ Important!** Do not transition `margin` or positional properties (`top`, `left`, `right`, `bottom`) as these don't perform well and lead to poor frame rates, instead use `padding` or `transform` as they can be hardware-accelerated.
+
+[ꜛ Back to TOC](#table-of-contents)

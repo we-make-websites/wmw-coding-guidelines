@@ -38,6 +38,8 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 * Use apostrophes `'` in Liquid objects, tags, and filters, not quotations `"`
 * Escape apostrophes if they appear inside the string
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## [Commenting (inline)](#commenting-inline)
 
 ### Don't
@@ -55,6 +57,8 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
   <div class="foo">{{ product.description }}</div>
 {% endif %}
 ```
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## [Commenting (introductory)](#commenting-introductory)
 
@@ -85,6 +89,8 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 ------------------------------------------------------------------------------
 {% endcomment %}
 ```
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## Conditional statements
 
@@ -225,6 +231,8 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 * If the `{% if %}` condition is short you can put it inline
 * Include the space inside the `{% if %}` condition so it is only outputted when the if condition is met
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
 
 ### Don't
@@ -288,6 +296,8 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 * Use the iteration to set variables which are then used to call the block's settings
 * Use Liquid's built in tags to avoid repeating code
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## [Indenting](#indenting)
 ```html
 {% if variable %}
@@ -303,6 +313,8 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 ```
 
 * Treat opening Liquid tags the same as HTML elements; indent two spaces inside
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## [Language strings](#language-strings)
 
@@ -339,6 +351,8 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 * Never hard-code text in your template files
 * Always use Shopify's [translation filter](https://help.shopify.com/en/themes/development/theme-store-requirements/internationalizing/translation-filter)
 * Most of our clients are multi-lingual so it is expected that they will be able to translate their store without requiring additional development
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## Schema settings
 
@@ -404,11 +418,15 @@ Specific rules for certain settings of `type`:
 * `textarea` – Do not use for raw HTML, use `html` for this
 * `url` – Only use for all choices, use one of the limited selections if you are only expecting a certain output (`collection`, `product`, `blog`, `page`, and `article`), do not use for video, use `video_url` for this
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## [Snippets](#snippets)
 
 * Use Liquid snippets to keep files small and manageable
 * In the same way of block gets its own SCSS and JS file, consider splitting it into its own snippet
 * Snippets are especially useful for repeating content
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## [Spacing](#spacing)
 
@@ -433,6 +451,8 @@ Specific rules for certain settings of `type`:
 * Add spaces around filters
 * If conditions should be on separate lines
 * Separate blocks of Liquid code with a newline
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## Variables
 
@@ -548,6 +568,8 @@ Specific rules for certain settings of `type`:
 * If it's a string than append `_string`
 * This makes it obvious what you're dealing with when you have a lot of variables
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## [Whitespace controls](#whitespace-controls)
 
 ### Don't
@@ -568,3 +590,5 @@ Specific rules for certain settings of `type`:
 * If you need to trim whitespace from objects then you can use whitespace controls, e.g. `{{- section.settings.body_copy -}}`
 
 > **🗒 Note:** Not all apps support whitespace controls.
+
+[ꜛ Back to TOC](#table-of-contents)
