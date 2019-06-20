@@ -1,6 +1,6 @@
-![We Make Websites](https://github.com/we-make-websites/wmw-coding-guidelines/blob/master/assets/logo.png)
+<p align="center"><img src="https://raw.githubusercontent.com/we-make-websites/wmw-coding-guidelines/master/assets/logo.png" alt="We Make Websites" width="170"></p>
 
-# WMW Coding Guidelines
+# Coding Guidelines
 Standards, guidelines, and best practice we follow whilst developing at [We Make Websites](https://wemakewebsites.com/) on our Frame framework.
 
 ## Table of contents
