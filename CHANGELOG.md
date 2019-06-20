@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.5 – 2019-06-20
+* Home – Improving home content
+
 ## 1.1.4 – 2019-06-20
 * HTML – Added `<div>` or `<span>` rule
 * HTML – Updated spacing and attributes rules
