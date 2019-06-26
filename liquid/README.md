@@ -15,6 +15,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 1. [Commenting (introductory)](#commenting-introductory)
 1. [Conditional statements](#conditional-statements)
 1. [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
+1. [`{% include %}`](#-include-)
 1. [Indenting](#indenting)
 1. [Language strings](#language-strings)
 1. [Schema settings](#schema-settings)
@@ -298,7 +299,25 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 [ꜛ Back to TOC](#table-of-contents)
 
+## [`{% include %}`](#-include-)
+
+### Don't
+```html
+{% include 'icon-misc', icon: 'search', colour: 'red' %}
+```
+
+### Do
+```html
+{% include 'icon-misc' with icon: 'search', colour: 'red' %}
+```
+
+* When setting variables on your `{% include %}` always use `with` instead of starting with a comma
+* After the first variable declaration you must use a comma
+
+[ꜛ Back to TOC](#table-of-contents)
+
 ## [Indenting](#indenting)
+### Don't
 ```html
 {% if variable %}
 <h1>{{ product.title }}</h1>

@@ -183,7 +183,10 @@ The below guidelines cover only specific scenarios and should not be considered 
       <span class="footer__copy">{{ 'footer.copyright' | t }}</span>
       <span class="footer__name">{{ shop.name }}</span>
 
-      <img src="{{ settings.logo | img_url: '300x' }}" alt="{{ settings.logo.alt }}">
+      <img
+        alt="{{ settings.logo.alt }}"
+        src="{{ settings.logo | img_url: '300x' }}"
+      >
     </div>
   </div>
 </div>
