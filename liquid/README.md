@@ -476,11 +476,11 @@ Specific rules for certain settings of `type`:
 
 ## [Tag naming](#tag-naming)
 
-* Use the naming convention `tag_name: [value]` for products tag with a value and `tag_name` for tags without a value
-* In most cases `[value]` should be in lowercase to make comparisons easier however in instances where the value is outputted on the front-end in a specific case make sure this is clear in the tech spec
-* If you need to store separate values in the same tag then separate them using a `_`  such as `type_modal: [Model]_[Year]` (this isn't snake_case)
+* Use the naming convention `tag_name: [value]` for admin tags (products, orders, customers) with a value and `tag_name` for tags without a value
+* In most cases `[value]` should be in lowercase to make comparisons easier. However in instances where the value is outputted on the front-end in a specific case (e.g. Title Case) make sure this is clear in the tech spec
+* If you need to store separate values in the same tag then separate them using `_`  such as `type_modal: [Model]_[Year]` (this isn't snake_case)
 * Do not use boolean values (e.g. `has_addon: true`) as simply having the tag in the first place is enough to know that it is `true` (e.g. `has_addon`)
-* If the tag is to be used in a search string (and needs to be handlelised) then use the naming convention `tag_name--[value]`, this allows the value to be kebab-cased (e.g. `build_date--2019-07-03`)
+* If the tag is to be used in a search string (and therefore needs to be handlelised) then use the naming convention `tag_name--[value]`, this allows the value to be kebab-cased (e.g. `build_date--2019-07-03`)
 * Never put formatted money into the tag (e.g. `monthly_cost: £10`) as tags do not support all the formatting standards required by international stores (e.g. `monthly_cost: €12,34` will not be allowed because the comma ends the tag), instead use `monthly_cost: 1234` and format the cost using Liquid or JavaScript
 
 [ꜛ Back to TOC](#table-of-contents)
