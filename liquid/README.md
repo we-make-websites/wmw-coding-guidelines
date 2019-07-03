@@ -6,7 +6,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ## Shopify Cheatsheet
 
-The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet) is no longer up-to-date. For a full and complete list of avaiable objects, tags, and filters see the [Liquid reference](https://help.shopify.com/en/themes/liquid/objects) documentation.
+The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet) is no longer up-to-date. For a full and complete list of available objects, tags, and filters see the [Liquid reference](https://help.shopify.com/en/themes/liquid/objects) documentation.
 
 ## Table of contents
 
@@ -21,6 +21,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 1. [Schema settings](#schema-settings)
 1. [Snippets](#snippets)
 1. [Spacing](#spacing)
+1. [Tag naming](#tag-naming)
 1. [Variables](#variables)
 1. [Whitespace controls](#whitespace-controls)
 
@@ -473,6 +474,17 @@ Specific rules for certain settings of `type`:
 
 [ꜛ Back to TOC](#table-of-contents)
 
+## [Tag naming](#tag-naming)
+
+* Use the naming convention `tag_name: [value]` for products tag with a value and `tag_name` for tags without a value
+* In most cases `[value]` should be in lowercase to make comparisons easier however in instances where the value is outputted on the front-end in a specific case make sure this is clear in the tech spec
+* If you need to store separate values in the same tag then separate them using a `_`  such as `type_modal: [Model]_[Year]` (this isn't snake_case)
+* Do not use boolean values (e.g. `has_addon: true`) as simply having the tag in the first place is enough to know that it is `true` (e.g. `has_addon`)
+* If the tag is to be used in a search string (and needs to be handlelised) then use the naming convention `tag_name--[value]`, this allows the value to be kebab-cased (e.g. `build_date--2019-07-03`)
+* Never put formatted money into the tag (e.g. `monthly_cost: £10`) as tags do not support all the formatting standards required by international stores (e.g. `monthly_cost: €12,34` will not be allowed because the comma ends the tag), instead use `monthly_cost: 1234` and format the cost using Liquid or JavaScript
+
+[ꜛ Back to TOC](#table-of-contents)
+
 ## Variables
 
 1. [Assigning](#variable-assigning)
@@ -484,7 +496,7 @@ Specific rules for certain settings of `type`:
 #### Don't
 ```html
 {% for product in collection.products %}
-  {% if product.tags contains 'shipping' %}
+  {% if product.tags contains 'has_shipping' %}
     {% assign has_shipping_tag = true %}
   {% endif %}
 {% endif %}
@@ -495,7 +507,7 @@ Specific rules for certain settings of `type`:
 {% for product in collection.products %}
   {% assign has_shipping_tag = false %}
 
-  {% if product.tags contains 'shipping' %}
+  {% if product.tags contains 'has_shipping' %}
     {% assign has_shipping_tag = true %}
   {% endif %}
 {% endif %}

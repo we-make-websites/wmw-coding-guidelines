@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.7 - 2019-07-03
+* Liquid – Added tag naming rule, updated other rules to use tag naming convention
+
 ## 1.1.6 - 2019-06-26
 * Changelog - Updated order of changelog items
 * Home - Updated home with new content
