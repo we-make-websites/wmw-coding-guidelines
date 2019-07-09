@@ -1,6 +1,7 @@
 # Changelog
 
 ## 1.1.8 - 2019-07-09
+* HTML - Fixed indenting example
 * Liquid - Corrected typo
 
 ## 1.1.7 - 2019-07-03

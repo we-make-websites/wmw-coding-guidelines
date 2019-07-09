@@ -115,16 +115,16 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ### Don't
 ```html
-<h1 class="foo">
-{{ product.title }}
-</h1>
+<p class="body-1">
+{{ product.description }}
+</p>
 ```
 
 ### Do
 ```html
-<h1 class="foo">
-  {{ product.title }}
-</h1>
+<p class="body-1">
+  {{ product.description }}
+</p>
 ```
 
 * Indent two spaces inside each opening HTML element
