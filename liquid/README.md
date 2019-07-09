@@ -353,7 +353,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 </div>
 ```
 
-### Don't
+### Do
 ```html
 <div class="product-card">
   <h2 class="product-card__title">{{ product.title }}</h2>

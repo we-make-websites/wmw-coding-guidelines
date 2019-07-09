@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.8 - 2019-07-09
+* Liquid - Corrected typo
+
 ## 1.1.7 - 2019-07-03
 * Liquid – Added tag naming rule, updated other rules to use tag naming convention
 
