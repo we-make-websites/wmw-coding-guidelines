@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.9 - 2019-07-10
+* HTML - Updated title of the spacing rule
+* Liquid - Updated `{% include %}` and spacing rule
+
 ## 1.1.8 - 2019-07-09
 * HTML - Fixed indenting example
 * Liquid - Corrected typo

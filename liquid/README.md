@@ -20,7 +20,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 1. [Language strings](#language-strings)
 1. [Schema settings](#schema-settings)
 1. [Snippets](#snippets)
-1. [Spacing](#spacing)
+1. [Spacing & line character limits](#spacing--line-character-limits)
 1. [Tag naming](#tag-naming)
 1. [Variables](#variables)
 1. [Whitespace controls](#whitespace-controls)
@@ -305,15 +305,23 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 ### Don't
 ```html
 {% include 'icon-misc', icon: 'search', colour: 'red' %}
+{% include 'social-sharing' with share_title: product.title, share_permalink: product.url, share_image: product.featured_image %}
 ```
 
 ### Do
 ```html
 {% include 'icon-misc' with icon: 'search', colour: 'red' %}
+
+{% include 'social-sharing' with
+  share_title: product.title,
+  share_permalink: product.url,
+  share_image: product.featured_image
+%}
 ```
 
 * When setting variables on your `{% include %}` always use `with` instead of starting with a comma
 * After the first variable declaration you must use a comma
+* If there are more than two variables and it goes over 80 characters then break it into a multi-line include
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -448,22 +456,30 @@ Specific rules for certain settings of `type`:
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Spacing](#spacing)
+## [Spacing & line character limits](#spacing--line-character-limits)
 
 ### Don't
 ```html
-{{product.title|append:' text'}}
-{%if variable%}Content{% else %}Content{%endif%}
+{% assign sanitized_var = string|downcase|split: '/'|last|remove:'<p>'|remove:'</p>'|money_with_currency %}
+{%if variable%}<h1 class="product__title">{{ product.title }}</h1>
+  <div class="product__price">{{ product.price | money }}</div>{% else %}<h2 class="product__title">{{ product.title }}</h2>{%endif%}
 ```
 
 ### Do
 ```html
-{{ product.title | append: ' text' }}
+{% assign sanitized_variable = string | downcase | split: '/' | last %}
+{% assign sanitized_variable = sanitized_variable | remove:'<p>' | remove:'</p>' %}
+{% assign sanitized_variable = sanitized_variable | money_with_currency %}
 
 {% if variable %}
-  Content
+  <h1 class="product__title">{{ product.title }}</h1>
+
+  <div class="product__price">
+    {{ product.price | money }}
+  </div>
+
 {% else %}
-  Content
+  <h2 class="product__title">{{ product.title }}</h2>
 {% endif %}
 ```
 
@@ -471,6 +487,9 @@ Specific rules for certain settings of `type`:
 * Add spaces around filters
 * If conditions should be on separate lines
 * Separate blocks of Liquid code with a newline
+* If an `{% if %}` condition spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
+* If an `{% assign %}` has more than two filters and exceeds 80 characters break it into multiple `{% assign %}` and reference the previous variable
+* For details on HTML spacing see the [HTML](html/README.md) rule for [Spacing & line character limit](html/README.md#spacing--line-character-limit)
 
 [ꜛ Back to TOC](#table-of-contents)
 

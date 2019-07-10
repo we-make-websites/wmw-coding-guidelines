@@ -11,7 +11,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 1. [Commenting](#commenting)
 1. [`<div>` or `<span>`](#div-or-span)
 1. [Indenting](#indenting)
-1. [Spacing](#spacing)
+1. [Spacing & line character limits](#spacing--line-character-limits)
 1. [Self-closing element](#self-closing-elements)
 
 ## [Attributes](#attributes)
@@ -131,7 +131,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Spacing](#spacing)
+## [Spacing & line character limits](#spacing--line-character-limits)
 
 ### Don't
 ```html
