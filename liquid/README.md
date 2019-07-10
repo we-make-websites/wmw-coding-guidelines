@@ -489,7 +489,7 @@ Specific rules for certain settings of `type`:
 * Separate blocks of Liquid code with a newline
 * If an `{% if %}` condition spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
 * If an `{% assign %}` has more than two filters and exceeds 80 characters break it into multiple `{% assign %}` and reference the previous variable
-* For details on HTML spacing see the [HTML](html/README.md) rule for [Spacing & line character limit](html/README.md#spacing--line-character-limit)
+* For details on HTML spacing see the [HTML](../html/README.md) rule for [Spacing & line character limit](../html/README.md#spacing--line-character-limits)
 
 [ꜛ Back to TOC](#table-of-contents)
 
