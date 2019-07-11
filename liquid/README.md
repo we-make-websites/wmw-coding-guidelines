@@ -178,7 +178,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 {% endif %}
 ```
 
-* When an `{% if %}` condition spans multiple lines add a newline before the `{% else %}` condition
+* When an `{% if %}` tag spans multiple lines add a newline before the `{% else %}` tag
 * This helps visually separate the code and make it easier to scan
 
 ### [`{% if %}` or `{% case %}`](#-if--or--case-)
@@ -229,9 +229,9 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 <div class="row {{ row_class }}{% if is_hidden %} is-hidden{% endif %}"></div>
 ```
 
-* Do not put long `{% if %}` conditions inline, assign them separately
-* If the `{% if %}` condition is short you can put it inline
-* Include the space inside the `{% if %}` condition so it is only outputted when the if condition is met
+* Do not put long `{% if %}` tags inline, assign them separately
+* If the `{% if %}` tag is short you can put it inline
+* Include the space inside the `{% if %}` tag so it is only outputted when the if condition is met
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -460,6 +460,7 @@ Specific rules for certain settings of `type`:
 
 ### Don't
 ```html
+{% if template contains 'search' or template contains 'account' or template contains 'customer' or template contains 'cart' %}<meta name="robots" content="noindex, nofollow">{% endif %}
 {% assign sanitized_var = string|downcase|split: '/'|last|remove:'<p>'|remove:'</p>'|money_with_currency %}
 {%if variable%}<h1 class="product__title">{{ product.title }}</h1>
   <div class="product__price">{{ product.price | money }}</div>{% else %}<h2 class="product__title">{{ product.title }}</h2>{%endif%}
@@ -467,6 +468,15 @@ Specific rules for certain settings of `type`:
 
 ### Do
 ```html
+{% if
+  template contains 'search' or
+  template contains 'account' or
+  template contains 'customer' or
+  template contains 'cart'
+%}
+  <meta name="robots" content="noindex, nofollow">
+{% endif %}
+
 {% assign sanitized_variable = string | downcase | split: '/' | last %}
 {% assign sanitized_variable = sanitized_variable | remove:'<p>' | remove:'</p>' %}
 {% assign sanitized_variable = sanitized_variable | money_with_currency %}
@@ -483,12 +493,13 @@ Specific rules for certain settings of `type`:
 {% endif %}
 ```
 
-* Add a space inside each object and tag
+* Add spaces inside each object and tag
 * Add spaces around filters
-* If conditions should be on separate lines
 * Separate blocks of Liquid code with a newline
-* If an `{% if %}` condition spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
-* If an `{% assign %}` has more than two filters and exceeds 80 characters break it into multiple `{% assign %}` and reference the previous variable
+* Opening `{% if %}` tags should be on separate lines
+* `{% if %}` tags with more than two filters and exceeding 80 characters should be split onto multiple lines
+* If the contents of an `{% if %}` tag spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
+* `{% assign %}` tags with more than two filters and exceeding 80 characters should be broken up into multiple `{% assign %}` and reference the previous variable
 * For details on HTML spacing see the [HTML](../html/README.md) rule for [Spacing & line character limit](../html/README.md#spacing--line-character-limits)
 
 [ꜛ Back to TOC](#table-of-contents)

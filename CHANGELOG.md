@@ -1,20 +1,24 @@
 # Changelog
 
-## 1.1.9 - 2019-07-10
-* HTML - Updated title of the spacing rule
-* Liquid - Updated `{% include %}` and spacing rule
+## 1.20 – 2019-07-11
+* Liquid – Updated spacing & line character limits rule
+* Liquid – Standardised `{% if %}` tag language
 
-## 1.1.8 - 2019-07-09
-* HTML - Fixed indenting example
-* Liquid - Corrected typo
+## 1.1.9 – 2019-07-10
+* HTML – Updated title of the spacing rule
+* Liquid – Updated `{% include %}` and spacing rule
 
-## 1.1.7 - 2019-07-03
+## 1.1.8 – 2019-07-09
+* HTML – Fixed indenting example
+* Liquid – Corrected typo
+
+## 1.1.7 – 2019-07-03
 * Liquid – Added tag naming rule, updated other rules to use tag naming convention
 
-## 1.1.6 - 2019-06-26
-* Changelog - Updated order of changelog items
-* Home - Updated home with new content
-* HTML - Updated spacing rule
+## 1.1.6 – 2019-06-26
+* Changelog – Updated order of changelog items
+* Home – Updated home with new content
+* HTML – Updated spacing rule
 * Liquid – Added `{% include %}` rule
 
 ## 1.1.5 – 2019-06-20
