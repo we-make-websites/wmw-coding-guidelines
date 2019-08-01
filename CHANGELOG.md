@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.21 – 2019-08-01
+* Liquid – Fixed issue with wording
+
 ## 1.20 – 2019-07-11
 * Liquid – Updated spacing & line character limits rule
 * Liquid – Standardised `{% if %}` tag language

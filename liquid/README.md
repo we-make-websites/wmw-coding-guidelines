@@ -144,10 +144,10 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 {% endfor %}
 ```
 
-* In areas where client can customise the content do not assume that they will want to display every part of a section's settings
+* In areas where the client can customise the content do not assume that they will want to display every part of a section's settings
 * Wrap each setting in a `{% if %}` to hide it if no content is entered
-* Use `!= ''` rather than `{% if condition %}` or `!= blank` as it is more reliable, it is possible for a setting to existing if it previously had a value
-* When testing make sure the styling maintains, clients will expect it to work with missing settings
+* Use `!= ''` rather than `{% if condition %}` or `!= blank` as it is more reliable, it is possible for a setting to exist if it previously had a value
+* When testing make sure the section does not appear visually broken, the client will expect it to work with missing settings
 
 ### [Conditional spacing](#conditional-spacing)
 
