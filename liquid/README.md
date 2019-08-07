@@ -538,6 +538,7 @@ Split characters are used to effectively provide multiple description fields on 
 
 * Use split characters in the format `---[NAME]---` where `[NAME]` is the identifying name of the split content
 * `[NAME]` can have spaces, e.g. `---COMPATIBLE INFO---`
+* Assign the split description to variables at the top of the file then output the variable as and when you need it
 * Use split characters over metafields as they don't require any special apps to access and content can be automatically imported using apps like Excelify
 * Shopify tends to add extra HTML so in the example this has been stripped off, including empty line returns
 
