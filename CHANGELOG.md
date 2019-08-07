@@ -1,9 +1,12 @@
 # Changelog
 
-## 1.21 – 2019-08-01
+## 1.1.12 – 2019-08-07
+* Changelog – Fixed version numbering
+
+## 1.1.11 – 2019-08-01
 * Liquid – Fixed issue with wording
 
-## 1.20 – 2019-07-11
+## 1.1.10 – 2019-07-11
 * Liquid – Updated spacing & line character limits rule
 * Liquid – Standardised `{% if %}` tag language
 
