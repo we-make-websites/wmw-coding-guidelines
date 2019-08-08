@@ -29,7 +29,7 @@ You must apply all guidelines manually; there is no automatic linting available.
 ### Frame 3
 Use `yarn format` to automatically check your CSS and JS code. You will have to manually apply the guidelines to HTML and Liquid as there is no linter available.
 
-> **🗒 Note:** Older Frame 3 projects will not adhere to the new HTML and Liquid guidelines as they were written after Frame 3 was launched.
+> **🗒 Note:** Older Frame 3 projects will not adhere to the new HTML and Liquid guidelines as the guidelines were written after Frame 3 was launched.
 
 ## Can I contribute to the guidelines?
 

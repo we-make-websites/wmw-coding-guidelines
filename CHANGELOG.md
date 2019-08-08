@@ -1,6 +1,7 @@
 # Changelog
 
 ## 1.1.13 – 2019-08-08
+* All - Added navigational aids
 * HTML – Change attributes rule name
 * Liquid – Added split characters rule
 

@@ -18,6 +18,8 @@ Visit [@we-make-websites/stylelint-config](https://www.npmjs.com/package/@we-mak
 1. [Nesting](#nesting)
 1. [Properties](#properties)
 
+[← Back to homepage](/)
+
 ## General
 
 * [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)

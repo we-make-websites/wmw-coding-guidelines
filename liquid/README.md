@@ -26,6 +26,8 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 1. [Variables](#variables)
 1. [Whitespace controls](#whitespace-controls)
 
+[← Back to homepage](/)
+
 ## [Characters](#characters)
 
 ### Don't
