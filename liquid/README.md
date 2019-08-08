@@ -21,6 +21,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 1. [Schema settings](#schema-settings)
 1. [Snippets](#snippets)
 1. [Spacing & line character limits](#spacing--line-character-limits)
+1. [Split characters](#split-characters)
 1. [Tag naming](#tag-naming)
 1. [Variables](#variables)
 1. [Whitespace controls](#whitespace-controls)
@@ -501,6 +502,45 @@ Specific rules for certain settings of `type`:
 * If the contents of an `{% if %}` tag spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
 * `{% assign %}` tags with more than two filters and exceeding 80 characters should be broken up into multiple `{% assign %}` and reference the previous variable
 * For details on HTML spacing see the [HTML](../html/README.md) rule for [Spacing & line character limit](../html/README.md#spacing--line-character-limits)
+
+[ꜛ Back to TOC](#table-of-contents)
+
+## [Split characters](#split-characters)
+
+Split characters are used to effectively provide multiple description fields on the product page. It is useful when you need to output long form content in multiple locations.
+
+### Example
+```html
+{% if product.description != '' %}
+  {% assign full_description = product.description | remove: '<meta charset="utf-8">' | remove: '<meta charset="utf-8" />' | remove: '<span>' | remove: '</span>' | remove: '<p>&nbsp;</p>' | remove: '<p> </p>' | remove: '<p></p>' %}
+
+  {% if full_description contains '---DESCRIPTION---' %}
+    {% assign description = full_description | split: '<p>---DESCRIPTION---</p>' | last | split: '<p>---' | first %}
+  {% endif %}
+
+  {% if full_description contains '---SIZE GUIDE---' %}
+    {% assign size_guide = full_description | split: '<p>---SIZE GUIDE---</p>' | last | split: '<p>---' | first %}
+  {% endif %}
+{% endif %}
+
+{% if description %}
+  <div class="product__description rte">
+    {{ description }}
+  </div>
+{% endif %}
+
+{% if size_guide %}
+  <div class="product__size-guide rte">
+    {{ size_guide }}
+  </div>
+{% endif %}
+```
+
+* Use split characters in the format `---[NAME]---` where `[NAME]` is the identifying name of the split content
+* `[NAME]` can have spaces, e.g. `---COMPATIBLE INFO---`
+* Assign the split description to variables at the top of the file then output the variable as and when you need it
+* Use split characters over metafields as they don't require any special apps to access and content can be automatically imported using apps like Excelify
+* Shopify tends to add extra HTML so in the example this has been stripped off, including empty line returns
 
 [ꜛ Back to TOC](#table-of-contents)
 
