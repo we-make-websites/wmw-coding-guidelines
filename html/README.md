@@ -14,7 +14,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 1. [Spacing & line character limits](#spacing--line-character-limits)
 1. [Self-closing element](#self-closing-elements)
 
-[← Back to homepage](/)
+[← Back to homepage](../)
 
 ## [Attribute order](#attribute-order)
 
