@@ -6,7 +6,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ## Table of contents
 
-1. [Attributes](#attributes)
+1. [Attribute order](#attribute-order)
 1. [Characters](#characters)
 1. [Commenting](#commenting)
 1. [`<div>` or `<span>`](#div-or-span)
@@ -14,7 +14,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 1. [Spacing & line character limits](#spacing--line-character-limits)
 1. [Self-closing element](#self-closing-elements)
 
-## [Attributes](#attributes)
+## [Attribute order](#attribute-order)
 
 ### Don't
 ```html
