@@ -484,11 +484,11 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 ### [Section template naming](#section-template-naming)
 
 ```html
-[section]-template.liquid
+template-[section].liquid
 ```
 
-* If a section replaces the template's content it should have the suffix `-template`
-* E.g. `product-template.liquid` or `collection-template.liquid`
+* If a section replaces the template's content it should be prefixed with `template-`
+* E.g. `template-product.liquid` or `template-collection.liquid`
 
 ### [Snippet naming](#snippet-naming)
 
@@ -496,7 +496,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 icon-[snippet].liquid
 ```
 
-* Snippets used to contain inline SVGs should always be prefixed with `icon-`
+* Snippets used to contain inline SVGs should be prefixed with `icon-`
 * E.g. `icon-payment.liquid`
 
 ```html
