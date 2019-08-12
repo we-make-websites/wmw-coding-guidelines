@@ -220,7 +220,15 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
   {% assign row_class = 'row--full-width' %}
 {% endif %}
 
-<div class="row {{ row_class }}{% if is_hidden %} is-hidden{% endif %}"></div>
+<div
+  class="
+    row
+    {{ row_class }}
+    {% if is_hidden %} is-hidden{% endif %}
+  "
+>
+  <!-- Content -->
+</div>
 ```
 
 * Do not put long `{% if %}` tags inline, assign them separately
@@ -283,14 +291,12 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
       <div class="slide__buttons">
         {% for j in (1..2) %}
-          {%
-            assign slide_button_url = 'slide_#_button_%_url' |
+          {% assign slide_button_url = 'slide_#_button_%_url' |
             replace: '#', i |
             replace: '%', j
           %}
 
-          {%
-            assign slide_button_text = 'slide_#_button_%_text' |
+          {% assign slide_button_text = 'slide_#_button_%_text' |
             replace: '#', i |
             replace: '%', j
           %}
@@ -396,14 +402,13 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
   <meta name="robots" content="noindex, nofollow">
 {% endif %}
 
-{%
-  assign sanitized_variable = string |
-    downcase |
-    split: '/' |
-    last |
-    remove:'<p>' |
-    remove:'</p>' %} |
-    money_with_currency
+{% assign sanitized_variable = string |
+  downcase |
+  split: '/' |
+  last |
+  remove:'<p>' |
+  remove:'</p>' %} |
+  money_with_currency
 %}
 
 {% if variable %}
@@ -654,20 +659,18 @@ Split characters are used to effectively provide multiple description fields on 
 ### Example
 ```html
 {% if product.description != '' %}
-  {%
-    assign full_description = product.description |
-      remove: '<meta charset="utf-8">' |
-      remove: '<meta charset="utf-8" />' |
-      remove: '<span>' |
-      remove: '</span>' |
-      remove: '<p>&nbsp;</p>' |
-      remove: '<p> </p>' |
-      remove: '<p></p>'
+  {% assign full_description = product.description |
+    remove: '<meta charset="utf-8">' |
+    remove: '<meta charset="utf-8" />' |
+    remove: '<span>' |
+    remove: '</span>' |
+    remove: '<p>&nbsp;</p>' |
+    remove: '<p> </p>' |
+    remove: '<p></p>'
   %}
 
   {% if full_description contains '---DESCRIPTION---' %}
-    {%
-      assign description = full_description |
+    {% assign description = full_description |
       split: '<p>---DESCRIPTION---</p>' |
       last |
       split: '<p>---' |
@@ -676,12 +679,11 @@ Split characters are used to effectively provide multiple description fields on 
   {% endif %}
 
   {% if full_description contains '---SIZE GUIDE---' %}
-    {%
-      assign size_guide = full_description |
-        split: '<p>---SIZE GUIDE---</p>' |
-        last |
-        split: '<p>---' |
-        first
+    {% assign size_guide = full_description |
+      split: '<p>---SIZE GUIDE---</p>' |
+      last |
+      split: '<p>---' |
+      first
     %}
   {% endif %}
 {% endif %}
