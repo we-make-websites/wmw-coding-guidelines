@@ -199,14 +199,31 @@ The below guidelines cover only specific scenarios and should not be considered 
 * [Inline-level elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements#Elements) should be written on a single line
 * Single line elements should be grouped together by type
 * Multi line elements should have a newline between them
-* This includes empty block-level elements, e.g. the following is correct:
+* This guideline includes empty block-level elements, e.g. the following is correct:
 
 ```html
 <div
   class="article__image"
   data-bgset="{% include 'responsive-bg-image', image: article.image %}"
   js-article="image"
+></div>
+```
+
+* Once you are writing something over multiple lines, each line should only have one attribute or value on it
+* If an attribute's value exceeds 80 characters then it should be split in the following format:
+
+```html
+<div
+  class="
+    class-1
+    class-2
+    class-3
+    class-4
+  "
+  data-handle="{{ product.handle }}"
+  js-product="content"
 >
+  <!-- Content -->
 </div>
 ```
 

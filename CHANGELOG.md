@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 – 2019-09-25
+* HTML – Added example of multi-line attribute
+* Liquid – Re-organised structure
+* Liquid – Added section and snippet naming conventions and file structure
+
 ## 1.1.13 – 2019-08-08
 * All - Added navigational aids
 * HTML – Change attributes rule name

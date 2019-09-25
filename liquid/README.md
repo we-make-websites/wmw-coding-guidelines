@@ -10,44 +10,29 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 ## Table of contents
 
-1. [Characters](#characters)
-1. [Commenting (inline)](#commenting-inline)
-1. [Commenting (introductory)](#commenting-introductory)
+1. [Commenting](#commenting)
 1. [Conditional statements](#conditional-statements)
 1. [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
 1. [`{% include %}`](#-include-)
-1. [Indenting](#indenting)
+1. [Formatting](#formatting)
 1. [Language strings](#language-strings)
+1. [Naming](#naming)
 1. [Schema settings](#schema-settings)
 1. [Snippets](#snippets)
-1. [Spacing & line character limits](#spacing--line-character-limits)
 1. [Split characters](#split-characters)
-1. [Tag naming](#tag-naming)
 1. [Variables](#variables)
 1. [Whitespace controls](#whitespace-controls)
 
 [← Back to homepage](../README.md)
 
-## [Characters](#characters)
+## Commenting
 
-### Don't
-```html
-{% assign variable = "It's time for fun" %}
-```
+* [Inline](#inline)
+* [Introductory](#introductory)
 
-### Do
-```html
-{% assign variable = 'It\'s time for fun' %}
-```
+### [Inline](#inline)
 
-* Use apostrophes `'` in Liquid objects, tags, and filters, not quotations `"`
-* Escape apostrophes if they appear inside the string
-
-[ꜛ Back to TOC](#table-of-contents)
-
-## [Commenting (inline)](#commenting-inline)
-
-### Don't
+#### Don't
 ```html
 <!-- Only display description if tag is present -->
 {% if has_tag %}
@@ -55,19 +40,22 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 {% endif %}
 ```
 
-### Do
+#### Do
 ```html
 {% comment %} Only display description if tag is present {% endcomment %}
 {% if has_tag %}
-  <div class="foo">{{ product.description }}</div>
+  <div class="foo">
+    {{ product.description }}
+  </div>
 {% endif %}
 ```
 
-[ꜛ Back to TOC](#table-of-contents)
+* Use the `{% comment %}` tag for inline comments, not HTML comments
+* For `.js.liquid` or `.scss.liquid` file use the language appropriate comment
 
-## [Commenting (introductory)](#commenting-introductory)
+### [Introductory](#introductory)
 
-### Do
+#### Do
 ```html
 {% comment %}
 ------------------------------------------------------------------------------
@@ -85,8 +73,6 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 ------------------------------------------------------------------------------
   Snippet: Responsive image
   It creates a style tag and it restricts an image from growing larger than its max resolution.
-
-  // Shortened for brevity
 
   Usage:
   In your liquid template file, copy the following line
@@ -127,7 +113,10 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 {% for block in section.blocks %}
   <div class="block">
     {% if block.settings.image != '' %}
-      <img src="{{ block.settings.image | img_url: '2000x' }}" alt="{{ block.settings.image.alt }}">
+      <img
+        alt="{{ block.settings.image.alt }}"
+        src="{{ block.settings.image | img_url: '2000x' }}"
+      >
     {% endif %}
 
     {% if block.settings.title != '' %}
@@ -135,7 +124,9 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
     {% endif %}
 
     {% if block.settings.text != '' %}
-      <div class="block__text rte">{{ block.settings.text }}</div>
+      <div class="block__text rte">
+        {{ block.settings.text }}
+      </div>
     {% endif %}
 
     {% if block.settings.button url != '' and block.settings.button_text != '' %}
@@ -229,7 +220,15 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
   {% assign row_class = 'row--full-width' %}
 {% endif %}
 
-<div class="row {{ row_class }}{% if is_hidden %} is-hidden{% endif %}"></div>
+<div
+  class="
+    row
+    {{ row_class }}
+    {% if is_hidden %} is-hidden{% endif %}
+  "
+>
+  <!-- Content -->
+</div>
 ```
 
 * Do not put long `{% if %}` tags inline, assign them separately
@@ -245,7 +244,10 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 <!-- A custom page slider so four slides have been hard-coded in section settings -->
 <!-- This means we can't use {% for block in section.blocks %} -->
 <div class="slide slide--1">
-  <div class="slide__background" style="background-image: url({{ block.settings.slide_1_image | img_url: '2000x' }});">
+  <div
+    class="slide__background"
+    style="background-image: url({{ block.settings.slide_1_image | img_url: '2000x' }});"
+  ></div>
 
   <div class="slide__text">
     <h2 class="slide__title">{{ block.settings.slide_1_text }}</h2>
@@ -277,16 +279,30 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
   {% assign slide_text = 'slide_#_text' | replace: '#', i %}
 
   <div class="slide slide--{{ i }}">
-    <div class="slide__background" style="background-image: url({{ block.settings[slide_image] | img_url: '2000x' }});">
+    <div
+      class="slide__background"
+      style="background-image: url({{ block.settings[slide_image] | img_url: '2000x' }});"
+    ></div>
 
     <div class="slide__text">
       <h2 class="slide__heading">{{ block.settings[slide_heading] }}</h2>
-      <p class="slide__copy">{{ block.settings[slide_text] }}</p>
+
+      <p class="slide__copy">
+        {{ block.settings[slide_text] }}
+      </p>
 
       <div class="slide__buttons">
         {% for j in (1..2) %}
-          {% assign slide_button_url = 'slide_#_button_%_url' | replace: '#', i | replace: '%', j %}
-          {% assign slide_button_text = 'slide_#_button_%_text' | replace: '#', i | replace: '%', j %}
+          {% assign slide_button_url = 'slide_#_button_%_url' |
+            replace: '#', i |
+            replace: '%', j
+          %}
+
+          {% assign slide_button_text = 'slide_#_button_%_text' |
+            replace: '#', i |
+            replace: '%', j
+          %}
+
           <a class="slide__button" href="{{ block.settings[slide_button_url]}}">
             {{ block.settings[slide_button_text] }}
           </a>
@@ -303,40 +319,62 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [`{% include %}`](#-include-)
+## Formatting
 
-### Don't
+* [`{% include %}`](#-include-)
+* [Characters](#characters)
+* [Indenting](#indenting)
+* [Spacing & line character limits](#spacing--line-character-limits)
+
+### [`{% include %}`](#-include-)
+
+#### Don't
 ```html
 {% include 'icon-misc', icon: 'search', colour: 'red' %}
 {% include 'social-sharing' with share_title: product.title, share_permalink: product.url, share_image: product.featured_image %}
 ```
 
-### Do
+#### Do
 ```html
 {% include 'icon-misc' with icon: 'search', colour: 'red' %}
 
 {% include 'social-sharing' with
-  share_title: product.title,
+  share_image: product.featured_image,
   share_permalink: product.url,
-  share_image: product.featured_image
+  share_title: product.title,
 %}
 ```
 
 * When setting variables on your `{% include %}` always use `with` instead of starting with a comma
-* After the first variable declaration you must use a comma
+* After the first variable declaration you must use a comma `,`
 * If there are more than two variables and it goes over 80 characters then break it into a multi-line include
+* Sort the variables alphabetically and end each line with a comma `,`
 
-[ꜛ Back to TOC](#table-of-contents)
+### [Characters](#characters)
 
-## [Indenting](#indenting)
-### Don't
+#### Don't
+```html
+{% assign variable = "It's time for fun" %}
+```
+
+#### Do
+```html
+{% assign variable = 'It\'s time for fun' %}
+```
+
+* Use apostrophes `'` in Liquid objects, tags, and filters, not quotations `"`
+* Escape apostrophes if they appear inside the string
+
+### [Indenting](#indenting)
+
+#### Don't
 ```html
 {% if variable %}
 <h1>{{ product.title }}</h1>
 {% endif %}
 ```
 
-### Do
+#### Do
 ```html
 {% if variable %}
   <h1>{{ product.title }}</h1>
@@ -344,6 +382,65 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 ```
 
 * Treat opening Liquid tags the same as HTML elements; indent two spaces inside
+
+### [Spacing & line character limits](#spacing--line-character-limits)
+
+#### Don't
+```html
+{% if template contains 'search' or template contains 'account' or template contains 'customer' or template contains 'cart' %}<meta name="robots" content="noindex, nofollow">{% endif %}
+{% assign sanitized_var = string|downcase|split: '/'|last|remove:'<p>'|remove:'</p>'|money_with_currency %}
+{%if variable%}<h1 class="product__title">{{ product.title }}</h1>
+  <div class="product__price product__price--large money subtitle-1">{{ product.price | money }}</div>{% else %}<h2 class="product__title">{{ product.title }}</h2>{%endif%}
+```
+
+#### Do
+```html
+{% if
+  template contains 'search' or
+  template contains 'account' or
+  template contains 'customer' or
+  template contains 'cart'
+%}
+  <meta content="noindex, nofollow" name="robots">
+{% endif %}
+
+{% assign sanitized_variable = string |
+  downcase |
+  split: '/' |
+  last |
+  remove:'<p>' |
+  remove:'</p>' %} |
+  money_with_currency
+%}
+
+{% if variable %}
+  <h1 class="product__title">{{ product.title }}</h1>
+
+  <div
+    class="
+      product__price
+      product__price--large
+      money
+      subtitle-1
+    "
+  >
+    {{ product.price | money }}
+  </div>
+
+{% else %}
+  <h2 class="product__title">{{ product.title }}</h2>
+{% endif %}
+```
+
+* Add spaces inside each object and tag
+* Add spaces around filters
+* Separate blocks of Liquid code with a newline
+* Opening `{% if %}` tags should be on separate lines
+* `{% if %}` tags with more than two filters and exceeding 80 characters should be split onto multiple lines
+* If the contents of an `{% if %}` tag spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
+* `{% assign %}` tags with more than two filters and exceeding 80 characters should be broken up over multiple lines and indented
+* Once you are writing something over multiple lines, each line should only have one attribute or value on it
+* For details on HTML spacing see the [HTML](../html/README.md) rule for [Spacing & line character limit](../html/README.md#spacing--line-character-limits)
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -382,6 +479,54 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 * Never hard-code text in your template files
 * Always use Shopify's [translation filter](https://help.shopify.com/en/themes/development/theme-store-requirements/internationalizing/translation-filter)
 * Most of our clients are multi-lingual so it is expected that they will be able to translate their store without requiring additional development
+
+[ꜛ Back to TOC](#table-of-contents)
+
+## Naming
+
+1. [Section template naming](#section-template-naming)
+1. [Snippet naming](#Snippet-naming)
+1. [Tag naming](#tag-naming)
+
+### [Section template naming](#section-template-naming)
+
+```html
+template-[section].liquid
+```
+
+* If a section replaces the template's content it should be prefixed with `template-`
+* E.g. `template-product.liquid` or `template-collection.liquid`
+
+### [Snippet naming](#snippet-naming)
+
+```html
+icon-[snippet].liquid
+```
+
+* Snippets used to contain inline SVGs should be prefixed with `icon-`
+* E.g. `icon-payment.liquid`
+
+```html
+section-[snippet].liquid
+```
+
+* Snippets that contain a section's content should be prefixed with `section-`
+* E.g. `section-hero.liquid` or `section-featured-collection.liquid`
+
+### [Tag naming](#tag-naming)
+
+```html
+tag_name
+tag_name: [value]
+tag_name: [value1]_[value2] (etc.)
+```
+
+* Use the naming convention `tag_name: [value]` for admin tags (products, orders, customers) with a value and `tag_name` for tags without a value
+* In most cases `[value]` should be in lowercase to make comparisons easier. However in instances where the value is outputted on the front-end in a specific case (e.g. Title Case) make sure this is clear in the tech spec
+* If you need to store separate values in the same tag then separate them using `_`  such as `type_modal: [Model]_[Year]` (this isn't snake_case)
+* Do not use boolean values (e.g. `has_addon: true`) as simply having the tag in the first place is enough to know that it is `true` (e.g. `has_addon`)
+* If the tag is to be used in a search string (and therefore needs to be handlelised) then use the naming convention `tag_name--[value]`, this allows the value to be kebab-cased (e.g. `build_date--2019-07-03`)
+* Never put formatted money into the tag (e.g. `monthly_cost: £10`) as tags do not support all the formatting standards required by international stores (e.g. `monthly_cost: €12,34` will not be allowed because the comma ends the tag), instead use `monthly_cost: 1234` and format the cost using Liquid or JavaScript
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -451,59 +596,61 @@ Specific rules for certain settings of `type`:
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Snippets](#snippets)
+## Snippets
+
+* [Section snippets](#section-snippets)
+* [Snippets general](#snippets-general)
+
+### [Section snippets](#section-snippets)
+
+* Place the content for a section inside a snippet (see [snippet naming](#snippet-naming) for advice on naming)
+* This allows us to use a section anywhere as we can place the snippet inside a `{% case %}` block setup
+
+#### Example
+
+##### Section
+```html
+{% comment %}
+----------------------------------------------------------------------------
+  Section: Featured text
+  – Large text banner.
+----------------------------------------------------------------------------
+{% endcomment %}
+<section
+  class="featured-text-section"
+  data-section-id="{{ section.id }}"
+  data-section-type="featured-text"
+>
+  {% include 'section-featured-text' with object: section %}
+</section>
+
+{% schema %}
+  {
+    "name": "Featured Text",
+    <!-- Section settings -->
+  }
+{% endschema %}
+```
+
+##### Snippet
+```html
+<!-- Code removed for brevity -->
+<div class="featured-text">
+  {% if object.settings.title != '' %}
+    <p class="featured-text__copy body-1">
+      {{ object.settings.title }}
+    </p>
+  {% endif %}
+</div>
+```
+
+* With this setup you would then be able to include `{% include 'section-featured-text' with object: block %}` on a page other than the homepage
+
+### [Snippets general](#snippets-general)
 
 * Use Liquid snippets to keep files small and manageable
-* In the same way of block gets its own SCSS and JS file, consider splitting it into its own snippet
+* In the same way a block gets its own SCSS and JS file, consider splitting it into its own snippet
 * Snippets are especially useful for repeating content
-
-[ꜛ Back to TOC](#table-of-contents)
-
-## [Spacing & line character limits](#spacing--line-character-limits)
-
-### Don't
-```html
-{% if template contains 'search' or template contains 'account' or template contains 'customer' or template contains 'cart' %}<meta name="robots" content="noindex, nofollow">{% endif %}
-{% assign sanitized_var = string|downcase|split: '/'|last|remove:'<p>'|remove:'</p>'|money_with_currency %}
-{%if variable%}<h1 class="product__title">{{ product.title }}</h1>
-  <div class="product__price">{{ product.price | money }}</div>{% else %}<h2 class="product__title">{{ product.title }}</h2>{%endif%}
-```
-
-### Do
-```html
-{% if
-  template contains 'search' or
-  template contains 'account' or
-  template contains 'customer' or
-  template contains 'cart'
-%}
-  <meta name="robots" content="noindex, nofollow">
-{% endif %}
-
-{% assign sanitized_variable = string | downcase | split: '/' | last %}
-{% assign sanitized_variable = sanitized_variable | remove:'<p>' | remove:'</p>' %}
-{% assign sanitized_variable = sanitized_variable | money_with_currency %}
-
-{% if variable %}
-  <h1 class="product__title">{{ product.title }}</h1>
-
-  <div class="product__price">
-    {{ product.price | money }}
-  </div>
-
-{% else %}
-  <h2 class="product__title">{{ product.title }}</h2>
-{% endif %}
-```
-
-* Add spaces inside each object and tag
-* Add spaces around filters
-* Separate blocks of Liquid code with a newline
-* Opening `{% if %}` tags should be on separate lines
-* `{% if %}` tags with more than two filters and exceeding 80 characters should be split onto multiple lines
-* If the contents of an `{% if %}` tag spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
-* `{% assign %}` tags with more than two filters and exceeding 80 characters should be broken up into multiple `{% assign %}` and reference the previous variable
-* For details on HTML spacing see the [HTML](../html/README.md) rule for [Spacing & line character limit](../html/README.md#spacing--line-character-limits)
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -514,14 +661,32 @@ Split characters are used to effectively provide multiple description fields on 
 ### Example
 ```html
 {% if product.description != '' %}
-  {% assign full_description = product.description | remove: '<meta charset="utf-8">' | remove: '<meta charset="utf-8" />' | remove: '<span>' | remove: '</span>' | remove: '<p>&nbsp;</p>' | remove: '<p> </p>' | remove: '<p></p>' %}
+  {% assign full_description = product.description |
+    remove: '<meta charset="utf-8">' |
+    remove: '<meta charset="utf-8" />' |
+    remove: '<span>' |
+    remove: '</span>' |
+    remove: '<p>&nbsp;</p>' |
+    remove: '<p> </p>' |
+    remove: '<p></p>'
+  %}
 
   {% if full_description contains '---DESCRIPTION---' %}
-    {% assign description = full_description | split: '<p>---DESCRIPTION---</p>' | last | split: '<p>---' | first %}
+    {% assign description = full_description |
+      split: '<p>---DESCRIPTION---</p>' |
+      last |
+      split: '<p>---' |
+      first
+    %}
   {% endif %}
 
   {% if full_description contains '---SIZE GUIDE---' %}
-    {% assign size_guide = full_description | split: '<p>---SIZE GUIDE---</p>' | last | split: '<p>---' | first %}
+    {% assign size_guide = full_description |
+      split: '<p>---SIZE GUIDE---</p>' |
+      last |
+      split: '<p>---' |
+      first
+    %}
   {% endif %}
 {% endif %}
 
@@ -543,17 +708,6 @@ Split characters are used to effectively provide multiple description fields on 
 * Assign the split description to variables at the top of the file then output the variable as and when you need it
 * Use split characters over metafields as they don't require any special apps to access and content can be automatically imported using apps like Excelify
 * Shopify tends to add extra HTML so in the example this has been stripped off, including empty line returns
-
-[ꜛ Back to TOC](#table-of-contents)
-
-## [Tag naming](#tag-naming)
-
-* Use the naming convention `tag_name: [value]` for admin tags (products, orders, customers) with a value and `tag_name` for tags without a value
-* In most cases `[value]` should be in lowercase to make comparisons easier. However in instances where the value is outputted on the front-end in a specific case (e.g. Title Case) make sure this is clear in the tech spec
-* If you need to store separate values in the same tag then separate them using `_`  such as `type_modal: [Model]_[Year]` (this isn't snake_case)
-* Do not use boolean values (e.g. `has_addon: true`) as simply having the tag in the first place is enough to know that it is `true` (e.g. `has_addon`)
-* If the tag is to be used in a search string (and therefore needs to be handlelised) then use the naming convention `tag_name--[value]`, this allows the value to be kebab-cased (e.g. `build_date--2019-07-03`)
-* Never put formatted money into the tag (e.g. `monthly_cost: £10`) as tags do not support all the formatting standards required by international stores (e.g. `monthly_cost: €12,34` will not be allowed because the comma ends the tag), instead use `monthly_cost: 1234` and format the cost using Liquid or JavaScript
 
 [ꜛ Back to TOC](#table-of-contents)
 
