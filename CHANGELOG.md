@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.1 – 2019-10-03
+* CSS – Added proper names for variable naming convention
+* CSS – Removed fallback rule for BEM
+* HTML – Added rule for `aria-` attributes
+* HTML – Made examples make more sense
+* HTML – Added attribute values rule
+
 ## 1.2.0 – 2019-09-25
 * HTML – Added example of multi-line attribute
 * Liquid – Re-organised structure

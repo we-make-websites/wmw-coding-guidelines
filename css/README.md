@@ -474,17 +474,12 @@ The below example will only work when you are using Frame 2 or higher as previou
 .product-icons {
   &__icon {
     &#{&}--large {
-      // This might be over-complicated for this scenario
       // Also we're already at three levels deep so always keep an eye on your nesting
     }
   }
 
-  &__icon--large {
-    // This might be simpler alternative than the above
-  }
-
   .product-card & {
-    // Keep all the code for .product-icons in one place by qualifying its contex
+    // Keep all the code for .product-icons in one place by qualifying its context
     // Code here will only apply to .product-icons when inside .product-card
   }
 }
@@ -632,8 +627,8 @@ $GRID_MARGIN: 20px;
 }
 ```
 
-* For global variables use all caps separated by _
-* For local variables use lowercase separated by _
+* For global variables use SCREAMING_SNAKE_CASE
+* For local variables use snake_case
 
 > **🗒 Note:** Local variables are only available in the declaration they are defined in.
 

@@ -6,7 +6,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ## Table of contents
 
-1. [Attribute order](#attribute-order)
+1. [Attributes](#attributes)
 1. [Characters](#characters)
 1. [Commenting](#commenting)
 1. [`<div>` or `<span>`](#div-or-span)
@@ -16,29 +16,35 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 [← Back to homepage](../README.md)
 
-## [Attribute order](#attribute-order)
+## Attributes
 
-### Don't
+* [Attribute order](#attribute-order)
+* [Attribute values](#attribute-values)
+
+### [Attribute order](#attribute-order)
+
+#### Don't
 ```html
-<textarea js-email="textarea" type="email" name="contact[email]" class="newsletter-modal__textarea" id="NewsletterModal-Email" value="{{ customer.email }}" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}" autocorrect="off" autocapitalize="off" data-show="true">{{ 'general.pages.contact_placeholder' | t }}</textarea>
+<input id="NewsletterModal-Email" class="newsletter-modal__textarea" autocapitalize="off" autocomplete="newsletter-address" autocorrect="off" name="contact[email]" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}" type="email" value="{{ customer.email }}" aria-labelledby="NewsletterModal-EmailLabel" data-show="true" js-newsletter="email">
+>
 ```
 
-### Do
+#### Do
 ```html
-<textarea
-  id="NewsletterModal-Email"
+<input
+  id="NewsletterModalEmail"
   class="newsletter-modal__textarea"
   autocapitalize="off"
+  autocomplete="newsletter-address"
   autocorrect="off"
   name="contact[email]"
   placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
   type="email"
   value="{{ customer.email }}"
+  aria-labelledby="NewsletterModalEmailLabel"
   data-show="true"
-  js-email="textarea"
+  js-newsletter="email"
 >
-  {{ 'general.pages.contact_placeholder' | t }}
-</textarea>
 ```
 
 * When an element has more than two attributes they should be stacked on newlines
@@ -46,6 +52,7 @@ The below guidelines cover only specific scenarios and should not be considered 
   * `id`
   * `class`
   * {native}
+  * `aria-`
   * `data-`
   * `js-`
 * {native} covers everything else, items within {native} should be in alphabetical order
@@ -66,6 +73,12 @@ The below guidelines cover only specific scenarios and should not be considered 
 ```
 
 * Use multi line attributes if as a single line it would exceed 80 characters
+
+### [Attribute values](#attribute-values)
+
+* `id` values should be PascalCase
+* `class` values should follow BEM naming conventions
+* `js-` attributes should be camelCase
 
 [ꜛ Back to TOC](#table-of-contents)
 
