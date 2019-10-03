@@ -9,6 +9,7 @@ Standards, guidelines, and best practice we follow whilst developing at [We Make
 1. [Liquid](liquid/README.md)
 1. [CSS/SCSS](css/README.md)
 1. [JavaScript](https://github.com/Shopify/javascript#import-javascript-from-shopify)
+1. [VS Code](vs-code/README.md)
 
 ## Why do we need guidelines?
 
