@@ -63,11 +63,11 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ### Also
 ```html
-<div class="hero template-article__hero-image lazyload" data-bgset="{% include 'responsive-bg-image', image: article.image %}"></div>
+<div class="hero template-article__hero-image lazyload" data-bgset="{% render 'responsive-bg-image' with image: article.image %}"></div>
 
 <div
   class="hero template-article__hero-image lazyload"
-  data-bgset="{% include 'responsive-bg-image', image: article.image %}"
+  data-bgset="{% render 'responsive-bg-image' with image: article.image %}"
 >
 </div>
 ```
@@ -153,7 +153,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 <div id="Product" class="product" data-id="{{ product.id }}" js-product="container">
   <h1 class="product__title">{{ product.title }}</h1>
   <h2 class="product__subtitle">{{ product.type }}</h2>
-  <button class="product__button product-button"><span class="product-button__icon">{% include 'icon-misc' with icon: 'plus' %}</span><span class="product-button__text">{{ 'products.product.add_to_cart' | t }}</span></button>
+  <button class="product__button product-button"><span class="product-button__icon">{% render 'icon-misc' with icon: 'plus' %}</span><span class="product-button__text">{{ 'products.product.add_to_cart' | t }}</span></button>
   <div class="product__content product-content">
     <p class="product-content__description">{{ product.description }}</p>
     <p class="product-content__shipping">{{ pages['shipping'].content | strip_html }}</p>
@@ -175,7 +175,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 
   <button class="product__button product-button">
     <span class="product-button__icon">
-      {% include 'icon-misc' with icon: 'plus' %}
+      {% render 'icon-misc' with icon: 'plus' %}
     </span>
 
     <span class="product-button__text">
@@ -217,7 +217,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 ```html
 <div
   class="article__image"
-  data-bgset="{% include 'responsive-bg-image', image: article.image %}"
+  data-bgset="{% render 'responsive-bg-image' with image: article.image %}"
   js-article="image"
 ></div>
 ```

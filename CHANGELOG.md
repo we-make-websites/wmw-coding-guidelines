@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.3 - 2019-12-09
+* HTML - Replaced `{% include %}` with `{% render %}`
+* Liquid - Replaced `{% include %}` with `{% render %}`
+
 ## 1.2.2 - 2019-12-09
 * Home - Added VS Code section
 * VS Code - Details recommended extensions and settings
