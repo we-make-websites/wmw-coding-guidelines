@@ -15,11 +15,12 @@ These links will open the Visual Studio Marketplace.
 
 * [Bracket Pair Colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2)
 * [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-* [Liquid Languages Support](https://marketplace.visualstudio.com/items?itemName=neilding.language-liquid)
 * [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)
+* [Liquid Languages Support](https://marketplace.visualstudio.com/items?itemName=neilding.language-liquid)
 * [Shopify Liquid Template Snippets](https://marketplace.visualstudio.com/items?itemName=killalau.vscode-liquid-snippets)
-* [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint)
 * [Snippet Creator](https://marketplace.visualstudio.com/items?itemName=nikitaKunevich.snippet-creator)
+* [stylelint-plus](https://marketplace.visualstudio.com/items?itemName=hex-ci.stylelint-plus)
+
 
 [ꜛ Back to TOC](#table-of-contents)
 
