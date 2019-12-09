@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2 - 2019-12-09
+* Home - Added VS Code section
+* VS Code - Details recommended extensions and settings
+
 ## 1.2.1 – 2019-10-03
 * CSS – Added proper names for variable naming convention
 * CSS – Removed fallback rule for BEM
