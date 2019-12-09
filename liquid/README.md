@@ -13,7 +13,6 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 1. [Commenting](#commenting)
 1. [Conditional statements](#conditional-statements)
 1. [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
-1. [`{% include %}`](#-include-)
 1. [Formatting](#formatting)
 1. [Language strings](#language-strings)
 1. [Naming](#naming)
@@ -67,7 +66,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 * Include an introductory comment at the start of each file
 * Describe what folder it's in, the file's name, and list any special features or conditions
-* If it's an include show an example include with its variables, e.g.
+* If it's something included using a `{% render %}` then show an example with its variables, e.g.
 ```html
 {% comment %}
 ------------------------------------------------------------------------------
@@ -76,7 +75,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
   Usage:
   In your liquid template file, copy the following line
-  - {% include 'responsive-image' with image: featured_image, image_class: "css-class", wrapper_class: "wrapper-css-class", max_width: 700, max_height: 800 %}
+  - {% render 'responsive-image' with image: featured_image, image_class: "css-class", wrapper_class: "wrapper-css-class", max_width: 700, max_height: 800 %}
 ------------------------------------------------------------------------------
 {% endcomment %}
 ```
@@ -224,7 +223,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
   class="
     row
     {{ row_class }}
-    {% if is_hidden %} is-hidden{% endif %}
+    {% if is_hidden %}is-hidden{% endif %}
   "
 >
   <!-- Content -->
@@ -233,7 +232,7 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 * Do not put long `{% if %}` tags inline, assign them separately
 * If the `{% if %}` tag is short you can put it inline
-* Include the space inside the `{% if %}` tag so it is only outputted when the if condition is met
+* Only include the space inside the `{% if %}` tag if it's on a single line, otherwise there is no need to include a space
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -321,33 +320,35 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 ## Formatting
 
-* [`{% include %}`](#-include-)
+* [`{% render %}`](#-render-)
 * [Characters](#characters)
 * [Indenting](#indenting)
 * [Spacing & line character limits](#spacing--line-character-limits)
 
-### [`{% include %}`](#-include-)
+### [`{% render %}`](#-render-)
+
+> 🗒 **Note:** `{% include %}` tags have been deprecated by Shopify and replaced with the `{% render %}` tag. [For full details visit this page](https://help.shopify.com/en/themes/liquid/tags/theme-tags#render).
 
 #### Don't
 ```html
 {% include 'icon-misc', icon: 'search', colour: 'red' %}
-{% include 'social-sharing' with share_title: product.title, share_permalink: product.url, share_image: product.featured_image %}
+{% render 'social-sharing' with share_title: product.title, share_permalink: product.url, share_image: product.featured_image %}
 ```
 
 #### Do
 ```html
-{% include 'icon-misc' with icon: 'search', colour: 'red' %}
+{% render 'icon-misc' with icon: 'search', colour: 'red' %}
 
-{% include 'social-sharing' with
+{% render 'social-sharing' with
   share_image: product.featured_image,
   share_permalink: product.url,
   share_title: product.title,
 %}
 ```
 
-* When setting variables on your `{% include %}` always use `with` instead of starting with a comma
+* When setting variables on your `{% render %}` always use `with` instead of starting with a comma
 * After the first variable declaration you must use a comma `,`
-* If there are more than two variables and it goes over 80 characters then break it into a multi-line include
+* If there are more than two variables and it goes over 80 characters then break it into a multi-line tag
 * Sort the variables alphabetically and end each line with a comma `,`
 
 ### [Characters](#characters)
@@ -621,7 +622,7 @@ Specific rules for certain settings of `type`:
   data-section-id="{{ section.id }}"
   data-section-type="featured-text"
 >
-  {% include 'section-featured-text' with object: section %}
+  {% render 'section-featured-text' with object: section %}
 </section>
 
 {% schema %}
@@ -644,7 +645,8 @@ Specific rules for certain settings of `type`:
 </div>
 ```
 
-* With this setup you would then be able to include `{% include 'section-featured-text' with object: block %}` on a page other than the homepage
+* With this setup you would then be able to add `{% render 'section-featured-text' with object: block %}` on a page other than the homepage
+* With `{% render %}` you would need to include all the parameters that the snippet requires
 
 ### [Snippets general](#snippets-general)
 
