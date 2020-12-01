@@ -14,12 +14,12 @@ These are the minimum extensions we recommend you have installed.
 These links will open the Visual Studio Marketplace.
 
 * [Bracket Pair Colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2)
+* [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 * [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 * [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)
 * [Liquid Languages Support](https://marketplace.visualstudio.com/items?itemName=neilding.language-liquid)
 * [Shopify Liquid Template Snippets](https://marketplace.visualstudio.com/items?itemName=killalau.vscode-liquid-snippets)
-* [Snippet Creator](https://marketplace.visualstudio.com/items?itemName=nikitaKunevich.snippet-creator)
-* [stylelint-plus](https://marketplace.visualstudio.com/items?itemName=hex-ci.stylelint-plus)
+* [Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
 
 
 [ꜛ Back to TOC](#table-of-contents)

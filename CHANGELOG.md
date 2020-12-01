@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.4 - 2020-12-01
+* VS Code - Updated extensions list
+
 ## 1.2.3 - 2019-12-09
 * HTML - Replaced `{% include %}` with `{% render %}`
 * Liquid - Replaced `{% include %}` with `{% render %}`
