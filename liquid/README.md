@@ -4,7 +4,7 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 
 ## Table of contents
 
-* [`{% liquid %}` tag](#liquid--tag)
+* [`{% liquid %}` tag](#-liquid--tag)
 * [Commenting](#commenting)
 * [Conditional statements](#conditional-statements)
 * [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
@@ -19,7 +19,7 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 
 [← Back to homepage](../README.md)
 
-## [`{% liquid %}` tag](#liquid--tag)
+## [`{% liquid %}` tag](#-liquid--tag)
 
 #### Don't
 ```html
