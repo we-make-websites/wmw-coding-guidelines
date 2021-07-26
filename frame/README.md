@@ -5,11 +5,11 @@ Standards, guidelines, and best practice we follow whilst developing at [We Make
 
 ## Table of contents
 
-* [HTML](frame/html/README.md)
-* [Liquid](frame/liquid/README.md)
-* [CSS/SCSS](frame/css/README.md)
+* [HTML](html/README.md)
+* [Liquid](liquid/README.md)
+* [CSS/SCSS](css/README.md)
 * [JavaScript](https://github.com/Shopify/javascript#import-javascript-from-shopify)
-* [VS Code](frame/vs-code/README.md)
+* [VS Code](vs-code/README.md)
 
 ## Why do we need guidelines?
 
