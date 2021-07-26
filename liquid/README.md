@@ -1,28 +1,47 @@
 # Liquid Guidelines
 
-The below guidelines cover only specific scenarios and should not be considered exhaustive. For more general HTML guidelines visit [Shopify's Liquid file requirements for themes](https://help.shopify.com/en/themes/development/theme-store-requirements/theme-file-requirements).
-
-**Where there are differences our guidelines take precedence.**
-
-## Shopify Cheatsheet
-
-The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet) is no longer up-to-date. For a full and complete list of available objects, tags, and filters see the [Liquid reference](https://help.shopify.com/en/themes/liquid/objects) documentation.
+For details on how to pass Liquid variables to Vue props, see [CANVAS's documentation](https://www.notion.so/wemakewebsites/Passing-Liquid-to-Vue-9367b24ce4ae447bbfc6471794f01b7a).
 
 ## Table of contents
 
-1. [Commenting](#commenting)
-1. [Conditional statements](#conditional-statements)
-1. [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
-1. [Formatting](#formatting)
-1. [Language strings](#language-strings)
-1. [Naming](#naming)
-1. [Schema settings](#schema-settings)
-1. [Snippets](#snippets)
-1. [Split characters](#split-characters)
-1. [Variables](#variables)
-1. [Whitespace controls](#whitespace-controls)
+* [`{% liquid %}` tag](#liquid-tag)
+* [Commenting](#commenting)
+* [Conditional statements](#conditional-statements)
+* [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
+* [Formatting](#formatting)
+* [Language strings](#language-strings)
+* [Naming](#naming)
+* [Schema settings](#schema-settings)
+* [Snippets](#snippets)
+* [Split characters](#split-characters)
+* [Variables](#variables)
+* [Whitespace controls](#whitespace-controls)
 
 [← Back to homepage](../README.md)
+
+## [`{% liquid %}` tag](#liquid-tag)
+
+#### Don't
+```html
+{% assign variable_a = 'Hello world' %}
+{% assign variable_b = 'Hello world' %}
+{% assign variable_c = 'Hello world' %}
+{% assign variable_e = 'Hello world' %}
+```
+
+#### Do
+```html
+{%- liquid
+  assign variable_a = 'Hello world'
+  assign variable_b = 'Hello world'
+  assign variable_c = 'Hello world'
+  assign variable_e = 'Hello world'
+-%}
+```
+
+* When using multiple tags replace with a `{% liquid %}` tag
+* Use whitespace controls to remove whitespace from around the statement when rendered
+* See [Shopify documentation](https://shopify.dev/api/liquid/tags/theme-tags#liquid) for more details
 
 ## Commenting
 
@@ -191,16 +210,18 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 
 #### Do
 ```html
-{% case variable %}
-  {% when 'Hello' %}
-    Content
-  {% when 'Goodbye' %}
-    Content
-  {% when 'Good night '%}
-    Content
-  {% else %}
-    Content
-{% endcase %}
+{%- liquid
+  case variable %}
+    when 'Hello'
+      Content
+    when 'Goodbye'
+      Content
+    when 'Good night '%}
+      Content
+    else
+      Content
+  endcase
+-%}
 ```
 
 * Do not use `{% if %}` for more than two conditions, use `{% case %}` instead
@@ -273,9 +294,11 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 ### Do
 ```html
 {% for i in (1..4) %}
-  {% assign slide_image = 'slide_#_image' | replace: '#', i %}
-  {% assign slide_heading = 'slide_#_heading' | replace: '#', i %}
-  {% assign slide_text = 'slide_#_text' | replace: '#', i %}
+  {%- liquid
+    assign slide_image = 'slide_#_image' | replace: '#', i
+    assign slide_heading = 'slide_#_heading' | replace: '#', i
+    assign slide_text = 'slide_#_text' | replace: '#', i
+  -%}
 
   <div class="slide slide--{{ i }}">
     <div
@@ -492,11 +515,11 @@ The [Shopify Cheatsheet](https://www.shopify.co.uk/partners/shopify-cheat-sheet)
 ### [Section template naming](#section-template-naming)
 
 ```html
-template-[section].liquid
+main-[section].liquid
 ```
 
-* If a section replaces the template's content it should be prefixed with `template-`
-* E.g. `template-product.liquid` or `template-collection.liquid`
+* If a section replaces the template's content it should be prefixed with `main-` and moved into the _main_ folder in _sections_ (if it isn't a dynamic component)
+* E.g. `main-product.liquid` or `main-collection.liquid`
 
 ### [Snippet naming](#snippet-naming)
 
@@ -552,8 +575,8 @@ tag_name: [value1]_[value2] (etc.)
   "type": "text",
   "id": "store_id",
   "label": "Store ID",
-  "default": "dev_store",
-  "info": "Enter a unique store ID using a snake case naming convention. e.g: gb_store"
+  "info": "Enter a unique store ID using a snake case naming convention. e.g: gb_store",
+  "default": "dev_store"
 }
 ```
 
@@ -577,13 +600,13 @@ tag_name: [value1]_[value2] (etc.)
   "type": "text",
   "id": "store_id",
   "label": "Store ID",
-  "default": "dev_store",
-  "info": "Enter a unique store ID using a snake case naming convention. e.g: gb_store"
+  "info": "Enter a unique store ID using a snake case naming convention. e.g: gb_store",
+  "default": "dev_store"
 }
 ```
 
 * Use the prescribed order, any other key value pairs should be added below in alphabetical order
-* Use snake case for `id`
+* Use snake_case for `id`
 * Use sentence case for `label` and `info`
 
 ### [`Type`](#type)
@@ -592,63 +615,12 @@ Specific rules for certain settings of `type`:
 * `range` – Use for fixed number choices (such as font size, height, duration etc.)
 * `richtext` – If you are changing `text` or `textarea` to `richtext` (or vice versa) you will need to delete any existing settings data as it will throw an error
 * `select` – Use for fixed text choices (not for numbers)
-* `textarea` – Do not use for raw HTML, use `html` for this
+* `textarea` – Do not use as it doesn't support dynamic content sources
 * `url` – Only use for all choices, use one of the limited selections if you are only expecting a certain output (`collection`, `product`, `blog`, `page`, and `article`), do not use for video, use `video_url` for this
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## Snippets
-
-* [Section snippets](#section-snippets)
-* [Snippets general](#snippets-general)
-
-### [Section snippets](#section-snippets)
-
-* Place the content for a section inside a snippet (see [snippet naming](#snippet-naming) for advice on naming)
-* This allows us to use a section anywhere as we can place the snippet inside a `{% case %}` block setup
-
-#### Example
-
-##### Section
-```html
-{% comment %}
-----------------------------------------------------------------------------
-  Section: Featured text
-  – Large text banner.
-----------------------------------------------------------------------------
-{% endcomment %}
-<section
-  class="featured-text-section"
-  data-section-id="{{ section.id }}"
-  data-section-type="featured-text"
->
-  {% render 'section-featured-text' with object: section %}
-</section>
-
-{% schema %}
-  {
-    "name": "Featured Text",
-    <!-- Section settings -->
-  }
-{% endschema %}
-```
-
-##### Snippet
-```html
-<!-- Code removed for brevity -->
-<div class="featured-text">
-  {% if object.settings.title != '' %}
-    <p class="featured-text__copy body-1">
-      {{ object.settings.title }}
-    </p>
-  {% endif %}
-</div>
-```
-
-* With this setup you would then be able to add `{% render 'section-featured-text' with object: block %}` on a page other than the homepage
-* With `{% render %}` you would need to include all the parameters that the snippet requires
-
-### [Snippets general](#snippets-general)
+## [Snippets](#snippets-general)
 
 * Use Liquid snippets to keep files small and manageable
 * In the same way a block gets its own SCSS and JS file, consider splitting it into its own snippet
@@ -662,35 +634,34 @@ Split characters are used to effectively provide multiple description fields on 
 
 ### Example
 ```html
-{% if product.description != '' %}
-  {% assign full_description = product.description |
-    remove: '<meta charset="utf-8">' |
-    remove: '<meta charset="utf-8" />' |
-    remove: '<span>' |
-    remove: '</span>' |
-    remove: '<p>&nbsp;</p>' |
-    remove: '<p> </p>' |
-    remove: '<p></p>'
-  %}
+{%- liquid
+  if product.description != ''
+    assign full_description = product.description |
+      remove: '<meta charset="utf-8">' |
+      remove: '<meta charset="utf-8" />' |
+      remove: '<span>' |
+      remove: '</span>' |
+      remove: '<p>&nbsp;</p>' |
+      remove: '<p> </p>' |
+      remove: '<p></p>'
 
-  {% if full_description contains '---DESCRIPTION---' %}
-    {% assign description = full_description |
-      split: '<p>---DESCRIPTION---</p>' |
-      last |
-      split: '<p>---' |
-      first
-    %}
-  {% endif %}
+    if full_description contains '---DESCRIPTION---'
+      assign description = full_description |
+        split: '<p>---DESCRIPTION---</p>' |
+        last |
+        split: '<p>---' |
+        first
+    endif
 
-  {% if full_description contains '---SIZE GUIDE---' %}
-    {% assign size_guide = full_description |
-      split: '<p>---SIZE GUIDE---</p>' |
-      last |
-      split: '<p>---' |
-      first
-    %}
-  {% endif %}
-{% endif %}
+    if full_description contains '---SIZE GUIDE---'
+      assign size_guide = full_description |
+        split: '<p>---SIZE GUIDE---</p>' |
+        last |
+        split: '<p>---' |
+        first
+    endif
+  endif
+-%}
 
 {% if description %}
   <div class="product__description rte">
@@ -732,13 +703,15 @@ Split characters are used to effectively provide multiple description fields on 
 
 #### Do
 ```html
-{% for product in collection.products %}
-  {% assign has_shipping_tag = false %}
+{%- liquid
+  for product in collection.products
+    assign has_shipping_tag = false
 
-  {% if product.tags contains 'has_shipping' %}
-    {% assign has_shipping_tag = true %}
-  {% endif %}
-{% endif %}
+    if product.tags contains 'has_shipping'
+      assign has_shipping_tag = true
+    endif
+  endif
+-%}
 ```
 
 * Assign the default state of a variable before you first use it
@@ -769,10 +742,12 @@ Split characters are used to effectively provide multiple description fields on 
 
 #### Do
 ```html
-{% assign variable_a = 'Hello world' %}
-{% assign variable_b = 'Hello world' %}
-{% assign variable_c = 'Hello world' %}
-{% assign variable_e = 'Hello world' %}
+{%- liquid
+  assign variable_a = 'Hello world'
+  assign variable_b = 'Hello world'
+  assign variable_c = 'Hello world'
+  assign variable_e = 'Hello world'
+-%}
 
 <h1>{{ product.title }}</h1>
 <div>{{ product.description }}</div>
@@ -831,21 +806,7 @@ Split characters are used to effectively provide multiple description fields on 
 
 ## [Whitespace controls](#whitespace-controls)
 
-### Don't
-```html
-{%- if variable_name -%}
-  {%- assign another_variable = false -%}
-{%- endif -%}
-```
-
-### Do
-```html
-{% if variable_name %}
-  {% assign another_variable = false %}
-{% endif %}
-```
-
-* Do not use [whitespace control](https://help.shopify.com/en/themes/liquid/basics/whitespace_) on tags
+* Only use whitespace controls when using a `{% liquid %}` tag or when outputting Liquid to Vue props
 * If you need to trim whitespace from objects then you can use whitespace controls, e.g. `{{- section.settings.body_copy -}}`
 
 > **🗒 Note:** Not all apps support whitespace controls.
