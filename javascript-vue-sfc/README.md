@@ -51,7 +51,8 @@ const bar = [
 
 ### [General comments](#general-comments)
 
-* Add a newline before all comments
+* Add a newline comments, except those starting with `eslint` or `webpack`
+* Comments should begin with a capital letter
 
 ### [Long form comments](#long-form-comments)
 
