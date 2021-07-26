@@ -1,6 +1,8 @@
 <p align="center"><img src="https://raw.githubusercontent.com/we-make-websites/wmw-coding-guidelines/master/assets/logo.png" alt="We Make Websites" width="170"></p>
 
-# FRAME Coding Guidelines
+# Coding Guidelines
+Deprecated. See [CANVAS guidelines](/README.md).
+
 Standards, guidelines, and best practice we follow whilst developing at [We Make Websites](https://wemakewebsites.com/) on our FRAME framework.
 
 ## Table of contents
@@ -31,7 +33,3 @@ When committing your changes the SCSS and JS files will be automated linted due 
 
 ### FRAME 1 & 2
 You must apply all guidelines manually; there is no automatic linting available.
-
-# CANVAS Coding Guidelines
-
-These guidelines are for FRAME projects, for CANVAS projects [follow these guidelines](/README.md).

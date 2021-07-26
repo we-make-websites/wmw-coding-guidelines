@@ -1,7 +1,11 @@
 <p align="center"><img src="https://raw.githubusercontent.com/we-make-websites/wmw-coding-guidelines/master/assets/logo.png" alt="We Make Websites" width="170"></p>
 
-# CANVAS Coding Guidelines
-Standards, guidelines, and best practice we follow whilst developing at [We Make Websites](https://wemakewebsites.com/) on our CANVAS framework.
+# Coding Guidelines
+Standards, guidelines, and best practice when working on our CANVAS framework.
+
+Updates to BASIS must also follow these guidelines.
+
+For FRAME projects [follow these guidelines](frame/README.md).
 
 ## Table of contents
 
@@ -30,6 +34,4 @@ Assuming you've followed [setup](https://www.notion.so/wemakewebsites/Setup-CANV
 
 Please branch from `master` and submit a pull request for any suggested changes.
 
-# FRAME Coding Guidelines
 
-These guidelines are for CANVAS projects, for FRAME projects [follow these guidelines](frame/README.md).
