@@ -1,29 +1,23 @@
-# CSS Guidelines
-
-## stylelint & NPM
-
-There is an NPM module available to import our CSS guidelines into stylelint. Simply use `yarn add @we-make-websites/stylelint-config` to install (Frame 3 already includes this package).
-
-Visit [@we-make-websites/stylelint-config](https://www.npmjs.com/package/@we-make-websites/stylelint-config) or the [repo](https://github.com/we-make-websites/stylelint-config) for more information.
+# CSS/SCSS Guidelines
 
 ## Table of contents
 
-1. [General](#general)
-1. [Methods](#methods)
-1. [Declarations](#declarations)
-1. [Naming](#naming)
-1. [Spacing](#spacing)
-1. [Formatting](#formatting)
-1. [Colours](#colours)
-1. [Nesting](#nesting)
-1. [Properties](#properties)
+* [General](#general)
+* [Methods](#methods)
+* [Declarations](#declarations)
+* [Naming](#naming)
+* [Spacing](#spacing)
+* [Formatting](#formatting)
+* [Colours](#colours)
+* [Nesting](#nesting)
+* [Properties](#properties)
 
 [← Back to homepage](../README.md)
 
 ## General
 
 * [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
-* [Notes on Frame](#notes-on-frame)
+* [Overriding stylelint](#overriding-stylelint)
 
 ### [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
 
@@ -56,18 +50,39 @@ Visit [@we-make-websites/stylelint-config](https://www.npmjs.com/package/@we-mak
 * If you're applying the same include or styles on lots of selectors, create a class and apply it in HTML to keep things DRY
 * This is where defined h1, h2, p etc. in Sketch files would be really useful so we can re-use established styles
 
-> **❗Exception:** Sometimes it's still better to KISS (Keep It Simple, Stupid) than DRY.
+#### Exceptions
 
-### [Notes on Frame](#notes-on-frame)
+* Sometimes it's still better to KISS (Keep It Simple, Stupid) than DRY.
 
-#### Frame 3
-You are expected to follow the guidelines to the letter without fail, Frame 3 represents the best that We Make Websites produces so your code should be too. Frame 3 comes with a style lint which will highlight errors, using yarn format will automatically fix most of these errors for you.
+### [Overriding stylelint](#overriding-stylelint)
 
-#### Frame 2
-When building a new project using Frame 2.0 it is expected that if you build any new sections or re-build existing templates you will follow these guidelines.
+#### Don't
+```scss
+// stylelint-disable-next-line
+#app {
+  // stylelint-disable-next-line
+  background-color: $COLOR_BACKGROUND_DARK !important;
+  margin: 0;
+  // stylelint-disable-next-line
+  position: absolute !important;
+}
+```
 
-#### Frame 1 and Old Workflow
-Not all of these guidelines will be possible when working with an existing site (or any site built before these guidelines). Frame 2.0 local concatenation of code allows us to use SASS features that are not available with Shopify's old version of SASS, these should be highlighted in the Notes or Exceptions are the end of the page.
+#### Do
+```scss
+// stylelint-disable declaration-no-important
+// stylelint-disable selector-max-id
+
+#app {
+  background-color: $COLOR_BACKGROUND_DARK !important;
+  margin: 0;
+  position: absolute !important;
+}
+```
+
+* If you must override the stylelint then add a document rule at the beginning of file instead of lots of comments
+* Add the rule comments at the top of the file just after the intro comment with a newline between the rule comments and the first declaration block
+* Add the rule comments in alphabetical order
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -125,6 +140,7 @@ Not all of these guidelines will be possible when working with an existing site 
 
 * When using padding to create a responsive banner always use padding-bottom
 * Also add a preceding comment explaining the ratio of the banner
+* `aspect-ratio` is not yet supported in Safari
 
 ### [Fullscreen elements](#fullscreen-elements)
 
@@ -220,7 +236,11 @@ Not all of these guidelines will be possible when working with an existing site 
 * Don't use IDs, ever. Definitely never use them nested under each other
 * They're overly specific and trump classes in the order of CSS rendering
 
-> **❗Exception:** Sometimes you may have to because you're working with apps or code you can't otherwise edit. In this case, and only as a last resort, use IDs.
+#### Exceptions
+
+* Sometimes you may have to because you're working with apps or code you can't otherwise edit
+* In this case, and only as a last resort, use IDs
+* Add a `stylelint-disable selector-max-id` comment at the start of the SCSS file immediately beneath the intro comment to disable linting for it
 
 ### [!important](#important)
 
@@ -234,7 +254,11 @@ Not all of these guidelines will be possible when working with an existing site 
 * Never use `!important` if it can be avoided
 *  Add inline comments above the property explaining why if you have to use `!important`
 
-> **❗Exception:** Sometimes you have to because of apps though. However before using !important consider doubling the specificity (see below) if you're battling code that is loaded in the page after your stylesheet but not actually inline.
+#### Exceptions
+
+* Sometimes you have to because of apps though
+* However before using `!important` consider doubling the specificity (see below) if you're battling code that is loaded in the page after your stylesheet but not actually inline
+* Add a `stylelint-disable declaration-no-important` comment at the start of the SCSS file immediately beneath the intro comment to disable linting for it
 
 #### Doubling Specificity
 
@@ -275,18 +299,13 @@ Not all of these guidelines will be possible when working with an existing site 
 * The code is more verbose when making responsive changes
 * Do not nest properties (used to be accepted, it no longer is)
 
-> **❗Exception:** Feel free to use shorthand properties for `margin`, `padding`, `border`, and `transform`.
+#### Exceptions
+
+* Feel free to use shorthand properties for `border`, `margin`, `padding`, and `transform`
 
 ### [Prefixes](#prefixes)
 
-#### Frame 2 and 3
-Thanks to the Frame 2 and 3 watch command you don't need to add prefixes to CSS properties as these are added automatically before upload.
-
-#### Frame 1 and Old Workflow
-
-If you're using the Old Workflow or Frame 1 you will need to add prefixes, you can keep track of browser support using [Can I Use](https://caniuse.com/). The most commonly needed prefixes is for Flex properties, use [Should I Prefix](http://shouldiprefix.com/) to find out what prefixes you need.
-
-You will also need to add prefixes even if you're working on a Frame 2 or 3 project and not working on one of the bundled CSS files (like `checkout.scss.liquid`)
+* Prefixes are automatically added to to CSS properties
 
 ### [Property order](#property-order)
 
@@ -296,15 +315,11 @@ You will also need to add prefixes even if you're working on a Frame 2 or 3 proj
   // Extends
   @extend .grid;
   // Includes
-  @include transition(0.5s);
+  @include transition(opacity);
   // Properties in alphabetical order
-  // Frame 2+ auto-prefixes so no need to include them
-  // Otherwise prefixed versions are listed under the main property
   background-color: transparent;
   border: 0;
   display: flex;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   padding: 0;
 
   // Pseudo-element
@@ -329,7 +344,8 @@ You will also need to add prefixes even if you're working on a Frame 2 or 3 proj
   }
 
   // Pseudo-selectors
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     box-shadow: 0 0 5px color(blue, 0.3);
   }
 
@@ -387,8 +403,6 @@ The order should be as follows, all items within each group should be sorted alp
 ### [Variables](#variables)
 
 When first setting up your project you should go through and define a series of variables and mixins to help with the maintenance of the project, it's a lot easier to change the property of one variable rather than hunting for all appearances of, say, a `font-family`.
-
-> **🗒 Note:** On Frame 3 projects you can use the styleguide page template.
 
 It is the project lead developer's responsibility to set them up to maintain conformity.
 
@@ -458,8 +472,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 The below example will only work when you are using Frame 2 or higher as previous versions do not support interpolation brackets used in the class name.
 
 ```scss
-// Newlines and spacing removed for brevity
-
+// product.scss
 .product {
   &__title {}
   &__subtitle {}
@@ -467,14 +480,17 @@ The below example will only work when you are using Frame 2 or higher as previou
   &__image {}
   &__description {}
 
+  // Newlines and spacing removed for brevity
   // Even without comments we can see what we're editing
   // It doesn't matter if subtitle becomes another element for example
 }
-
+```
+```scss
+// product-icons.scss
 .product-icons {
   &__icon {
     &#{&}--large {
-      // Also we're already at three levels deep so always keep an eye on your nesting
+      // We're already at three levels deep so always keep an eye on your nesting
     }
   }
 
@@ -522,7 +538,7 @@ The below example will only work when you are using Frame 2 or higher as previou
 }
 ```
 
-#### Do (Frame 2+ only)
+#### Do
 ```scss
 .foo {
   &__bar {
@@ -535,8 +551,6 @@ The below example will only work when you are using Frame 2 or higher as previou
 * The modifier has interpolation brackets `#{}` because && is invalid SCSS
 * The modifier would render as `.foo__bar.foo__bar--modifier` in CSS
 * This means it has greater specificity, without this any later changes to .foo__bar would override the modifier (for example in media queries) as `.foo__bar` and `.foo__bar--modifier` would have the same specificity so the properties appear later would trump the modifier's
-
-> **❗Exception:** If you're working on a site using the Old Workflow or Frame 1.0 this can't be done as Shopify's version of SASS doesn't support concatenating or interpolation brackets.
 
 ### [BEM naming](#bem-naming)
 
@@ -557,7 +571,9 @@ The below example will only work when you are using Frame 2 or higher as previou
 * Elements may change and no longer be a label or input, breaking the CSS, causing maintenance issues so always select with a class
 * With decent BEM naming you shouldn't need to comment your CSS to say what things are or where they sit
 
-> **❗Exception:** Feel free to write comments to explain why you've done things strangely if you have had to.
+#### Exceptions
+
+* Feel free to write comments to explain why you've done things strangely if you have had to
 
 ### [HTML naming](#html-naming)
 
@@ -598,7 +614,7 @@ h3.foo {
   font-family: 'Lobster', serif;
 }
 
-.u-highlight {
+.text-highlight {
   color: $COLOR_RED;
 }
 ```
@@ -629,8 +645,7 @@ $GRID_MARGIN: 20px;
 
 * For global variables use SCREAMING_SNAKE_CASE
 * For local variables use snake_case
-
-> **🗒 Note:** Local variables are only available in the declaration they are defined in.
+* Local variables are only available in the declaration they are defined in
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -910,7 +925,9 @@ $GRID_MARGIN: 20px;
 * Use RGB (or RGBA) colour values as they are more human readable
 * These values are often supplied in brand guidelines
 
-> **❗Exception:** If required, use lowercase and shorthand (where possible) hex colour values and names.
+#### Exceptions
+
+* If required, use lowercase and shorthand (where possible) hex colour values and names
 
 ### [Colour variables](#colour-variables)
 
@@ -933,8 +950,6 @@ $COLOR_IRON_2: rgb(212,215,217);
 * Colours are global variables so they should be in all caps
 * Use [this website](http://chir.ag/projects/name-that-color/#6195ED) to automatically generate colour names (unless they're named in the client's brand guidelines)
 * If you have two or more colours similar enough to share the same name then suffix them with a number where the 1 is the darkest variant of the colour
-
-> **🗒 Note:** VS Code automatically previews the colour.
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -1006,8 +1021,7 @@ $COLOR_IRON_2: rgb(212,215,217);
 * Mounts up to a significant maintenance issue
 * This does mean that you can't always nest properties the way you normally would
 * Media queries are not included when counting levels of nesting
-
-> **🗒 Note:** VS Code shows you how many levels deep you are in its Breadcrumbs feature (View > Toggle Breadcrumbs). You should only ever see three stages after the base declaration.
+* VS Code can show you how many levels deep you are in its Breadcrumbs feature (View > Toggle Breadcrumbs)
 
 ### [Nesting media queries](#nesting-media-queries)
 
@@ -1071,6 +1085,7 @@ $COLOR_IRON_2: rgb(212,215,217);
 * [letter-spacing](#letter-spacing)
 * [line-height](#line-height)
 * [margin-top](#margin-top)
+* [padding](#padding)
 * [transition](#transition)
 
 ### [border](#border)
@@ -1144,7 +1159,6 @@ $COLOR_IRON_2: rgb(212,215,217);
 
 * Use rem, relative ems. They're easier to understand as they're always relative to the base font-size
 * Frame 3 comes with a responsive font `@mixin`, use this
-* Most Frame 2 themes come with a REM function which lets your use pixel sizes
 
 #### Don't
 ```scss
@@ -1222,7 +1236,29 @@ $COLOR_IRON_2: rgb(212,215,217);
 * Don't use margin-top to space elements out as vertical margins collapse
 * Use padding-top or margin-bottom on preceding elements
 
-> **❗Exception:**  When you need a negative `margin-top` or when the element is toggled below a preceding element so you don't have to add a `margin-bottom` to the preceding element and then toggle a class to remove it
+#### Exceptions
+* When you need a negative `margin-top`
+* If the element is conditionally shown then use `margin-top` instead of a conditional class on the preceding element
+
+### [padding](#padding)
+
+#### Don't
+```scss
+.foo {
+  padding-top: $SPACING_M;
+}
+```
+
+#### Do
+```scss
+.foo {
+  padding-block-start: $SPACING_M;
+}
+```
+
+* Consider using [padding block](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block) and [padding inline](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline) constituent properties instead of just `padding` as these reflect the current `writing-mode` of the page
+* Note that the properties `padding-block` and `padding-inline` are not yet supported in Edge, you can only use the consistent properties (`padding-block-start`, `padding-block-end`, `padding-inline-start`, and `padding-inline-end`)
+* In left to right `writing-mode`, the block properties are vertical (top and bottom) and inline is horizontal (left and right)
 
 ### [transition](#transition)
 
@@ -1236,19 +1272,20 @@ $COLOR_IRON_2: rgb(212,215,217);
 #### Do
 ```scss
 .foo {
-  transition: transform 0.4s ease 0.2s;
-  will-change: transform
+  @include transition(transform)
 }
 ```
 
-* Make sure you put your transition properties in the correct order:
-```scss
-transition: [transition-property] [transition-duration] [transition-timing-function] [transition-delay];
-```
-* Use `will-change` to highlight to the browser that the property will change, this helps performance as the browser will then use hardware acceleration (not widely supported yet)
-* Use this only when the transition is used frequently ie: navigation drawer
-* Avoid overusing it as it could have the opposite effect and hinder all animations
+* Use the `transition` mixin
+* See the `get-transition-properties` function for default values used for timing and ease
+* You can customise on a per mixin basis:
 
-> **⚠️ Important!** Do not transition `margin` or positional properties (`top`, `left`, `right`, `bottom`) as these don't perform well and lead to poor frame rates, instead use `padding` or `transform` as they can be hardware-accelerated.
+```scss
+.foo {
+  @include transition(transform $TIMING_L $EASING_LINEAR)
+}
+```
+
+* Do not transition `margin` or positional properties (`top`, `left`, `right`, `bottom`) as these don't perform well and lead to poor frame rates, instead use `padding` or `transform` as they can be hardware-accelerated
 
 [ꜛ Back to TOC](#table-of-contents)
