@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.0 - 2021-26-07
+* Added CANVAS rules
+
 ## 1.2.4 - 2020-12-01
 * VS Code - Updated extensions list
 
