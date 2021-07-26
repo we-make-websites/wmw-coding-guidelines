@@ -16,11 +16,15 @@ These links will open the Visual Studio Marketplace.
 * [Bracket Pair Colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2)
 * [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 * [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+* [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+* [GraphQL](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql)
+* [Highlight Matching Tag](https://marketplace.visualstudio.com/items?itemName=vincaslt.highlight-matching-tag)
 * [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)
-* [Liquid Languages Support](https://marketplace.visualstudio.com/items?itemName=neilding.language-liquid)
-* [Shopify Liquid Template Snippets](https://marketplace.visualstudio.com/items?itemName=killalau.vscode-liquid-snippets)
-* [Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+* [Liquid](https://marketplace.visualstudio.com/items?itemName=sissel.shopify-liquid)
+* [stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+* [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
 
+We do not recommend the Prettier extension as it's _too_ opinionated.
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -30,7 +34,7 @@ Useful settings to make your life easier.
 
 ### Changing your settings
 
-1. Press `cmd` + `,` to open the settings dialog in VS Code
+1. Press `cmd` + `,` (`ctrl` + `,` on Windows) to open the settings dialog in VS Code
 1. Click the arrow pointing to the page icon in top right
 1. Paste settings below into the JSON format file this has opened
 
@@ -40,11 +44,12 @@ Useful settings to make your life easier.
 * [Disable file preview](#disable-file-preview)
 * [File associations](#file-associations)
 * [Git autofetch](#git-autofetch)
+* [Lint on save](#lint-on-save)
 * [Trim trailing whitespace](#trim-trailing-whitespace)
 
 ### [Character limit](#character-limit)
 
-```js
+```json
 "editor.rulers": [
   80
 ],
@@ -58,7 +63,7 @@ Useful settings to make your life easier.
 
 ### [Disable file preview](#disable-file-preview)
 
-```js
+```json
 "workbench.editor.enablePreviewFromQuickOpen": false
 ```
 
@@ -67,7 +72,7 @@ Useful settings to make your life easier.
 
 ### [File associations](#file-associations)
 
-```js
+```json
 "files.associations": {
   "*.scss.liquid": "scss",
   "*.js.liquid": "javascript"
@@ -84,9 +89,21 @@ Useful settings to make your life easier.
 
 * Autofetches the Git repo every five minutes
 
+### [Lint on save](#lint-on-save)
+
+```json
+"editor.formatOnSave": false,
+"editor.codeActionsOnSave": {
+  "source.fixAll.eslint": true
+},
+```
+
+* Runs `eslint --fix` on file save
+* `formatOnSave` is set to `false` to prevent Prettier extension from running (if installed)
+
 ### [Trim trailing whitespace](#trim-trailing-whitespace)
 
-```js
+```json
 "files.trimTrailingWhitespace": true
 ```
 
