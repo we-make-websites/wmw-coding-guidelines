@@ -5,10 +5,10 @@ Standards, guidelines, and best practice we follow whilst developing at [We Make
 
 ## Table of contents
 
-* [HTML & Vue `template`](html/README.md)
+* [HTML & Vue `template`](html-vue-template/README.md)
 * [Liquid](liquid/README.md)
 * [CSS/SCSS](css/README.md)
-* [Vue & JavaScript](js/README.md)
+* [JavaScript & Vue SFC](javascript-vue-sfc/README.md)
 * [VS Code](vs-code/README.md)
 
 ## Why do we need guidelines?

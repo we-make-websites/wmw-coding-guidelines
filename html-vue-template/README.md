@@ -1,38 +1,38 @@
-# HTML Guidelines
+# HTML & Vue `<template>` Guidelines
 
-The below guidelines cover only specific scenarios and should not be considered exhaustive. For more general HTML guidelines visit [Google's HTML Style guide](https://google.github.io/styleguide/htmlcssguide.html).
+These rules apply to all Liquid, HTML, and Vue `<template>` code.
 
-**Where there are differences our guidelines take precedence.**
+See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 
 ## Table of contents
 
-1. [Attributes](#attributes)
-1. [Characters](#characters)
-1. [Commenting](#commenting)
-1. [`<div>` or `<span>`](#div-or-span)
-1. [Indenting](#indenting)
-1. [Spacing & line character limits](#spacing--line-character-limits)
-1. [Self-closing element](#self-closing-elements)
+* [Attributes](#attributes)
+* [Characters](#characters)
+* [Commenting](#commenting)
+* [`<div>` or `<span>`](#div-or-span)
+* [Indenting](#indenting)
+* [Spacing & line character limits](#spacing--line-character-limits)
+* [Self-closing element](#self-closing-elements)
+* [Vue render tags](#vue-render-tags)
 
 [← Back to homepage](../README.md)
 
 ## Attributes
 
-* [Attribute order](#attribute-order)
-* [Attribute values](#attribute-values)
-
 ### [Attribute order](#attribute-order)
 
 #### Don't
 ```html
+<!-- .liquid file -->
 <input id="NewsletterModal-Email" class="newsletter-modal__textarea" autocapitalize="off" autocomplete="newsletter-address" autocorrect="off" name="contact[email]" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}" type="email" value="{{ customer.email }}" aria-labelledby="NewsletterModal-EmailLabel" data-show="true" js-newsletter="email">
 >
 ```
 
 #### Do
 ```html
+<!-- .liquid file -->
 <input
-  id="NewsletterModalEmail"
+  id="newsletter-modal-email"
   class="newsletter-modal__textarea"
   autocapitalize="off"
   autocomplete="newsletter-address"
@@ -41,46 +41,54 @@ The below guidelines cover only specific scenarios and should not be considered 
   placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
   type="email"
   value="{{ customer.email }}"
-  aria-labelledby="NewsletterModalEmailLabel"
+  aria-labelledby="newsletter-modal-email-label"
   data-show="true"
   js-newsletter="email"
 >
 ```
 
-* When an element has more than two attributes they should be stacked on newlines
+* When an element has more than one attribute they should be stacked on newlines
 * They should follow this order:
+  * `is`
+  * `v-for`
+  * `v-if` / `v-else-if` / `v-else`
+  * `v-show`
+  * `v-cloak`
   * `id`
+  * `ref`
+  * `key`
+  * `v-model`
   * `class`
-  * {native}
+  * { native }
   * `aria-`
   * `data-`
   * `js-`
-* {native} covers everything else, items within {native} should be in alphabetical order
+  * `@event`
+  * `v-html` / `v-text`
+* { native } covers everything else, items within { native } should be in alphabetical order
 * This makes it easier for managing merges in Git
 * Make sure you trim trailing spaces after each line
 
 > **🗒 Note:** Be sure to follow the formatting; the trailing `>` should be on a newline with the attributes indented in two spaces.
 
-### Also
+#### Also
 ```html
+<!-- .liquid file -->
 <div class="hero template-article__hero-image lazyload" data-bgset="{% render 'responsive-bg-image' with image: article.image %}"></div>
 
 <div
   class="hero template-article__hero-image lazyload"
   data-bgset="{% render 'responsive-bg-image' with image: article.image %}"
->
-</div>
+></div>
 ```
 
 * Use multi line attributes if as a single line it would exceed 80 characters
 
 ### [Attribute values](#attribute-values)
 
-* `id` values should be PascalCase
+* `id` values should be kebab-case
 * `class` values should follow BEM naming conventions
-* `js-` attributes should be camelCase
-
-[ꜛ Back to TOC](#table-of-contents)
+* `ref`, `key`, and `js-` attributes should be camelCase
 
 ## [Characters](#characters)
 
@@ -95,24 +103,6 @@ The below guidelines cover only specific scenarios and should not be considered 
 ```
 
 * Use quotations `"` HTML elements, not apostrophes `'`
-
-[ꜛ Back to TOC](#table-of-contents)
-
-## [Commenting](#commenting)
-
-### Don't
-```html
-<!-- Comment goes here -->
-```
-
-### Do
-```html
-{% comment %} Comment goes here {% endcomment %}
-```
-
-* Do not use HTML comments, use the `{% comment %}` filter with whitespace operators
-* Liquid `{% comment %}` will not be rendered in the HTML
-* Use spaces inside the `{% comment %}` tag
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -150,6 +140,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ### Don't
 ```html
+<!-- .liquid file -->
 <div id="Product" class="product" data-id="{{ product.id }}" js-product="container">
   <h1 class="product__title">{{ product.title }}</h1>
   <h2 class="product__subtitle">{{ product.type }}</h2>
@@ -164,6 +155,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ### Do
 ```html
+<!-- .liquid file -->
 <div
   id="Product"
   class="product"
@@ -215,6 +207,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 * This guideline includes empty block-level elements, e.g. the following is correct:
 
 ```html
+<!-- .liquid file -->
 <div
   class="article__image"
   data-bgset="{% render 'responsive-bg-image' with image: article.image %}"
@@ -226,6 +219,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 * If an attribute's value exceeds 80 characters then it should be split in the following format:
 
 ```html
+<!-- .liquid file -->
 <div
   class="
     class-1
@@ -251,16 +245,69 @@ The below guidelines cover only specific scenarios and should not be considered 
 
 ### Don't
 ```html
-<img src="image.png" alt=""/>
-<input class="foo" placeholder="Content"/>
+<!-- .liquid file -->
+<img
+  alt=""
+  src="{{ 'image.png' | file_url: '200x' }}"
+/>
+
+<input
+  class="foo"
+  placeholder="Content"
+  type="text"
+/>
 ```
 
 ### Do
 ```html
-<img src="image.png" alt="">
-<input class="foo" placeholder="Content">
+<!-- .liquid file -->
+<img
+  alt=""
+  src="{{ 'image.png' | file_url: '200x' }}"
+>
+
+<input
+  class="foo"
+  placeholder="Content"
+  type="text"
+>
 ```
 
-* The `/` in self-closing tags is obsolete, do not use it
+* The `/` in self-closing tags is obsolete in HTML, do not use it
+
+### Exceptions
+
+* Inside a Vue `<template>` tag you should use self-closing tags:
+
+```html
+<!-- .vue file -->
+<h1
+  class="main-product__title"
+  v-html="product.title"
+/>
+```
+
+[ꜛ Back to TOC](#table-of-contents)
+
+## [Vue render tags](#vue-render-tags)
+
+### Don't
+```html
+<!-- .vue file -->
+<h1 class="main-product__title">
+  {{ product.title }}
+</h1>
+```
+
+### Do
+```html
+<!-- .vue file -->
+<h1
+  class="main-product__title"
+  v-html="product.title"
+/>
+```
+
+* Use `v-html` or `v-text` to render content in an element instead of using the template render tags
 
 [ꜛ Back to TOC](#table-of-contents)
