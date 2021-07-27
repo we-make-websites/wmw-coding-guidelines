@@ -10,7 +10,9 @@ When saving `eslint --fix` should run and automatically fix most issues.
 
 * [Arrays](#arrays)
 * [Comments](#comments)
+* [Indents](#indents)
 * [Objects](#objects)
+* [Order](#order)
 * [Semi-colons](#semi-colons)
 
 [← Back to homepage](../README.md)
@@ -41,6 +43,8 @@ const bar = [
 * Each item in an array should be on a newline if there are more than two items
 * For single item arrays there should be no spaces inside the opening and closing tags
 * All items in an array must always have a trailing comma
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## Comments
 
@@ -90,6 +94,8 @@ const bar = [
 
 * Use the short form comment for general comments
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## [Objects](#objects)
 
 ### Don't
@@ -117,6 +123,72 @@ const bar = {
 * For single property objects there should be a space inside the opening and closing braces
 * Keys should not use single quotations (`'`) where the key is a single word
 * All properties in an object must always have a trailing comma
+
+[ꜛ Back to TOC](#table-of-contents)
+
+## [Order](#order)
+
+* As per [Vue's style guide](https://v3.vuejs.org/style-guide/#component-instance-options-order-recommended) your Vue component options should follow this order:
+  * `name`
+  * `components`
+  * `props`
+  * `emits`
+  * `setup`
+  * `data`
+  * `computed`
+  * `watch`
+  * Lifecycle events in the order they're called
+  * `methods`
+
+[ꜛ Back to TOC](#table-of-contents)
+
+## [Indents](#indents)
+
+### Don't
+
+```js
+<template>
+<div class="product-card">
+</div>
+</template>
+
+<script>
+  export default {
+    name: 'Product Card',
+  }
+</script>
+
+<style lang="scss">
+  @import '@/config/configuration';
+  @import './featured-products';
+</style>
+```
+
+### Do
+
+```js
+<template>
+  <div class="product-card">
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Product Card',
+}
+</script>
+
+<style lang="scss">
+@import '@/config/configuration';
+@import './featured-products';
+</style>
+```
+
+* Only indent the contents of the `<template>` tag
+* Scripts and styles should not be indented
+* This gives more character length to write your JS in
+
+[ꜛ Back to TOC](#table-of-contents)
 
 ## [Semi-colons](#semi-colons)
 
