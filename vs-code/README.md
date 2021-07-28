@@ -11,6 +11,8 @@ The below settings are recommended to help you follow our other guidelines.
 
 These are the minimum extensions we recommend you have installed.
 
+CANVAS projects can automatically install these extensions in VS Code.
+
 These links will open the Visual Studio Marketplace.
 
 * [Bracket Pair Colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2)
@@ -32,6 +34,8 @@ We do not recommend the Prettier extension as it's _too_ opinionated.
 
 Useful settings to make your life easier.
 
+CANVAS projects can automatically apply these settings in VS Code.
+
 ### Changing your settings
 
 1. Press `cmd` + `,` (`ctrl` + `,` on Windows) to open the settings dialog in VS Code
@@ -41,10 +45,13 @@ Useful settings to make your life easier.
 ### Table of contents
 
 * [Character limit](#character-limit)
+* [Diff whitespace](#diff-whitespace)
 * [Disable file preview](#disable-file-preview)
+* [End of line character](#end-of-line-character)
 * [File associations](#file-associations)
 * [Git autofetch](#git-autofetch)
 * [Lint on save](#lint-on-save)
+* [Tab size](#tab-size)
 * [Trim trailing whitespace](#trim-trailing-whitespace)
 
 ### [Character limit](#character-limit)
@@ -61,14 +68,31 @@ Useful settings to make your life easier.
 * Adds a vertical border in your code editor denoting where the 80 character limit is
 * The colour is in the hexadecimal colour with an additional alpha value
 
+### [Diff whitespace](#diff-whitespace)
+
+```json
+"diffEditor.ignoreTrimWhitespace": false
+```
+
+* Don't ignore whitespace in the diff view of VS Code
+* See [trim trailing whitespace](#trim-trailing-whitespace) so you don't have to manually remove trailing whitespace
+
 ### [Disable file preview](#disable-file-preview)
 
 ```json
 "workbench.editor.enablePreviewFromQuickOpen": false
 ```
 
-* When opening files from `cmd` + `p` file search they won't open in preview mode
+* When opening files from `cmd` + `p` (or `ctrl` + `p` on Windows) file search they won't open in preview mode
 * This means that opening another file won't close the previous one
+
+### [End of line character](#end-of-line-character)
+
+```json
+"files.eol": "\n"
+```
+
+* Prevents issues with end of line characters being different
 
 ### [File associations](#file-associations)
 
@@ -94,12 +118,21 @@ Useful settings to make your life easier.
 ```json
 "editor.formatOnSave": false,
 "editor.codeActionsOnSave": {
-  "source.fixAll.eslint": true
-},
+  "source.fixAll.eslint": true,
+  "source.fixAll.stylelint": true
+}
 ```
 
-* Runs `eslint --fix` on file save
+* Runs `eslint --fix` and `stylelint --fix` on file save
 * `formatOnSave` is set to `false` to prevent Prettier extension from running (if installed)
+
+### [Tab size](#tab-size)
+
+```json
+"editor.tabSize": 2
+```
+
+* You should use a tab size of two spaces to follow guidelines
 
 ### [Trim trailing whitespace](#trim-trailing-whitespace)
 
