@@ -1,7 +1,8 @@
 # Changelog
 
-## 2.0.0 - 2021-26-07
+## 2.0.0 - 2021-29-07
 * Added CANVAS rules
+* Moved FRAME rules into separate folder
 
 ## 1.2.4 - 2020-12-01
 * VS Code - Updated extensions list

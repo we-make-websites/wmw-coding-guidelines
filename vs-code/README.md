@@ -50,6 +50,7 @@ CANVAS projects can automatically apply these settings in VS Code.
 * [End of line character](#end-of-line-character)
 * [File associations](#file-associations)
 * [Git autofetch](#git-autofetch)
+* [HTML validation](#html-validation)
 * [Lint on save](#lint-on-save)
 * [Tab size](#tab-size)
 * [Trim trailing whitespace](#trim-trailing-whitespace)
@@ -107,11 +108,22 @@ CANVAS projects can automatically apply these settings in VS Code.
 
 ### [Git autofetch](#git-autofetch)
 
-```js
+```json
 "git.autofetch": true
 ```
 
 * Autofetches the Git repo every five minutes
+
+### [HTML validation](#html-validation)
+
+```json
+"html.validate.scripts": false,
+"html.validate.styles": false
+```
+
+* Stops validating `<script>` and `<style>` tags in HTML files
+* These are frequently used to pass Liquid variables into global JS
+* Because of the presence of Liquid in these tags VS Code's linter flags errors
 
 ### [Lint on save](#lint-on-save)
 
