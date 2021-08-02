@@ -48,7 +48,7 @@ const bar = [
 
 ## Comments
 
-* [General](#general)
+* [Comments general](#comments-general)
 * [Long form](#long-form-comments)
 * [JSDoc](#jsdoc-comments)
 * [Short form](short-form-comments)
@@ -142,9 +142,19 @@ const bar = {
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Indents](#indents)
+## Indents
 
-### Don't
+* [Indents general](#indents-general)
+* [Vue SFC](#vue-sfc)
+
+### [Indents general](#indents-general)
+
+* When saving your file `eslint --fix` is automatically run, if there are items which need break onto multiple lines (such as arrays) then `eslint` will do this for you, however the indenting may be incorrect
+* Apply common sense when saving a file which `eslint` then fixes, if the indenting doesn't look right it probably isn't, `eslint` doesn't lint indenting correctly at all times
+
+### [Vue SFC](#vue-sfc)
+
+#### Don't
 
 ```js
 <template>
@@ -164,7 +174,7 @@ const bar = {
 </style>
 ```
 
-### Do
+#### Do
 
 ```js
 <template>
@@ -179,7 +189,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/config/configuration';
 @import './featured-products';
 </style>
 ```

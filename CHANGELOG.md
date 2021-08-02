@@ -1,6 +1,10 @@
 # Changelog
 
-## 2.0.0 - 2021-29-07
+## 2.0.1 - 2021-08-02
+* JavaScript & Vue SFC - Added note about automatic indenting by `eslint`
+* Changelog – Fixed dates
+
+## 2.0.0 - 2021-07-29
 * Added CANVAS rules
 * Moved FRAME rules into separate folder
 
