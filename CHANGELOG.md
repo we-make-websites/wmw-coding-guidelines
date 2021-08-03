@@ -1,8 +1,5 @@
 # Changelog
 
-## 2.0.2 - 2021-08-03
-* VS Code - Updated file preview setting
-
 ## 2.0.1 - 2021-08-02
 * JavaScript & Vue SFC - Added note about automatic indenting by `eslint`
 * Changelog – Fixed dates

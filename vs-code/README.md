@@ -81,8 +81,7 @@ CANVAS projects can automatically apply these settings in VS Code.
 ### [Disable file preview](#disable-file-preview)
 
 ```json
-"workbench.editor.enablePreview": false,
-"workbench.editor.enablePreviewFromQuickOpen": false
+"workbench.editor.enablePreviewFromQuickOpen": false,
 ```
 
 * When opening files from `cmd` + `p` (or `ctrl` + `p` on Windows) file search they won't open in preview mode
