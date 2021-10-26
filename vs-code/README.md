@@ -15,7 +15,6 @@ CANVAS projects can automatically install these extensions in VS Code.
 
 These links will open the Visual Studio Marketplace.
 
-* [Bracket Pair Colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2)
 * [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 * [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 * [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
@@ -44,6 +43,7 @@ CANVAS projects can automatically apply these settings in VS Code.
 
 ### Table of contents
 
+* [Bracket colourisation](#bracket-colourisation)
 * [Character limit](#character-limit)
 * [Diff whitespace](#diff-whitespace)
 * [Disable file preview](#disable-file-preview)
@@ -54,6 +54,12 @@ CANVAS projects can automatically apply these settings in VS Code.
 * [Lint on save](#lint-on-save)
 * [Tab size](#tab-size)
 * [Trim trailing whitespace](#trim-trailing-whitespace)
+
+### [Bracket colourisation](#bracket-colourisation)
+```json
+"editor.bracketPairColorization.enabled": true
+```
+* VS Code natively supports bracket colourisation so you no longer need the extension
 
 ### [Character limit](#character-limit)
 
@@ -132,11 +138,13 @@ CANVAS projects can automatically apply these settings in VS Code.
 "editor.codeActionsOnSave": {
   "source.fixAll.eslint": true,
   "source.fixAll.stylelint": true
-}
+},
+"stylelint.validate": ["css", "scss"]
 ```
 
 * Runs `eslint --fix` and `stylelint --fix` on file save
 * `formatOnSave` is set to `false` to prevent Prettier extension from running (if installed)
+* Sets Stylelint extension to validate SCSS files as well as CSS files
 
 ### [Tab size](#tab-size)
 

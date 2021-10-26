@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.2 - 2021-10-26
+* VS Code - Removed bracket colorizer extension
+* VS Code - Updated recommended settings to use native bracket colourisation and set stylelint to lint SCSS
+
 ## 2.0.1 - 2021-08-02
 * JavaScript & Vue SFC - Added note about automatic indenting by `eslint`
 * Changelog – Fixed dates
