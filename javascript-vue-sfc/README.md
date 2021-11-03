@@ -26,7 +26,9 @@ const foo = [
   'bar'
 ]
 
-const bar = ['foo', 'bar' ]
+const bar = ['foo',
+  'bar'
+]
 ```
 
 ### Do
@@ -34,15 +36,12 @@ const bar = ['foo', 'bar' ]
 ```js
 const foo = ['bar']
 
-const bar = [
-  'foo',
-  'bar',
-]
+const bar = ['foo', 'bar']
 ```
 
-* Each item in an array should be on a newline if there are more than two items
+* Arrays should be consistently formatted, either they should all be on one line, or they should all be on newlines
 * For single item arrays there should be no spaces inside the opening and closing tags
-* All items in an array must always have a trailing comma
+* All items in an array must have a trailing comma
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -214,7 +213,7 @@ const foo = 'Bar'
 ```
 
 * Do not use semi-colons (`;`) unless not doing so would cause an ASI failure
-* E.g. the below would need a semi-colon otherwise when minified it would break:
+* E.g. the below needs a semi-colon on the first line otherwise when minified it would break:
 
 ```js
 const array = [];

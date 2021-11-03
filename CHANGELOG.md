@@ -1,6 +1,10 @@
 # Changelog
 
-## 2.0.2 - 2021-10-26
+## 2.2.0 - 2021-11-03
+* HTML - Added attribute casing rule
+* JavaScript & Vue SFC - Updated array rules
+
+## 2.1.0 - 2021-10-26
 * VS Code - Removed bracket colorizer extension
 * VS Code - Updated recommended settings to use native bracket colourisation and set stylelint to lint SCSS
 

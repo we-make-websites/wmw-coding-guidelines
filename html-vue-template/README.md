@@ -19,6 +19,19 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 
 ## Attributes
 
+### [Attribute casing](#attribute-casing)
+* The general rule is if the attribute is to do with CSS then you kebab-case the value
+* If its the attribute is for JavaScript use camelCase in the value
+* kebab-case
+  * `id`
+  * `class`
+  * `for`
+* camelCase
+  * `v-` bind
+  * Vue `@` events
+  * `data-`
+  * `js-` selector values
+
 ### [Attribute order](#attribute-order)
 
 #### Don't
