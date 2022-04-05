@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0 - 2022-04-05
+* JavaScript & Vue SFC - Added Vue SFC order rule
+* JavaScript & Vue SFC - Added variable rules
+
 ## 2.2.0 - 2021-11-03
 * HTML - Added attribute casing rule
 * JavaScript & Vue SFC - Updated array rules

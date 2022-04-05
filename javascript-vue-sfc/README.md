@@ -14,6 +14,7 @@ When saving `eslint --fix` should run and automatically fix most issues.
 * [Objects](#objects)
 * [Order](#order)
 * [Semi-colons](#semi-colons)
+* [Variables](#variables)
 
 [← Back to homepage](../README.md)
 
@@ -127,6 +128,11 @@ const bar = {
 
 ## [Order](#order)
 
+* [Attributes](#attributes)
+* [Vue SFC order](#vue-sfc-order)
+
+### [Attributes](#attributes)
+
 * As per [Vue's style guide](https://v3.vuejs.org/style-guide/#component-instance-options-order-recommended) your Vue component options should follow this order:
   * `name`
   * `components`
@@ -139,19 +145,26 @@ const bar = {
   * Lifecycle events in the order they're called
   * `methods`
 
+### [Vue SFC order](#vue-sfc-order)
+
+* Vue SFC files should be in the following order:
+  * `<template>`
+  * `<script>`
+  * `<style>`
+
 [ꜛ Back to TOC](#table-of-contents)
 
 ## Indents
 
 * [Indents general](#indents-general)
-* [Vue SFC](#vue-sfc)
+* [Vue SFC indentation](#vue-sfc-indentation)
 
 ### [Indents general](#indents-general)
 
 * When saving your file `eslint --fix` is automatically run, if there are items which need break onto multiple lines (such as arrays) then `eslint` will do this for you, however the indenting may be incorrect
 * Apply common sense when saving a file which `eslint` then fixes, if the indenting doesn't look right it probably isn't, `eslint` doesn't lint indenting correctly at all times
 
-### [Vue SFC](#vue-sfc)
+### [Vue SFC indentation](#vue-sfc-indentation)
 
 #### Don't
 
@@ -222,5 +235,43 @@ const array = [];
   array.push(value))
 }
 ```
+
+[ꜛ Back to TOC](#table-of-contents)
+
+## [Variables](#variables)
+
+### Don't
+
+```js
+var foo = true
+
+let bar = [
+  'One',
+  'Two',
+  'Three',
+]
+
+const baz = 'String'
+baz += ', extra string'
+```
+
+### Do
+
+```js
+const foo = true
+
+const bar = [
+  'One',
+  'Two',
+  'Three',
+]
+
+let baz = 'String'
+baz += ', extra string'
+```
+
+* Do not use `var`, use `let` or `const` as the situation dictates
+* Use `const` for variables which are _never_ reassigned
+* Use `let` for variables which are reassigned
 
 [ꜛ Back to TOC](#table-of-contents)
