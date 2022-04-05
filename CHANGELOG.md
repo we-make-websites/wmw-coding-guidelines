@@ -2,6 +2,8 @@
 
 ## 2.3.0 - 2022-04-05
 * Liquid - Added order for schema settings
+* Liquid - Updated conditional statements
+* Liquid - Added setting states page linked from conditional statements
 * JavaScript & Vue SFC - Updated title linking
 
 ## 2.2.0 - 2022-04-05

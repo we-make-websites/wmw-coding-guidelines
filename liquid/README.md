@@ -130,24 +130,24 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 ```html
 {% for block in section.blocks %}
   <div class="block">
-    {% if block.settings.image != '' %}
+    {% if block.settings.image != blank %}
       <img
         alt="{{ block.settings.image.alt }}"
         src="{{ block.settings.image | img_url: '2000x' }}"
       >
     {% endif %}
 
-    {% if block.settings.title != '' %}
+    {% if block.settings.title != blank %}
       <h2 class="block__title">{{ block.settings.title }}</h2>
     {% endif %}
 
-    {% if block.settings.text != '' %}
+    {% if block.settings.text != blank %}
       <div class="block__text rte">
         {{ block.settings.text }}
       </div>
     {% endif %}
 
-    {% if block.settings.button url != '' and block.settings.button_text != '' %}
+    {% if block.settings.button url != blank and block.settings.button_text != blank %}
       <a class="block__button" href="{{ block.settings.button_url }}">
         {{ block.settings.button_text }}
       </a>
@@ -158,7 +158,8 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 
 * In areas where the client can customise the content do not assume that they will want to display every part of a section's settings
 * Wrap each setting in a `{% if %}` to hide it if no content is entered
-* Use `!= ''` rather than `{% if condition %}` or `!= blank` as it is more reliable, it is possible for a setting to exist if it previously had a value
+* Use `!= blank` rather than `{% if condition %}` or `!= ''` as it is more reliable
+* See [setting states](./settings-states.md) for a full breakdown of what each setting returns when empty or cleared
 * When testing make sure the section does not appear visually broken, the client will expect it to work with missing settings
 
 ### [Conditional spacing](#conditional-spacing)
