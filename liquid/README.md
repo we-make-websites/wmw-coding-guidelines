@@ -159,7 +159,7 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 * In areas where the client can customise the content do not assume that they will want to display every part of a section's settings
 * Wrap each setting in a `{% if %}` to hide it if no content is entered
 * Use `!= blank` rather than `{% if condition %}` or `!= ''` as it is more reliable
-* See [setting states](./settings-states.md) for a full breakdown of what each setting returns when empty or cleared
+* See [setting states](./setting-states.md) for a full breakdown of what each setting returns when empty or cleared
 * When testing make sure the section does not appear visually broken, the client will expect it to work with missing settings
 
 ### [Conditional spacing](#conditional-spacing)
