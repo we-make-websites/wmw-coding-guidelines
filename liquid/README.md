@@ -85,17 +85,18 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 
 * Include an introductory comment at the start of each file
 * Describe what folder it's in, the file's name, and list any special features or conditions
-* If it's something included using a `{% render %}` then show an example with its variables, e.g.
+* If it's a snippet then provide a list of parameters that it supports using the [JSDoc format](https://jsdoc.app/)
 ```html
 {% comment %}
-------------------------------------------------------------------------------
-  Snippet: Responsive image
-  It creates a style tag and it restricts an image from growing larger than its max resolution.
+-----------------------------------------------------------------------------
+  Snippet: Line item (line-item)
 
-  Usage:
-  In your liquid template file, copy the following line
-  - {% render 'responsive-image' with image: featured_image, image_class: "css-class", wrapper_class: "wrapper-css-class", max_width: 700, max_height: 800 %}
-------------------------------------------------------------------------------
+  @param {String} [block_class] - Block level class to apply to all elements.
+  @param {String} [class] - Additional classes.
+  @param {Number} [index] - Index for line item, used for animation delay.
+  @param {Boolean|Object} [item] - Line item in cart response or order.
+  @param {Boolean} [loading_animation] - Force the display of the loading state.
+-----------------------------------------------------------------------------
 {% endcomment %}
 ```
 
@@ -429,14 +430,10 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
   <meta content="noindex, nofollow" name="robots">
 {% endif %}
 
-{% assign sanitized_variable = string |
-  downcase |
-  split: '/' |
-  last |
-  remove:'<p>' |
-  remove:'</p>' %} |
-  money_with_currency
-%}
+{%- liquid
+  assign sanitized_variable = string | downcase | split: '/' | last | remove: '<p>'
+  assign sanitized_variable = sanitized_variable | remove: '</p>' | money_with_currency
+-%}
 
 {% if variable %}
   <h1 class="product__title">{{ product.title }}</h1>
@@ -463,9 +460,15 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 * Opening `{% if %}` tags should be on separate lines
 * `{% if %}` tags with more than two filters and exceeding 80 characters should be split onto multiple lines
 * If the contents of an `{% if %}` tag spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
-* `{% assign %}` tags with more than two filters and exceeding 80 characters should be broken up over multiple lines and indented
 * Once you are writing something over multiple lines, each line should only have one attribute or value on it
 * For details on HTML spacing see the [HTML](../html/README.md) rule for [Spacing & line character limit](../html/README.md#spacing--line-character-limits)
+
+#### Liquid tags
+
+* Previously we recommended placing Liquid filters on newlines when there are more than two and the Liquid exceeded 80 characters
+* This approach is not compatible with the [`{% liquid %}` tag](#-liquid--tag)
+* We now recommended keeping filters on the same line and the `{% liquid %}` tag is our preferred approach
+* However if there are a large number of filters being used on an `{% assign %}` then consider splitting the Liquid onto multiple lines like in the example above
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -646,33 +649,22 @@ Specific rules for certain settings of `type`:
 
 Split characters are used to effectively provide multiple description fields on the product page. It is useful when you need to output long form content in multiple locations.
 
+> Using Shopify native metafields is now the preferred approach.
+
 ### Example
 ```html
 {%- liquid
   if product.description != ''
-    assign full_description = product.description |
-      remove: '<meta charset="utf-8">' |
-      remove: '<meta charset="utf-8" />' |
-      remove: '<span>' |
-      remove: '</span>' |
-      remove: '<p>&nbsp;</p>' |
-      remove: '<p> </p>' |
-      remove: '<p></p>'
+    assign full_description = product.description | remove: '<meta charset="utf-8">' | remove: '<meta charset="utf-8" />'
+    assign full_description = full_description | remove: '<span>' | remove: '</span>'
+    assign full_description = full_description | remove: '<p>&nbsp;</p>' | remove: '<p> </p>' | remove: '<p></p>'
 
     if full_description contains '---DESCRIPTION---'
-      assign description = full_description |
-        split: '<p>---DESCRIPTION---</p>' |
-        last |
-        split: '<p>---' |
-        first
+      assign description = full_description | split: '<p>---DESCRIPTION---</p>' | last | split: '<p>---' | first
     endif
 
     if full_description contains '---SIZE GUIDE---'
-      assign size_guide = full_description |
-        split: '<p>---SIZE GUIDE---</p>' |
-        last |
-        split: '<p>---' |
-        first
+      assign size_guide = full_description | split: '<p>---SIZE GUIDE---</p>' | last | split: '<p>---' | first
     endif
   endif
 -%}
@@ -693,7 +685,6 @@ Split characters are used to effectively provide multiple description fields on 
 * Use split characters in the format `---[NAME]---` where `[NAME]` is the identifying name of the split content
 * `[NAME]` can have spaces, e.g. `---COMPATIBLE INFO---`
 * Assign the split description to variables at the top of the file then output the variable as and when you need it
-* Use split characters over metafields as they don't require any special apps to access and content can be automatically imported using apps like Excelify
 * Shopify tends to add extra HTML so in the example this has been stripped off, including empty line returns
 
 [ꜛ Back to TOC](#table-of-contents)
@@ -776,8 +767,7 @@ Split characters are used to effectively provide multiple description fields on 
 {% endfor %}
 ```
 
-* Group all variables which are not set inside specific `{% forloop %}` at the top of the file
-* If there are lots of variables consider placing them in a variables file, e.g. in the product section you would place them in a _product-variables.liquid_ snippet
+* Group all variables which are not set inside a specific `{% for %}` tag at the top of the file
 
 ### [Variable naming](#variable-naming)
 
@@ -803,12 +793,14 @@ Split characters are used to effectively provide multiple description fields on 
 
 #### More examples
 ```html
-{% assign has_shipping_tag = true %}
-{% assign is_catalogue_product = false %}
+{%- liquid
+  assign has_shipping_tag = true
+  assign is_catalogue_product = false
 
-{% assign additional_handle_array = 'Item 1,Item 2,Item 3' | split: ',' %}
+  assign additional_handle_array = 'Item 1,Item 2,Item 3' | split: ','
 
-{% assign installation_search_string = '' %}
+  assign installation_search_string = ''
+-%}
 ```
 
 * If a variable is a boolean then name it as a question, 'has the shipping tag' becomes `has_shipping_tag`
@@ -820,7 +812,7 @@ Split characters are used to effectively provide multiple description fields on 
 
 ## [Whitespace controls](#whitespace-controls)
 
-* Only use whitespace controls when using a `{% liquid %}` tag or when outputting Liquid to Vue props
+* Only use whitespace controls when using a `{% liquid %}` tag
 * If you need to trim whitespace from objects then you can use whitespace controls, e.g. `{{- section.settings.body_copy -}}`
 
 > **🗒 Note:** Not all apps support whitespace controls.
