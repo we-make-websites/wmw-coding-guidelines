@@ -126,7 +126,7 @@ const bar = {
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Order](#order)
+## Order
 
 * [Attributes](#attributes)
 * [Vue SFC order](#vue-sfc-order)
