@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.3.0 - 2022-04-05
+* Liquid - Added order for schema settings
+
 ## 2.2.0 - 2022-04-05
 * JavaScript & Vue SFC - Added Vue SFC order rule
 * JavaScript & Vue SFC - Added variable rules

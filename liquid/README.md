@@ -11,7 +11,7 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 * [Formatting](#formatting)
 * [Language strings](#language-strings)
 * [Naming](#naming)
-* [Schema settings](#schema-settings)
+* [Schema & section settings](#schema--section-settings)
 * [Snippets](#snippets)
 * [Split characters](#split-characters)
 * [Variables](#variables)
@@ -554,7 +554,7 @@ tag_name: [value1]_[value2] (etc.)
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## Schema settings
+## Schema & section settings
 
 * [`default` & `label`](#default-&-label)
 * [Formatting & order](#formatting-&-order)
@@ -605,11 +605,24 @@ tag_name: [value1]_[value2] (etc.)
 }
 ```
 
-* Use the prescribed order, any other key value pairs should be added below in alphabetical order
+* Use the prescribed order:
+  * `type`
+  * `id`
+  * `label`
+  * `info`
+  * `accept` (video_url)
+  * `limit` (collection_list, product_list)
+  * `min` (range)
+  * `max` (range)
+  * `step` (range)
+  * `unit` (range)
+  * `options` (radio, select)
+  * `placeholder` (number, text, textarea, html, video_url)
+  * `default`
 * Use snake_case for `id`
 * Use sentence case for `label` and `info`
 
-### [`Type`](#type)
+### [`type`](#type)
 
 Specific rules for certain settings of `type`:
 * `range` – Use for fixed number choices (such as font size, height, duration etc.)
