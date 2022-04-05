@@ -2,6 +2,7 @@
 
 ## 2.3.0 - 2022-04-05
 * Liquid - Added order for schema settings
+* JavaScript & Vue SFC - Updated title linking
 
 ## 2.2.0 - 2022-04-05
 * JavaScript & Vue SFC - Added Vue SFC order rule
