@@ -3,6 +3,7 @@
 ## 2.4.0 - 2022-04-06
 * Home - Updated Canvas naming
 * CSS - General updates
+* CSS - Fixed incorrect usage of `margin` and `padding`
 * HTML - General updates
 * Liquid - General updates
 * Liquid - Updated filter guidelines

@@ -62,7 +62,8 @@
 #app {
   // stylelint-disable-next-line
   background-color: var(--color-background-dark) !important;
-  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
   // stylelint-disable-next-line
   position: absolute !important;
 }
@@ -75,7 +76,8 @@
 
 #app {
   background-color: var(--color-background-dark) !important;
-  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
   position: absolute !important;
 }
 ```
@@ -126,7 +128,7 @@
 #### Don't
 ```scss
 .foo {
-  padding-top: 60%;
+  padding-block-start: 60%;
 }
 ```
 
@@ -134,11 +136,11 @@
 ```scss
 .foo {
   // 16:9 ratio
-  padding-bottom: 56.25%
+  padding-block-end: 56.25%
 }
 ```
 
-* When using padding to create a responsive banner always use padding-bottom
+* When using padding to create a responsive banner always use `padding-block-end`
 * Also add a preceding comment explaining the ratio of the banner
 * `aspect-ratio` is not yet supported in the latest two whole versions of Safari
 
@@ -291,12 +293,13 @@
 }
 ```
 
-* Avoid shorthand for background and font properties
+* Avoid shorthand for `background` and `font` properties
 * For these properties the non-described properties automatically are set to `none`/`default`/`0` which causes issues
+* Don't use `margin` and `padding` shorthand properties, instead using `margin-block`, `margin-inline`, `padding-block`, and `padding-inline`
 
 #### Exceptions
 
-* Feel free to use shorthand properties for `border`, `margin`, `padding`, and `transform`
+* Feel free to use shorthand properties for `border` and `transform`
 
 ### [Prefixes](#prefixes)
 
@@ -315,7 +318,6 @@
   background-color: transparent;
   border: 0;
   display: flex;
-  padding: 0;
 
   // Pseudo-element
   &::before {
@@ -324,18 +326,18 @@
 
   // Nested elements
   &__bar {
-    margin: 0;
+    color: var(--color-text-light);
   }
 
   // Direct descendents
   > .baz {
-    padding: 0;
+    color: var(--color-text-secondary);
   }
 
   // Sibling selectors
   + .bam,
   ~ .bam {
-    padding-left: 0;
+    padding-inline-start: 0;
   }
 
   // Pseudo-selectors
@@ -357,7 +359,7 @@
 ```
 
 The order should be as follows, all items within each group should be sorted alphabetically:
-1. Local variables (e.g. `$local_margin`)
+1. Local variables (e.g. `$local-margin`)
 1. Extends (e.g. `@extend %font`)
 1. Includes (e.g. `@include ms-respond()`)
 1. Properties (e.g. `background-color`)
@@ -402,14 +404,6 @@ The order should be as follows, all items within each group should be sorted alp
 When first setting up your project you should go through and define a series of variables and mixins to help with the maintenance of the project, it's a lot easier to change the property of one variable rather than hunting for all appearances of, say, a `font-family`.
 
 It is the project lead developer's responsibility to set them up to maintain conformity.
-
-Common properties that benefit from variables are:
-* `border-radius`
-* `color`
-* `font-family`
-* `font-weight`
-* `margin` (gutters, grid gutters)
-* `transition` (duration, easing)
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -741,7 +735,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```scss
 .foo {
   --local-margin: (2 * var(--global-margin));
-  margin-bottom: var(--local-margin);
+  margin-block-end: var(--local-margin);
   width: calc(100% + var(--local-margin));
 }
 ```
@@ -773,7 +767,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```scss
 .foo {
   background-color: red; // Don't
-  /* padding-top: 30px;
+  /* padding-block-start: 30px;
   width: 100% */
 }
 ```
@@ -783,7 +777,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 .foo {
   // Comment above the line
   background-color: red;
-  // padding-top: 30px;
+  // padding-block-start: 30px;
   // width: 100%;
 }
 ```
@@ -867,7 +861,7 @@ $margin: var(--spacing-m);
 ```scss
 .foo {
   animation-delay: 0;
-  margin: 0px;
+  margin-block: 0px;
   opacity: .4567;
 }
 ```
@@ -876,7 +870,7 @@ $margin: var(--spacing-m);
 ```scss
 .foo {
   animation-delay: 0s;
-  margin: 0;
+  margin-block: 0;
   opacity: 0.4;
 }
 ```
