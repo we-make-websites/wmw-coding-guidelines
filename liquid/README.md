@@ -39,7 +39,7 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 -%}
 ```
 
-* When using multiple tags replace with a `{% liquid %}` tag
+* When using multiple Liquid tags replace with a single `{% liquid %}` tag
 * Use whitespace controls to remove whitespace from around the statement when rendered
 * See [Shopify documentation](https://shopify.dev/api/liquid/tags/theme-tags#liquid) for more details
 
@@ -69,7 +69,8 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 ```
 
 * Use the `{% comment %}` tag for inline comments, not HTML comments
-* For `.js.liquid` or `.scss.liquid` file use the language appropriate comment
+* HTML comments are included in the compiled HTML
+* For `.js.liquid` or `.scss.liquid` file use the language appropriate comment format
 
 ### [Introductory](#introductory)
 
@@ -85,17 +86,18 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 
 * Include an introductory comment at the start of each file
 * Describe what folder it's in, the file's name, and list any special features or conditions
-* If it's something included using a `{% render %}` then show an example with its variables, e.g.
+* If it's a snippet then provide a list of parameters that it supports using the [JSDoc format](https://jsdoc.app/)
 ```html
 {% comment %}
-------------------------------------------------------------------------------
-  Snippet: Responsive image
-  It creates a style tag and it restricts an image from growing larger than its max resolution.
+-----------------------------------------------------------------------------
+  Snippet: Line item (line-item)
 
-  Usage:
-  In your liquid template file, copy the following line
-  - {% render 'responsive-image' with image: featured_image, image_class: "css-class", wrapper_class: "wrapper-css-class", max_width: 700, max_height: 800 %}
-------------------------------------------------------------------------------
+  @param {String} [block_class] - Block level class to apply to all elements.
+  @param {String} [class] - Additional classes.
+  @param {Number} [index] - Index for line item, used for animation delay.
+  @param {Boolean|Object} [item] - Line item in cart response or order.
+  @param {Boolean} [loading_animation] - Force the display of the loading state.
+-----------------------------------------------------------------------------
 {% endcomment %}
 ```
 
@@ -199,28 +201,28 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 #### Don't
 ```html
 {% if variable == 'Hello' %}
-  Content
+  <!-- Code -->
 {% elsif variable == 'Goodbye' %}
-  Content
+  <!-- Code -->
 {% elsif variable == 'Good night' %}
-  Content
+  <!-- Code -->
 {% else %}
-  Content
+  <!-- Code -->
 {% endif %}
 ```
 
 #### Do
 ```html
 {%- liquid
-  case variable %}
+  case variable
     when 'Hello'
-      Content
+      <!-- Code -->
     when 'Goodbye'
-      Content
-    when 'Good night '%}
-      Content
+      <!-- Code -->
+    when 'Good night'
+      <!-- Code -->
     else
-      Content
+      <!-- Code -->
   endcase
 -%}
 ```
@@ -237,9 +239,11 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 
 #### Do
 ```html
-{% if section.settings.width == 'full' or section.settings.display == 'full' %}
-  {% assign row_class = 'row--full-width' %}
-{% endif %}
+{%- liquid
+  if section.settings.width == 'full' or section.settings.display == 'full'
+    assign row_class = 'row--full-width'
+  endif
+-%}
 
 <div
   class="
@@ -304,7 +308,7 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
   <div class="slide slide--{{ i }}">
     <div
       class="slide__background"
-      style="background-image: url({{ block.settings[slide_image] | img_url: '2000x' }});"
+      style="background-image: url({{ block.settings[slide_image] | image_url: width: 2000 }});"
     ></div>
 
     <div class="slide__text">
@@ -316,17 +320,15 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 
       <div class="slide__buttons">
         {% for j in (1..2) %}
-          {% assign slide_button_url = 'slide_#_button_%_url' |
-            replace: '#', i |
-            replace: '%', j
-          %}
+          {%- liquid
+            assign slide_button_url = 'slide_#_button_%_url' | replace: '#', i | replace: '%', j
+            assign slide_button_text = 'slide_#_button_%_text' | replace: '#', i | replace: '%', j
+          -%}
 
-          {% assign slide_button_text = 'slide_#_button_%_text' |
-            replace: '#', i |
-            replace: '%', j
-          %}
-
-          <a class="slide__button" href="{{ block.settings[slide_button_url]}}">
+          <a
+            class="slide__button"
+            href="{{ block.settings[slide_button_url] }}"
+          >
             {{ block.settings[slide_button_text] }}
           </a>
         {% endfor %}
@@ -336,7 +338,7 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 {% endfor %}
 ```
 
-* Use `{% for i in (1..#) %}` in combination with `{% assign %}` and replace to remove repetitive code
+* Use `{% for i in (1..#) %}` in combination with `{% assign %}` to replace repetitive code
 * Use the iteration to set variables which are then used to call the block's settings
 * Use Liquid's built in tags to avoid repeating code
 
@@ -350,8 +352,6 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 * [Spacing & line character limits](#spacing--line-character-limits)
 
 ### [`{% render %}`](#-render-)
-
-> 🗒 **Note:** `{% include %}` tags have been deprecated by Shopify and replaced with the `{% render %}` tag. [For full details visit this page](https://help.shopify.com/en/themes/liquid/tags/theme-tags#render).
 
 #### Don't
 ```html
@@ -374,6 +374,8 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 * After the first variable declaration you must use a comma `,`
 * If there are more than two variables and it goes over 80 characters then break it into a multi-line tag
 * Sort the variables alphabetically and end each line with a comma `,`
+
+> 📋 `{% include %}` tags have been deprecated by Shopify and replaced with the `{% render %}` tag. [For full details visit this page](https://help.shopify.com/en/themes/liquid/tags/theme-tags#render).
 
 ### [Characters](#characters)
 
@@ -429,14 +431,10 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
   <meta content="noindex, nofollow" name="robots">
 {% endif %}
 
-{% assign sanitized_variable = string |
-  downcase |
-  split: '/' |
-  last |
-  remove:'<p>' |
-  remove:'</p>' %} |
-  money_with_currency
-%}
+{%- liquid
+  assign sanitized_variable = string | downcase | split: '/' | last | remove: '<p>'
+  assign sanitized_variable = sanitized_variable | remove: '</p>' | money_with_currency
+-%}
 
 {% if variable %}
   <h1 class="product__title">{{ product.title }}</h1>
@@ -462,10 +460,16 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 * Separate blocks of Liquid code with a newline
 * Opening `{% if %}` tags should be on separate lines
 * `{% if %}` tags with more than two filters and exceeding 80 characters should be split onto multiple lines
-* If the contents of an `{% if %}` tag spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
-* `{% assign %}` tags with more than two filters and exceeding 80 characters should be broken up over multiple lines and indented
+* If the contents of an `{% if %}` condition spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
 * Once you are writing something over multiple lines, each line should only have one attribute or value on it
 * For details on HTML spacing see the [HTML](../html/README.md) rule for [Spacing & line character limit](../html/README.md#spacing--line-character-limits)
+
+#### Liquid tags
+
+* Previously we recommended placing Liquid filters on newlines when there are more than two and the Liquid exceeded 80 characters
+* This approach is not compatible with the [`{% liquid %}` tag](#-liquid--tag)
+* We now recommended keeping filters on the same line and the `{% liquid %}` tag is our preferred approach
+* However if there are a large number of filters being used on an `{% assign %}` then consider splitting the Liquid onto multiple lines like in the example above
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -503,15 +507,15 @@ For details on how to pass Liquid variables to Vue props, see [CANVAS's document
 
 * Never hard-code text in your template files
 * Always use Shopify's [translation filter](https://help.shopify.com/en/themes/development/theme-store-requirements/internationalizing/translation-filter)
-* Most of our clients are multi-lingual so it is expected that they will be able to translate their store without requiring additional development
+* Most of our clients are multi-language so it is expected that they will be able to translate their store without requiring additional development
 
 [ꜛ Back to TOC](#table-of-contents)
 
 ## Naming
 
-1. [Section template naming](#section-template-naming)
-1. [Snippet naming](#Snippet-naming)
-1. [Tag naming](#tag-naming)
+* [Section template naming](#section-template-naming)
+* [Snippet naming](#Snippet-naming)
+* [Tag naming](#tag-naming)
 
 ### [Section template naming](#section-template-naming)
 
@@ -547,7 +551,8 @@ tag_name: [value1]_[value2] (etc.)
 ```
 
 * Use the naming convention `tag_name: [value]` for admin tags (products, orders, customers) with a value and `tag_name` for tags without a value
-* In most cases `[value]` should be in lowercase to make comparisons easier. However in instances where the value is outputted on the front-end in a specific case (e.g. Title Case) make sure this is clear in the tech spec
+* In most cases `[value]` should be in lowercase to make comparisons easier
+* However in instances where the value is outputted on the front-end in a specific case (e.g. Title Case) make sure this is clear in the tech spec
 * If you need to store separate values in the same tag then separate them using `_`  such as `type_modal: [Model]_[Year]` (this isn't snake_case)
 * Do not use boolean values (e.g. `has_addon: true`) as simply having the tag in the first place is enough to know that it is `true` (e.g. `has_addon`)
 * If the tag is to be used in a search string (and therefore needs to be handlelised) then use the naming convention `tag_name--[value]`, this allows the value to be kebab-cased (e.g. `build_date--2019-07-03`)
@@ -646,33 +651,22 @@ Specific rules for certain settings of `type`:
 
 Split characters are used to effectively provide multiple description fields on the product page. It is useful when you need to output long form content in multiple locations.
 
+> 📋 Using Shopify native metafields is now the preferred approach.
+
 ### Example
 ```html
 {%- liquid
   if product.description != ''
-    assign full_description = product.description |
-      remove: '<meta charset="utf-8">' |
-      remove: '<meta charset="utf-8" />' |
-      remove: '<span>' |
-      remove: '</span>' |
-      remove: '<p>&nbsp;</p>' |
-      remove: '<p> </p>' |
-      remove: '<p></p>'
+    assign full_description = product.description | remove: '<meta charset="utf-8">' | remove: '<meta charset="utf-8" />'
+    assign full_description = full_description | remove: '<span>' | remove: '</span>'
+    assign full_description = full_description | remove: '<p>&nbsp;</p>' | remove: '<p> </p>' | remove: '<p></p>'
 
     if full_description contains '---DESCRIPTION---'
-      assign description = full_description |
-        split: '<p>---DESCRIPTION---</p>' |
-        last |
-        split: '<p>---' |
-        first
+      assign description = full_description | split: '<p>---DESCRIPTION---</p>' | last | split: '<p>---' | first
     endif
 
     if full_description contains '---SIZE GUIDE---'
-      assign size_guide = full_description |
-        split: '<p>---SIZE GUIDE---</p>' |
-        last |
-        split: '<p>---' |
-        first
+      assign size_guide = full_description | split: '<p>---SIZE GUIDE---</p>' | last | split: '<p>---' | first
     endif
   endif
 -%}
@@ -693,16 +687,15 @@ Split characters are used to effectively provide multiple description fields on 
 * Use split characters in the format `---[NAME]---` where `[NAME]` is the identifying name of the split content
 * `[NAME]` can have spaces, e.g. `---COMPATIBLE INFO---`
 * Assign the split description to variables at the top of the file then output the variable as and when you need it
-* Use split characters over metafields as they don't require any special apps to access and content can be automatically imported using apps like Excelify
 * Shopify tends to add extra HTML so in the example this has been stripped off, including empty line returns
 
 [ꜛ Back to TOC](#table-of-contents)
 
 ## Variables
 
-1. [Assigning](#variable-assigning)
-1. [Grouping](#variable-grouping)
-1. [Naming](#variable-naming)
+* [Assigning](#variable-assigning)
+* [Grouping](#variable-grouping)
+* [Naming](#variable-naming)
 
 ### [Variable assigning](#variable-assigning)
 
@@ -744,8 +737,8 @@ Split characters are used to effectively provide multiple description fields on 
 {% assign variable_c = 'Hello world' %}
 
 {% for variant in product.variants %}
-  <h2>{{ variant.title }}</h2>
   {% assign variable_d = variant.title %}
+  <h2>{{ variable_d }}</h2>
 {% endfor %}
 
 {% assign variable_e = 'Hello world' %}
@@ -767,8 +760,8 @@ Split characters are used to effectively provide multiple description fields on 
 <div>{{ product.description }}</div>
 
 {% for variant in product.variants %}
-  <h2>{{ variant.title }}</h2>
   {% assign variable_d = variant.title %}
+  <h2>{{ variable_d }}</h2>
 {% endfor %}
 
 {% for product in recommendations.products %}
@@ -776,8 +769,7 @@ Split characters are used to effectively provide multiple description fields on 
 {% endfor %}
 ```
 
-* Group all variables which are not set inside specific `{% forloop %}` at the top of the file
-* If there are lots of variables consider placing them in a variables file, e.g. in the product section you would place them in a _product-variables.liquid_ snippet
+* Group all variables which are not set inside a specific `{% for %}` tag at the top of the file
 
 ### [Variable naming](#variable-naming)
 
@@ -803,12 +795,14 @@ Split characters are used to effectively provide multiple description fields on 
 
 #### More examples
 ```html
-{% assign has_shipping_tag = true %}
-{% assign is_catalogue_product = false %}
+{%- liquid
+  assign has_shipping_tag = true
+  assign is_catalogue_product = false
 
-{% assign additional_handle_array = 'Item 1,Item 2,Item 3' | split: ',' %}
+  assign additional_handle_array = 'Item 1,Item 2,Item 3' | split: ','
 
-{% assign installation_search_string = '' %}
+  assign installation_search_string = ''
+-%}
 ```
 
 * If a variable is a boolean then name it as a question, 'has the shipping tag' becomes `has_shipping_tag`
@@ -820,9 +814,9 @@ Split characters are used to effectively provide multiple description fields on 
 
 ## [Whitespace controls](#whitespace-controls)
 
-* Only use whitespace controls when using a `{% liquid %}` tag or when outputting Liquid to Vue props
+* Only use whitespace controls when using a `{% liquid %}` tag
 * If you need to trim whitespace from objects then you can use whitespace controls, e.g. `{{- section.settings.body_copy -}}`
 
-> **🗒 Note:** Not all apps support whitespace controls.
+> 📋 Not all apps support whitespace controls.
 
 [ꜛ Back to TOC](#table-of-contents)

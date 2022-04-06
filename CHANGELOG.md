@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.4.0 - 2022-04-06
+* Home - Updated Canvas naming
+* CSS - General updates
+* CSS - Fixed incorrect usage of `margin` and `padding`
+* HTML - General updates
+* Liquid - General updates
+* Liquid - Updated filter guidelines
+* Liquid - Updated commenting guidelines
+* JavaScript & Vue SFC - General updates
+
 ## 2.3.0 - 2022-04-05
 * Liquid - Added order for schema settings
 * Liquid - Updated conditional statements
