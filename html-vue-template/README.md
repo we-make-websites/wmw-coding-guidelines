@@ -19,9 +19,12 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 
 ## Attributes
 
+* [Attribute casing](#attribute-casing)
+* [Attribute order](#attribute-order)
+
 ### [Attribute casing](#attribute-casing)
-* The general rule is if the attribute is to do with CSS then you kebab-case the value
-* If its the attribute is for JavaScript use camelCase in the value
+* The general rule is if the attribute is to do with CSS then you use kebab-case for the value
+* If the attribute is for JavaScript then use camelCase in the value
 * kebab-case
   * `id`
   * `class`
@@ -60,8 +63,8 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 >
 ```
 
-* When an element has more than one attribute they should be stacked on newlines
-* They should follow this order:
+* When an element has more than one attribute then each attribute should be on its own line
+* Attributes should follow this order:
   * `is`
   * `v-for`
   * `v-if` / `v-else-if` / `v-else`
@@ -82,26 +85,7 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 * This makes it easier for managing merges in Git
 * Make sure you trim trailing spaces after each line
 
-> **🗒 Note:** Be sure to follow the formatting; the trailing `>` should be on a newline with the attributes indented in two spaces.
-
-#### Also
-```html
-<!-- .liquid file -->
-<div class="hero template-article__hero-image lazyload" data-bgset="{% render 'responsive-bg-image' with image: article.image %}"></div>
-
-<div
-  class="hero template-article__hero-image lazyload"
-  data-bgset="{% render 'responsive-bg-image' with image: article.image %}"
-></div>
-```
-
-* Use multi line attributes if as a single line it would exceed 80 characters
-
-### [Attribute values](#attribute-values)
-
-* `id` values should be kebab-case
-* `class` values should follow BEM naming conventions
-* `ref`, `key`, and `js-` attributes should be camelCase
+> 📋 Be sure to follow the formatting; the trailing `>` should be on a newline with the attributes indented in two spaces.
 
 ## [Characters](#characters)
 
@@ -115,7 +99,7 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 <div class="foo"></div>
 ```
 
-* Use quotations `"` HTML elements, not apostrophes `'`
+* Use double quotations `"` HTML elements, not apostrophes/single quotations `'`
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -286,11 +270,11 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 >
 ```
 
-* The `/` in self-closing tags is obsolete in HTML, do not use it
+* The `/` in self-closing tags is obsolete in HTML elements, do not use it
 
 ### Exceptions
 
-* Inside a Vue `<template>` tag you should use self-closing tags:
+* Inside a Vue `<template>` tag you should use self-closing tags for elements which don't normally self-close:
 
 ```html
 <!-- .vue file -->

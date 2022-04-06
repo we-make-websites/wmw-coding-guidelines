@@ -55,40 +55,41 @@ const bar = ['foo', 'bar']
 
 ### [General comments](#general-comments)
 
-* Add a newline comments, except those starting with `eslint` or `webpack`
+* Add a newline after comments, except those starting with `eslint` or `webpack`
 * Comments should begin with a capital letter
 
 ### [Long form comments](#long-form-comments)
 
 ```js
 /**
- * [Folder]: [Title]
+ * Folder: Title
  * -----------------------------------------------------------------------------
- * [Description].
+ * Description.
  *
  */
 ```
 
-* Use the long form comment for intro comments inside the `<script>` tag in Vue files
+* Use the long form comment for intro comments inside the `<script>` tag in Vue files and at the start of JS files
 
 ### [JSDoc comments](#jsdoc-comments)
 
 ```js
 /**
  * [Comment].
- * @param {String} [variable] - [Variable description].
- * @returns
+ * @param {String} variable - Variable description.
+ * @returns {String}
  */
 ```
 
 * Use the JSDoc comment before every function explaining what it does, its expected variables, and what it returns
+* Wrap the variable in square brackets to denote that it's optional, e.g. `[variable]`
 * See [JSDoc documentation](https://jsdoc.app/) for details
 
 ### [Short form comments](short-form-comments)
 
 ```js
 /**
- * [Comment].
+ * Comment.
  */
 ```
 
@@ -105,7 +106,7 @@ const foo = {
   'bar': true
 }
 
-const bar = {'foo': true, 'bar': false}
+const bar = {'foo': true, 'bar-baz': false}
 ```
 
 ### Do
@@ -115,14 +116,14 @@ const foo = { bar: true }
 
 const bar = {
   foo: true,
-  bar: false,
+  'bar-baz': false,
 }
 ```
 
-* Each property in an object should be on a newline if there are more than two properties
-* For single property objects there should be a space inside the opening and closing braces
-* Keys should not use single quotations (`'`) where the key is a single word
-* All properties in an object must always have a trailing comma
+* Each property in an object should be on a newline if there are multiple properties
+* For single property objects there should be a space after the opening brace and before the closing brace
+* Single word keys should not use an apostrophes/single quotations (`'`)
+* All properties in a multi line object must always have a trailing comma
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -133,7 +134,7 @@ const bar = {
 
 ### [Attributes](#attributes)
 
-* As per [Vue's style guide](https://v3.vuejs.org/style-guide/#component-instance-options-order-recommended) your Vue component options should follow this order:
+* As per [Vue's style guide](https://v3.vuejs.org/style-guide/#component-instance-options-order-recommended) your Vue `<script>` export should follow this order:
   * `name`
   * `components`
   * `props`
@@ -225,7 +226,7 @@ const foo = 'Bar';
 const foo = 'Bar'
 ```
 
-* Do not use semi-colons (`;`) unless not doing so would cause an ASI failure
+* Do not use semi-colons (`;`) unless not doing so would cause an ASI error
 * E.g. the below needs a semi-colon on the first line otherwise when minified it would break:
 
 ```js
