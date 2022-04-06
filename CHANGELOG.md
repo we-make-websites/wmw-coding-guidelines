@@ -1,9 +1,11 @@
 # Changelog
 
 ## 2.4.0 - 2022-04-06
+* Home - Updated Canvas naming
+* CSS - Updated guidelines to support Canvas 3.0.0
+* Liquid - Updated guidelines to support Canvas 3.0.0
 * Liquid - Updated filter guidelines
 * Liquid - Updated commenting guidelines
-* Liquid - General updates
 
 ## 2.3.0 - 2022-04-05
 * Liquid - Added order for schema settings

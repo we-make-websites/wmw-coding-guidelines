@@ -1,11 +1,11 @@
 <p align="center"><img src="https://raw.githubusercontent.com/we-make-websites/wmw-coding-guidelines/master/assets/logo.png" alt="We Make Websites" width="170"></p>
 
 # Coding Guidelines
-Standards, guidelines, and best practice when working on our CANVAS framework.
+Standards, guidelines, and best practice when working on our Canvas framework.
 
-Updates to BASIS must also follow these guidelines.
+Updates to Basis and projects using Basis Adapter must also follow these guidelines.
 
-For FRAME projects [follow these guidelines](frame/README.md).
+For Frame projects [follow these guidelines](frame/README.md).
 
 ## Table of contents
 
@@ -28,10 +28,8 @@ When working on large, long-running projects, with dozens of developers of diffe
 
 When you are writing new code you are expected to maintain the guidelines, if you update an existing feature you are expected to update any non-adhering code that you interact with or change. This means you are not expected to fix the whole file when adding new functionality, just the code you write or change.
 
-Assuming you've followed [setup](https://www.notion.so/wemakewebsites/Setup-CANVAS-WIP-16ca72ba2505444e939e3a30f1525c7f) then your JS and Vue files will be formatted when you save by `eslint --fix`. Other `eslint` and `stylelint` errors will be flagged when committing your changes. You will have to manually apply the guidelines to HTML and Liquid as there is no linter available.
+Assuming you've followed [setup](https://we-make-websites.gitbook.io/canvas/guides/starting-a-new-project) then your JS, SCSS, and Vue files will be formatted when you save by `eslint --fix` and `stylelint --fix`. Other `eslint` and `stylelint` errors will be flagged when committing your changes. You will have to manually apply the guidelines to HTML and Liquid as there is no linter available.
 
 ## Can I contribute to the guidelines?
 
 Please branch from `master` and submit a pull request for any suggested changes.
-
-
