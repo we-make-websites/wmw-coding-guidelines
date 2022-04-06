@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.4.1 - 2022-04-06
+* CSS - Fixed title linking
+
 ## 2.4.0 - 2022-04-06
 * Home - Updated Canvas naming
 * CSS - General updates
