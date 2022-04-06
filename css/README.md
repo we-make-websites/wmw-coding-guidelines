@@ -1071,7 +1071,7 @@ $LIGHT_GREY: #d4d7d9;
 * [`font-family`](#font-family)
 * [`font-size`](#font-size)
 * [`line-height`](#line-height)
-* [`margin` & `padding`](#margin-&-padding)
+* [`margin` & `padding`](#margin--padding)
 * [`transition`](#transition)
 
 ### [`border`](#border)
@@ -1191,7 +1191,7 @@ $LIGHT_GREY: #d4d7d9;
 * This means `line-height` will scale with the font size rather than being fixed
 * Another consideration at the design phase is to keep `line-height` relative to the `font-size` in rational numbers
 
-### [`margin` & `padding`](#margin-&-padding)
+### [`margin` & `padding`](#margin--padding)
 
 #### Don't
 ```scss
