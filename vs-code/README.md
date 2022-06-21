@@ -24,6 +24,7 @@ These links will open the Visual Studio Marketplace.
 * [Liquid](https://marketplace.visualstudio.com/items?itemName=sissel.shopify-liquid)
 * [stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
 * [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+* [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
 
 We do not recommend the Prettier extension as it's _too_ opinionated.
 
