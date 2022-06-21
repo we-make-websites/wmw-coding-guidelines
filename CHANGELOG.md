@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.5.0 - 2022-06-21
+* VS Code - Updated recommended extensions to match Canvas
+
 ## 2.4.1 - 2022-04-06
 * CSS - Fixed title linking
 
