@@ -10,15 +10,19 @@ When saving `eslint --fix` should run and automatically fix most issues.
 
 * [Arrays](#arrays)
 * [Comments](#comments)
+* [If conditions](#if-conditions)
 * [Indents](#indents)
+* [Newlines](#newlines)
 * [Objects](#objects)
 * [Order](#order)
+* [Passing parameters](#passing-parameters)
 * [Semi-colons](#semi-colons)
 * [Variables](#variables)
+* [Whitespace](#whitespace)
 
 [← Back to homepage](../README.md)
 
-## [Arrays](#arrays)
+## Arrays
 
 ### Don't
 
@@ -37,12 +41,14 @@ const bar = ['foo',
 ```js
 const foo = ['bar']
 
-const bar = ['foo', 'bar']
+const bar = [
+  'foo',
+  'bar',
+]
 ```
 
-* Arrays should be consistently formatted, either they should all be on one line, or they should all be on newlines
-* For single item arrays there should be no spaces inside the opening and closing tags
-* All items in an array must have a trailing comma
+* Single item arrays should be on a single line with no spaces inside the opening and closing tags
+* Multiple item arrays should have each item on a newline with a trailing comma
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -53,12 +59,12 @@ const bar = ['foo', 'bar']
 * [JSDoc](#jsdoc-comments)
 * [Short form](short-form-comments)
 
-### [General comments](#general-comments)
+### General comments
 
 * Add a newline after comments, except those starting with `eslint` or `webpack`
 * Comments should begin with a capital letter
 
-### [Long form comments](#long-form-comments)
+### Long form comments
 
 ```js
 /**
@@ -71,7 +77,7 @@ const bar = ['foo', 'bar']
 
 * Use the long form comment for intro comments inside the `<script>` tag in Vue files and at the start of JS files
 
-### [JSDoc comments](#jsdoc-comments)
+### JSDoc comments
 
 ```js
 /**
@@ -85,7 +91,7 @@ const bar = ['foo', 'bar']
 * Wrap the variable in square brackets to denote that it's optional, e.g. `[variable]`
 * See [JSDoc documentation](https://jsdoc.app/) for details
 
-### [Short form comments](short-form-comments)
+### Short form comments
 
 ```js
 /**
@@ -97,7 +103,124 @@ const bar = ['foo', 'bar']
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Objects](#objects)
+## If conditions
+
+* [Early return](#early-return)
+* [Ternary operator](#ternary-operator)
+
+### Early return
+
+#### Don't
+
+```js
+if (condition) {
+  runFunctionA()
+} else {
+  runFunctionB()
+}
+```
+
+#### Do
+
+```js
+if (condition) {
+  runFunctionA()
+  return
+}
+
+runFunctionB()
+```
+
+* Use an early return instead of `if ... else` where possible to make the amount of code the browser has to run shorter
+* Where both parts of the condition lead to the same outcome you should continue using `if ... else`, e.g.
+
+```js
+let foo = ''
+
+if (condition) {
+  foo += 'Foo'
+} else {
+  foo += 'Bar'
+}
+
+foo += 'Baz'
+
+return foo
+```
+
+### Ternary operator
+
+#### Don't
+
+```js
+let foo = 'Baz'
+
+if (condition) {
+  foo = 'Bar'
+}
+
+const bar = condition ? 'When the ternary would exceed 80 characters then split onto newlines' : 'Foo'
+```
+
+#### Do
+
+```js
+const foo = condition ? 'Bar' : 'Baz'
+
+const bar = condition
+  ? 'When the ternary would exceed 80 characters then split onto newlines'
+  : 'Foo'
+```
+
+* When assigning a variable it's preferrable to use a ternary operator, e.g.
+* Split the ternary operator onto newlines when it exceeds 80 characters
+
+[ꜛ Back to TOC](#table-of-contents)
+
+## Newlines
+
+### Don't
+
+```js
+const foo = 'Bar'
+const bar = [
+  true,
+  false,
+  true,
+]
+bar.forEach((item) => {
+  if (item) return
+  runFunction(item)
+})
+```
+
+## Do
+
+```js
+const foo = 'Bar'
+
+const bar = [
+  true,
+  false,
+  true,
+]
+
+bar.forEach((item) => {
+  if (item) {
+    return
+  }
+
+  runFunction(item)
+})
+```
+
+* Newlines are free, use them to break up blocks of code
+* Multi-line objects should have newlines before and after them
+* Do not use single line if conditions
+
+[ꜛ Back to TOC](#table-of-contents)
+
+## Objects
 
 ### Don't
 
@@ -132,7 +255,7 @@ const bar = {
 * [Attributes](#attributes)
 * [Vue SFC order](#vue-sfc-order)
 
-### [Attributes](#attributes)
+### Attributes
 
 * As per [Vue's style guide](https://v3.vuejs.org/style-guide/#component-instance-options-order-recommended) your Vue `<script>` export should follow this order:
   * `name`
@@ -146,7 +269,7 @@ const bar = {
   * Lifecycle events in the order they're called
   * `methods`
 
-### [Vue SFC order](#vue-sfc-order)
+### Vue SFC order
 
 * Vue SFC files should be in the following order:
   * `<template>`
@@ -160,59 +283,82 @@ const bar = {
 * [Indents general](#indents-general)
 * [Vue SFC indentation](#vue-sfc-indentation)
 
-### [Indents general](#indents-general)
+### Indents general
 
-* When saving your file `eslint --fix` is automatically run, if there are items which need break onto multiple lines (such as arrays) then `eslint` will do this for you, however the indenting may be incorrect
+* When saving your file `eslint --fix` is automatically run, if there are items which need to break onto multiple lines (such as arrays) then `eslint` will do this for you, however the indenting may be incorrect
 * Apply common sense when saving a file which `eslint` then fixes, if the indenting doesn't look right it probably isn't, `eslint` doesn't lint indenting correctly at all times
 
-### [Vue SFC indentation](#vue-sfc-indentation)
+### Vue SFC indentation
 
 #### Don't
 
-```js
+```html
 <template>
-<div class="product-card">
+<div class="example">
+  <!-- Code -->
 </div>
 </template>
 
 <script>
   export default {
-    name: 'Product Card',
+    name: 'Example',
   }
 </script>
 
 <style lang="scss">
-  @import '@/config/configuration';
-  @import './featured-products';
+  @import './example';
 </style>
 ```
 
 #### Do
 
-```js
+```html
 <template>
-  <div class="product-card">
+  <div class="Example">
+    <!-- Code -->
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Product Card',
+  name: 'Example',
 }
 </script>
 
 <style lang="scss">
-@import './featured-products';
+@import './example';
 </style>
 ```
 
 * Only indent the contents of the `<template>` tag
-* Scripts and styles should not be indented
+* `<script>` and `<style>` tags should not be indented
 * This gives more character length to write your JS in
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Semi-colons](#semi-colons)
+## Passing parameters
+
+### Don't
+
+```js
+array.forEach(item => {
+  // Code
+})
+```
+
+### Do
+
+```js
+array.forEach((item) => {
+  // Code
+})
+```
+
+* Wrap the passed parameters in brackets `()`
+
+[ꜛ Back to TOC](#table-of-contents)
+
+## Semi-colons
 
 ### Don't
 
@@ -239,7 +385,7 @@ const array = [];
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Variables](#variables)
+## Variables
 
 ### Don't
 
@@ -274,5 +420,52 @@ baz += ', extra string'
 * Do not use `var`, use `let` or `const` as the situation dictates
 * Use `const` for variables which are _never_ reassigned
 * Use `let` for variables which are reassigned
+
+[ꜛ Back to TOC](#table-of-contents)
+
+## Whitespace
+
+### Don't
+
+```js
+const foo='Bar'
+
+array.forEach((item)=>{
+  // Code
+})
+
+for(const item of array){
+  // Code
+}
+
+if(condition==='foo'){
+  // Code
+}else{
+  // Code
+}
+```
+
+### Do
+
+```js
+const foo = 'Bar'
+
+array.forEach((item) => {
+  // Code
+})
+
+for (const item of array) {
+  // Code
+}
+
+if (condition === 'foo') {
+  // Code
+} else {
+  // Code
+}
+```
+
+* Whitespace is free, use it
+* It makes the code more readable
 
 [ꜛ Back to TOC](#table-of-contents)
