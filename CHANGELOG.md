@@ -2,6 +2,8 @@
 
 ## 2.6.0 - 2022-07-??
 
+* Updated Canvas and Frame to be Title case
+
 ### JavaScript & Vue SFC
 * Add if conditions, newlines, passing parameters, and whitespace rules
 * Updated array and indents rules
@@ -55,8 +57,8 @@
 
 ## 2.0.0 - 2021-07-29
 
-* Added CANVAS rules
-* Moved FRAME rules into separate folder
+* Added Canvas rules
+* Moved Frame rules into separate folder
 
 ## 1.2.4 - 2020-12-01
 

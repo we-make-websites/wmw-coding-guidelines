@@ -1,6 +1,6 @@
 # Liquid Guidelines
 
-For details on how to pass Liquid variables to Vue props, see [CANVAS's documentation](https://www.notion.so/wemakewebsites/Passing-Liquid-to-Vue-9367b24ce4ae447bbfc6471794f01b7a).
+For details on how to pass Liquid variables to Vue props, see [Canvas documentation](https://www.notion.so/wemakewebsites/Passing-Liquid-to-Vue-9367b24ce4ae447bbfc6471794f01b7a).
 
 ## Table of contents
 

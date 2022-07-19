@@ -11,7 +11,7 @@ The below settings are recommended to help you follow our other guidelines.
 
 These are the minimum extensions we recommend you have installed.
 
-CANVAS projects can automatically install these extensions in VS Code.
+Canvas projects can automatically install these extensions in VS Code.
 
 These links will open the Visual Studio Marketplace.
 
@@ -34,7 +34,7 @@ We do not recommend the Prettier extension as it's _too_ opinionated.
 
 Useful settings to make your life easier.
 
-CANVAS projects can automatically apply these settings in VS Code.
+Canvas projects can automatically apply these settings in VS Code.
 
 ### Changing your settings
 
