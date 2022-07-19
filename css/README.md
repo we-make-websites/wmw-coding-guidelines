@@ -19,9 +19,10 @@
 * [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
 * [Overriding stylelint](#overriding-stylelint)
 
-### [DRY (Don't Repeat Yourself)](#dry-dont-repeat-yourself)
+### DRY (Don't Repeat Yourself)
 
 #### Don't
+
 ```scss
 .foo {
   background-color: #fff;
@@ -37,6 +38,7 @@
 ```
 
 #### Do
+
 ```scss
 .btn {
   background-color: rgb(255, 255, 255);
@@ -54,9 +56,10 @@
 
 * Sometimes it's still better to KISS (Keep It Simple, Stupid) than DRY.
 
-### [Overriding stylelint](#overriding-stylelint)
+### Overriding stylelint
 
 #### Don't
+
 ```scss
 // stylelint-disable-next-line
 #app {
@@ -70,6 +73,7 @@
 ```
 
 #### Do
+
 ```scss
 // stylelint-disable declaration-no-important
 // stylelint-disable selector-max-id
@@ -95,9 +99,10 @@
 * [Fullscreen elements](#fullscreen-elements)
 * [Magic numbers](#magic-numbers)
 
-### [Mobile first](#mobile-first)
+### Mobile first
 
 #### Don't
+
 ```scss
 .foo {
   // Desktop code
@@ -123,9 +128,10 @@
 * This means we're expanding to fill desktop instead of cramming things in to fit mobile
 * If we fail to add desktop styles then the site will still be usable
 
-### [Responsive banner padding](#responsive-banner-padding)
+### Responsive banner padding
 
 #### Don't
+
 ```scss
 .foo {
   padding-block-start: 60%;
@@ -133,6 +139,7 @@
 ```
 
 #### Do
+
 ```scss
 .foo {
   // 16:9 ratio
@@ -144,9 +151,10 @@
 * Also add a preceding comment explaining the ratio of the banner
 * `aspect-ratio` is not yet supported in the latest two whole versions of Safari
 
-### [Fullscreen elements](#fullscreen-elements)
+### Fullscreen elements
 
 #### Don't
+
 ```scss
 .foo {
   bottom: 0;
@@ -158,6 +166,7 @@
 ```
 
 #### Do
+
 ```scss
 .foo {
   height: 100%;
@@ -171,9 +180,10 @@
 * Don't define all four positioning properties to set an element to fullscreen as these do not work on all elements
 * Instead use `height: 100%` and `width: 100%`
 
-### [Magic numbers](#magic-numbers)
+### Magic numbers
 
 #### Don't
+
 ```scss
 .foo {
   left: 23px;
@@ -181,6 +191,7 @@
 ```
 
 #### Do
+
 ```scss
 .foo {
   // 10px because of font height
@@ -201,7 +212,7 @@
 * When someone else comes to edit they won't understand why it's this number specifically
 * If you have to use magic numbers then leave a comment explaining why that number, it can be just because it works, but explain what will break if it's changed
 
-> 📋 Read more about [magic numbers](https://css-tricks.com/magic-numbers-in-css/).
+> Read more about [magic numbers](https://css-tricks.com/magic-numbers-in-css/).
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -215,9 +226,10 @@
 * [Pseudo-elements & -selectors](#pseudo-elements-&--selectors)
 * [Variables](#variables)
 
-### [#IDs](#ids)
+### #IDs
 
 #### Don't
+
 ```scss
 #foo {
   background-color: #000;
@@ -225,6 +237,7 @@
 ```
 
 #### Do
+
 ```scss
 .foo {
   background-color: rgb(0, 0, 0);
@@ -240,9 +253,10 @@
 * In this case, and only as a last resort, use IDs
 * Add a `// stylelint-disable selector-max-id` comment at the start of the SCSS file immediately beneath the intro comment to disable linting for it
 
-### [!important](#important)
+### `!important`
 
 #### Don't
+
 ```scss
 .foo {
   color: red !important;
@@ -268,11 +282,12 @@
 
 * This works because it's more specific than just the class name once, but won't override inline styles
 
-> 📋 Read more about [CSS specificity](https://www.smashingmagazine.com/2007/07/css-specificity-things-you-should-know/).
+> Read more about [CSS specificity](https://www.smashingmagazine.com/2007/07/css-specificity-things-you-should-know/).
 
-### [Longhand properties](#longhand-properties)
+### Longhand properties
 
 #### Don't
+
 ```scss
 .foo {
   background: url('/path/to/image.jpg') no-repeat 50% 50% #fff;
@@ -281,6 +296,7 @@
 ```
 
 #### Do
+
 ```scss
 .foo {
   background-color: #fff;
@@ -301,13 +317,20 @@
 
 * Feel free to use shorthand properties for `border` and `transform`
 
-### [Prefixes](#prefixes)
+### Prefixes
 
 * Prefixes are automatically added to to CSS properties
+* This also means that unused prefixes are automatically removed, if you definitely need the prefix then use the following:
 
-### [Property order](#property-order)
+```scss
+/* autoprefixer: ignore next */
+-webkit-prefixed-property: value;
+```
+
+### Property order
 
 #### Do
+
 ```scss
 .foo {
   // Extends
@@ -371,9 +394,10 @@ The order should be as follows, all items within each group should be sorted alp
 1. Parents (e.g. `.parent &`), so that they have the greatest priority
 1. Media queries (e.g. `@include mq($from: large)`)
 
-### [Pseudo-elements & -selectors](#pseudo-elements-&--selectors)
+### Pseudo-elements & -selectors
 
 #### Don't
+
 ```scss
 .foo {
   &:placeholder {}
@@ -383,6 +407,7 @@ The order should be as follows, all items within each group should be sorted alp
 ```
 
 #### Do
+
 ```scss
 .foo {
   &::after {}
@@ -397,7 +422,7 @@ The order should be as follows, all items within each group should be sorted alp
 * Pseudo-selectors should use `:` (hover, focus, active, nth-child etc.)
 * This helps differentiate between an element and a selector
 
-### [Variables](#variables)
+### Variables
 
 **If you're using Canvas 3.0.0 or newer then use the `design` command in conjunction with the _tokens.json_ file that the designer provided to automatically create your project's variable and classes.**
 
@@ -415,13 +440,13 @@ It is the project lead developer's responsibility to set them up to maintain con
 * [Descriptive naming](#descriptive-naming)
 * [Variable naming](#variable-naming)
 
-### [BEM & CSS](#bem-&-css)
+### BEM & CSS
 
 #### About
 
 **BEM** stands for Block Element Modifier and is a element class naming convention intended to standardise the way elements are named so everyone is on the same page and can work out the relationship of elements without having to refer back to the HTML constantly.
 
-> 📋 For more information go to [Get BEM](http://getbem.com/).
+> For more information go to [Get BEM](http://getbem.com/).
 
 Below is an ideal example of how BEM would be used across HTML and CSS (technically SCSS).
 
@@ -493,9 +518,10 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 }
 ```
 
-### [BEM modifiers](#bem-modifiers)
+### BEM modifiers
 
 #### Don't
+
 ```html
 <div class="bad"></div>
 <div class="bad--modifier"></div>
@@ -507,6 +533,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```
 
 #### Do
+
 ```html
 <div class="good good--modifier"></div>
 ```
@@ -520,9 +547,10 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * Apply the block/element as a class as well as the modifier class
 * Using interpolated brackets means the CSS will compile as `.good.good--modifier {}`
 
-### [Concatenating](#concatenating)
+### Concatenating
 
 #### Don't
+
 ```scss
 .foo {
   .foo__bar {
@@ -532,6 +560,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```
 
 #### Do
+
 ```scss
 .foo {
   &__bar {
@@ -545,11 +574,12 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * The modifier will compile as `.foo__bar.foo__bar--modifier` in CSS
 * This means it has greater specificity, without this any later changes to `.foo__bar` would override the modifier (for example in media queries) as `.foo__bar` and `.foo__bar--modifier` would have the same specificity so the properties applied later in the file would trump the modifier's
 
-> 📋 Read more about [CSS specificity](https://www.smashingmagazine.com/2007/07/css-specificity-things-you-should-know/).
+> Read more about [CSS specificity](https://www.smashingmagazine.com/2007/07/css-specificity-things-you-should-know/).
 
-### [BEM naming](#bem-naming)
+### BEM naming
 
 #### Don't
+
 ```scss
 .site-search {}
 .site-search label {}
@@ -557,6 +587,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```
 
 #### Do
+
 ```scss
 .site-search {}
 .site-search__title {}
@@ -571,9 +602,10 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 
 * Feel free to write comments to explain why you've done things strangely if you have had to
 
-### [Descriptive naming](#descriptive-naming)
+### Descriptive naming
 
 #### Don't
+
 ```scss
 .curley-font {
   font-family: 'Lobster', serif;
@@ -585,6 +617,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```
 
 #### Do
+
 ```scss
 .blog__subtitle {
   font-family: 'Lobster', serif;
@@ -597,7 +630,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 
 * CSS selectors should describe hierarchy, not the look as the look can change
 
-### [Variable naming](#variable-naming)
+### Variable naming
 
 #### Canvas 3.0.0 and newer
 * Use kebab-case for CSS and SASS variables
@@ -619,9 +652,10 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * [Indenting](#indenting)
 * [Whitespace](#whitespace)
 
-### [Indenting](#indenting)
+### Indenting
 
 #### Don't
+
 ```scss
 .foo {
     color: red;
@@ -633,6 +667,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```
 
 #### Do
+
 ```scss
 .foo {
   color: red;
@@ -647,9 +682,10 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * Shopify uses 2 spaces
 * Using spaces is easier to copy and paste
 
-### [Whitespace](#whitespace)
+### Whitespace
 
 #### Don't
+
 ```scss
 .foo{box-shadow: 0 0 rgba(0,0,0,0.5);color:red;font:{size:1em;weight:700;}}
 
@@ -661,6 +697,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```
 
 #### Do
+
 ```scss
 .foo {
   box-shadow: 0 0 rgba(0, 0, 0, 0.5);
@@ -708,9 +745,10 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * [Parenthesise on @includes](#parenthesise-on-includes)
 * [Zero values & units](#zero-values-&-units)
 
-### [Calculations](#calculation)
+### Calculations
 
 #### Don't
+
 ```scss
 .foo {
   left: calc(100% - 30px * 2);
@@ -719,6 +757,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```
 
 #### Do
+
 ```scss
 .foo {
   left: calc(100% - (var(--gutter) * 2));
@@ -742,9 +781,10 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 
 * Use local variables to define adjusted global variables
 
-### [Capitalisation](#capitalisation)
+### Capitalisation
 
 #### Don't
+
 ```scss
 .Foo {
   Color: var(--Color-Text-Primary);
@@ -752,6 +792,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```
 
 #### Do
+
 ```scss
 .foo {
   color: var(--color-text-primary);
@@ -761,9 +802,10 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * Use lowercase for selectors and properties
 * Refer to [Variable naming](#variable-naming) for global and local variables
 
-### [Commenting (inline)](#commenting-inline)
+### Commenting (inline)
 
 #### Don't
+
 ```scss
 .foo {
   background-color: red; // Don't
@@ -773,6 +815,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```
 
 #### Do
+
 ```scss
 .foo {
   // Comment above the line
@@ -788,7 +831,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * Use sentence case for your comments
 * Do not end with a full stop
 
-### [Commenting (introductory)](#commenting-introductory)
+### Commenting (introductory)
 
 ```css
 /**
@@ -803,7 +846,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * Describe what folder it's in, the file's name, and list any special features or conditions
 * All lines except the first one should have a full stop
 
-### [Negative variables](#negative-css-variables)
+### Negative variables
 
 #### Don't
 
@@ -825,9 +868,10 @@ $margin: var(--spacing-m);
 
 * To use negative values for CSS variables you have to times them by `-1` in a `calc()` function
 
-### [Parenthesise on @includes](#parenthesise-on-includes)
+### Parenthesise on @includes
 
 #### Where
+
 ```scss
 @mixin animation($property: color) {
   // Code
@@ -839,6 +883,7 @@ $margin: var(--spacing-m);
 ```
 
 #### Don't
+
 ```scss
 .foo {
   @include visually-hidden();
@@ -846,6 +891,7 @@ $margin: var(--spacing-m);
 ```
 
 #### Do
+
 ```scss
 .foo {
   @include animation(background-color);
@@ -855,9 +901,10 @@ $margin: var(--spacing-m);
 
 * Do not include parenthesise on argument-less mixins
 
-### [Zero values & units](#zero-values-&-units)
+### Zero values & units
 
 #### Don't
+
 ```scss
 .foo {
   animation-delay: 0;
@@ -867,6 +914,7 @@ $margin: var(--spacing-m);
 ```
 
 #### Do
+
 ```scss
 .foo {
   animation-delay: 0s;
@@ -887,9 +935,10 @@ $margin: var(--spacing-m);
 * [Colour properties](#colour-properties)
 * [Colour variables](#colour-variables)
 
-### [Colour properties](#colour-properties)
+### Colour properties
 
 #### Don't
+
 ```scss
 .foo {
   color: red;
@@ -901,6 +950,7 @@ $margin: var(--spacing-m);
 ```
 
 #### Do
+
 ```scss
 .foo {
   color: rgb(255, 0, 0);
@@ -916,9 +966,10 @@ $margin: var(--spacing-m);
 
 * If required, use lowercase and shorthand (where possible) hex colour values
 
-### [Colour variables](#colour-variables)
+### Colour variables
 
 #### Don't
+
 ```scss
 $colour-blue-other: #6195ed;
 $colour-dark-grey: #E2E3E4;
@@ -926,6 +977,7 @@ $LIGHT_GREY: #d4d7d9;
 ```
 
 #### Do
+
 ```scss
 --color-primary: rgb(97, 149, 237);
 --color-text-primary: rgb(226, 227, 228);
@@ -944,9 +996,10 @@ $LIGHT_GREY: #d4d7d9;
 * [Nesting levels](#nesting-levels)
 * [Nesting media queries](#nesting-media-queries)
 
-### [Nesting levels](#nesting-levels)
+### Nesting levels
 
 #### Don't
+
 ```scss
 .foo {
   .this {
@@ -968,6 +1021,7 @@ $LIGHT_GREY: #d4d7d9;
 ```
 
 #### Do
+
 ```scss
 .foo {
   // Base level (not included)
@@ -1009,9 +1063,10 @@ $LIGHT_GREY: #d4d7d9;
 * Media queries are not included when counting levels of nesting
 * VS Code can show you how many levels deep you are in its Breadcrumbs feature (View > Toggle Breadcrumbs)
 
-### [Nesting media queries](#nesting-media-queries)
+### Nesting media queries
 
 #### Don't
+
 ```scss
 .foo {
 
@@ -1034,6 +1089,7 @@ $LIGHT_GREY: #d4d7d9;
 ```
 
 #### Do
+
 ```scss
 .foo {
 
@@ -1074,9 +1130,10 @@ $LIGHT_GREY: #d4d7d9;
 * [`margin` & `padding`](#margin--padding)
 * [`transition`](#transition)
 
-### [`border`](#border)
+### `border`
 
 #### Don't
+
 ```scss
 .foo {
   border: none;
@@ -1092,6 +1149,7 @@ $LIGHT_GREY: #d4d7d9;
 ```
 
 #### Do
+
 ```scss
 .foo {
   border: 0;
@@ -1110,9 +1168,10 @@ $LIGHT_GREY: #d4d7d9;
 * When a border is set to `0` it will never display, however if a border is set to `none` but later overridden by a `border-style` it will display
 * If you're changing a single part of the property then target that specific property rather than setting all the properties again, this is much easier to maintain
 
-### [`font-family`](#font-family)
+### `font-family`
 
 #### Don't
+
 ```scss
 .foo {
   font-family: 'Avenir';
@@ -1120,6 +1179,7 @@ $LIGHT_GREY: #d4d7d9;
 ```
 
 #### Do
+
 ```scss
 :root {
   --font-family-body: 'Avenir', Helvetica, Arial, sans-serif;
@@ -1135,9 +1195,10 @@ $LIGHT_GREY: #d4d7d9;
 * This prevents loading blank pages until the font loads
 * The `font-family` should be declared in a global variable
 
-### [`font-size`](#font-size)
+### `font-size`
 
 #### Don't
+
 ```scss
 .foo {
   font-size: 12px;
@@ -1147,6 +1208,7 @@ $LIGHT_GREY: #d4d7d9;
 ```
 
 #### Do
+
 ```scss
 :root {
   --font-size-m: 1rem;
@@ -1167,9 +1229,10 @@ $LIGHT_GREY: #d4d7d9;
 * Canvas 3.0.0 or newer defines font sizes as global variables, use them
 * Canvas 2.3.0 or older comes with the font function `ms()`, use this
 
-### [`line-height`](#line-height)
+### `line-height`
 
 #### Don't
+
 ```scss
 .foo {
   line-height: 18.5px;
@@ -1181,6 +1244,7 @@ $LIGHT_GREY: #d4d7d9;
 ```
 
 #### Do
+
 ```scss
 .foo {
   line-height: 160%;
@@ -1191,9 +1255,10 @@ $LIGHT_GREY: #d4d7d9;
 * This means `line-height` will scale with the font size rather than being fixed
 * Another consideration at the design phase is to keep `line-height` relative to the `font-size` in rational numbers
 
-### [`margin` & `padding`](#margin--padding)
+### `margin` & `padding`
 
 #### Don't
+
 ```scss
 .foo {
   margin-top: var(--spacing-m);
@@ -1204,6 +1269,7 @@ $LIGHT_GREY: #d4d7d9;
 ```
 
 #### Do
+
 ```scss
 .foo {
   margin-block-start: var(--spacing-m);
@@ -1220,9 +1286,10 @@ $LIGHT_GREY: #d4d7d9;
 
 > Read more about [`margin-block`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block), [`margin-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline), [`padding-block`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block), and [`padding-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline).
 
-### [`transition`](#transition)
+### `transition`
 
 #### Don't
+
 ```scss
 .foo {
   transition: ease transform 0.4s 0.2s;
@@ -1230,6 +1297,7 @@ $LIGHT_GREY: #d4d7d9;
 ```
 
 #### Do
+
 ```scss
 .foo {
   @include transition(transform)

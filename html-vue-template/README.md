@@ -22,7 +22,8 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 * [Attribute casing](#attribute-casing)
 * [Attribute order](#attribute-order)
 
-### [Attribute casing](#attribute-casing)
+### Attribute casing
+
 * The general rule is if the attribute is to do with CSS then you use kebab-case for the value
 * If the attribute is for JavaScript then use camelCase in the value
 * kebab-case
@@ -35,9 +36,10 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
   * `data-`
   * `js-` selector values
 
-### [Attribute order](#attribute-order)
+### Attribute order
 
 #### Don't
+
 ```html
 <!-- .liquid file -->
 <input id="NewsletterModal-Email" class="newsletter-modal__textarea" autocapitalize="off" autocomplete="newsletter-address" autocorrect="off" name="contact[email]" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}" type="email" value="{{ customer.email }}" aria-labelledby="NewsletterModal-EmailLabel" data-show="true" js-newsletter="email">
@@ -45,6 +47,7 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 ```
 
 #### Do
+
 ```html
 <!-- .liquid file -->
 <input
@@ -85,16 +88,18 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 * This makes it easier for managing merges in Git
 * Make sure you trim trailing spaces after each line
 
-> 📋 Be sure to follow the formatting; the trailing `>` should be on a newline with the attributes indented in two spaces.
+> Be sure to follow the formatting; the trailing `>` should be on a newline with the attributes indented in two spaces.
 
-## [Characters](#characters)
+## Characters
 
 ### Don't
+
 ```html
 <div class='foo'></div>
 ```
 
 ### Do
+
 ```html
 <div class="foo"></div>
 ```
@@ -103,7 +108,7 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [`<div>` or `<span>`](#div-or-span)
+## `<div>` or `<span>`
 
 `<div>` and `<span>` are often used interchangeably but there are specific use cases for each:
 
@@ -113,9 +118,10 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Indenting](#indenting)
+## Indenting
 
 ### Don't
+
 ```html
 <p class="body-1">
 {{ product.description }}
@@ -123,6 +129,7 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 ```
 
 ### Do
+
 ```html
 <p class="body-1">
   {{ product.description }}
@@ -133,9 +140,10 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Spacing & line character limits](#spacing--line-character-limits)
+## Spacing & line character limits
 
 ### Don't
+
 ```html
 <!-- .liquid file -->
 <div id="Product" class="product" data-id="{{ product.id }}" js-product="container">
@@ -151,6 +159,7 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 ```
 
 ### Do
+
 ```html
 <!-- .liquid file -->
 <div
@@ -238,9 +247,10 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Self-closing elements](#self-closing-elements)
+## Self-closing elements
 
 ### Don't
+
 ```html
 <!-- .liquid file -->
 <img
@@ -256,6 +266,7 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 ```
 
 ### Do
+
 ```html
 <!-- .liquid file -->
 <img
@@ -286,9 +297,10 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 
 [ꜛ Back to TOC](#table-of-contents)
 
-## [Vue render tags](#vue-render-tags)
+## Vue render tags
 
 ### Don't
+
 ```html
 <!-- .vue file -->
 <h1 class="main-product__title">
@@ -297,6 +309,7 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 ```
 
 ### Do
+
 ```html
 <!-- .vue file -->
 <h1

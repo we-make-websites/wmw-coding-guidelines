@@ -3,11 +3,11 @@
 ## 2.6.0 - 2022-07-??
 
 * Updated Canvas and Frame to be Title case
+* Removed permalinks as GitHub adds them automatically
 
 ### JavaScript & Vue SFC
 * Add if conditions, newlines, passing parameters, and whitespace rules
 * Updated array and indents rules
-* Removed permalinks as GitHub adds them automatically
 
 ## 2.5.0 - 2022-06-21
 

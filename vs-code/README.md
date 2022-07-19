@@ -2,11 +2,6 @@
 
 The below settings are recommended to help you follow our other guidelines.
 
-## Table of contents
-
-1. [Extensions](#extensions)
-1. [Settings](#settings)
-
 ## Extensions
 
 These are the minimum extensions we recommend you have installed.
@@ -27,8 +22,6 @@ These links will open the Visual Studio Marketplace.
 * [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
 
 We do not recommend the Prettier extension as it's _too_ opinionated.
-
-[ꜛ Back to TOC](#table-of-contents)
 
 ## Settings
 
@@ -56,13 +49,15 @@ Canvas projects can automatically apply these settings in VS Code.
 * [Tab size](#tab-size)
 * [Trim trailing whitespace](#trim-trailing-whitespace)
 
-### [Bracket colourisation](#bracket-colourisation)
+### Bracket colourisation
+
 ```json
 "editor.bracketPairColorization.enabled": true
 ```
+
 * VS Code natively supports bracket colourisation so you no longer need the extension
 
-### [Character limit](#character-limit)
+### Character limit
 
 ```json
 "editor.rulers": [
@@ -74,9 +69,9 @@ Canvas projects can automatically apply these settings in VS Code.
 ```
 
 * Adds a vertical border in your code editor denoting where the 80 character limit is
-* The colour is in the hexadecimal colour with an additional alpha value
+* `editorRuler.foreground` sets the colour of the ruler using alpha-hexadecimal values
 
-### [Diff whitespace](#diff-whitespace)
+### Diff whitespace
 
 ```json
 "diffEditor.ignoreTrimWhitespace": false
@@ -85,7 +80,7 @@ Canvas projects can automatically apply these settings in VS Code.
 * Don't ignore whitespace in the diff view of VS Code
 * See [trim trailing whitespace](#trim-trailing-whitespace) so you don't have to manually remove trailing whitespace
 
-### [Disable file preview](#disable-file-preview)
+### Disable file preview
 
 ```json
 "workbench.editor.enablePreviewFromQuickOpen": false,
@@ -94,7 +89,7 @@ Canvas projects can automatically apply these settings in VS Code.
 * When opening files from `cmd` + `p` (or `ctrl` + `p` on Windows) file search they won't open in preview mode
 * This means that opening another file won't close the previous one
 
-### [End of line character](#end-of-line-character)
+### End of line character
 
 ```json
 "files.eol": "\n"
@@ -102,7 +97,7 @@ Canvas projects can automatically apply these settings in VS Code.
 
 * Prevents issues with end of line characters being different
 
-### [File associations](#file-associations)
+### File associations
 
 ```json
 "files.associations": {
@@ -113,7 +108,7 @@ Canvas projects can automatically apply these settings in VS Code.
 
 * This tells VS Code to ignore the `.liquid` extension and open the files with the write sort of highlighting enabled
 
-### [Git autofetch](#git-autofetch)
+### Git autofetch
 
 ```json
 "git.autofetch": true
@@ -121,7 +116,7 @@ Canvas projects can automatically apply these settings in VS Code.
 
 * Autofetches the Git repo every five minutes
 
-### [HTML validation](#html-validation)
+### HTML validation
 
 ```json
 "html.validate.scripts": false,
@@ -132,7 +127,7 @@ Canvas projects can automatically apply these settings in VS Code.
 * These are frequently used to pass Liquid variables into global JS
 * Because of the presence of Liquid in these tags VS Code's linter flags errors
 
-### [Lint on save](#lint-on-save)
+### Lint on save
 
 ```json
 "editor.formatOnSave": false,
@@ -147,7 +142,7 @@ Canvas projects can automatically apply these settings in VS Code.
 * `formatOnSave` is set to `false` to prevent Prettier extension from running (if installed)
 * Sets Stylelint extension to validate SCSS files as well as CSS files
 
-### [Tab size](#tab-size)
+### Tab size
 
 ```json
 "editor.tabSize": 2
@@ -155,14 +150,12 @@ Canvas projects can automatically apply these settings in VS Code.
 
 * You should use a tab size of two spaces to follow guidelines
 
-### [Trim trailing whitespace](#trim-trailing-whitespace)
+### Trim trailing whitespace
 
 ```json
 "files.trimTrailingWhitespace": true
 ```
 
 * Trims any trailing whitespace on file save (makes linting happy)
-
-[ꜛ Back to TOC](#table-of-contents)
 
 [← Back to homepage](../README.md)
