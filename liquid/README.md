@@ -27,7 +27,7 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 {% assign variable_a = 'Hello world' %}
 {% assign variable_b = 'Hello world' %}
 {% assign variable_c = 'Hello world' %}
-{% assign variable_e = 'Hello world' %}
+{% render 'snippet' %}
 ```
 
 #### Do
@@ -38,16 +38,18 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
   assign variable_b = 'Hello world'
   assign variable_c = 'Hello world'
   assign variable_e = 'Hello world'
+  render 'snippet'
 -%}
 ```
 
-* When using multiple Liquid tags replace with a single `{% liquid %}` tag
+* When using multiple Liquid tags replace with a single `{%- liquid -%}` tag
 * Use whitespace controls to remove whitespace from around the statement when rendered
 * See [Shopify documentation](https://shopify.dev/api/liquid/tags/theme-tags#liquid) for more details
 
 ## Commenting
 
 * [Inline](#inline)
+* [Long](#long)
 * [Introductory](#introductory)
 
 ### Inline
@@ -64,7 +66,7 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 #### Do
 
 ```html
-{% comment %} Only display description if tag is present {% endcomment %}
+{% # Only display description if tag is present %}
 {% if has_tag %}
   <div class="foo">
     {{ product.description }}
@@ -72,9 +74,26 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 {% endif %}
 ```
 
-* Use the `{% comment %}` tag for inline comments, not HTML comments
+* Use the `{% # [Comment] %}` tag for inline comments, not HTML comments
 * HTML comments are included in the compiled HTML
 * For `.js.liquid` or `.scss.liquid` file use the language appropriate comment format
+
+### Long
+
+#### Do
+
+```html
+{% comment %}
+------------------------------------------------------------------------------
+  Lorem ipsume dolor sit amet:
+  - Feature 1.
+  - Feature 2.
+  - Feature 3.
+------------------------------------------------------------------------------
+{% endcomment %}
+```
+
+* For longer comments (or lists) you the `{% comment %}{% endcomment %}` tags
 
 ### Introductory
 
@@ -166,11 +185,11 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 {% endfor %}
 ```
 
-* In areas where the client can customise the content do not assume that they will want to display every part of a section's settings
+* In areas where the client can customise the content do not assume they will fill in every setting
 * Wrap each setting in a `{% if %}` to hide it if no content is entered
 * Use `!= blank` rather than `{% if condition %}` or `!= ''` as it is more reliable
 * See [setting states](./setting-states.md) for a full breakdown of what each setting returns when empty or cleared
-* When testing make sure the section does not appear visually broken, the client will expect it to work with missing settings
+* Don't only develop and test based on what's in the design; the client will expect it to work regardless of which settings are missing
 
 ### Conditional spacing
 
@@ -178,13 +197,13 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 
 ```html
 {% if condition %}
-  <!-- Multiple lines of code -->
-  <!-- Multiple lines of code -->
-  <!-- Multiple lines of code -->
+  {% # Multiple lines of code %}
+  {% # Multiple lines of code %}
+  {% # Multiple lines of code %}
 {% else %}
-  <!-- Multiple lines of code -->
-  <!-- Multiple lines of code -->
-  <!-- Multiple lines of code -->
+  {% # Multiple lines of code %}
+  {% # Multiple lines of code %}
+  {% # Multiple lines of code %}
 {% endif %}
 ```
 
@@ -192,14 +211,14 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 
 ```html
 {% if condition %}
-  <!-- Multiple lines of code -->
-  <!-- Multiple lines of code -->
-  <!-- Multiple lines of code -->
+  {% # Multiple lines of code %}
+  {% # Multiple lines of code %}
+  {% # Multiple lines of code %}
 
 {% else %}
-  <!-- Multiple lines of code -->
-  <!-- Multiple lines of code -->
-  <!-- Multiple lines of code -->
+  {% # Multiple lines of code %}
+  {% # Multiple lines of code %}
+  {% # Multiple lines of code %}
 {% endif %}
 ```
 
@@ -212,13 +231,13 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 
 ```html
 {% if variable == 'Hello' %}
-  <!-- Code -->
+  {% # Code %}
 {% elsif variable == 'Goodbye' %}
-  <!-- Code -->
+  {% # Code %}
 {% elsif variable == 'Good night' %}
-  <!-- Code -->
+  {% # Code %}
 {% else %}
-  <!-- Code -->
+  {% # Code %}
 {% endif %}
 ```
 
@@ -228,13 +247,13 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 {%- liquid
   case variable
     when 'Hello'
-      <!-- Code -->
+      {% # Code %}
     when 'Goodbye'
-      <!-- Code -->
+      {% # Code %}
     when 'Good night'
-      <!-- Code -->
+      {% # Code %}
     else
-      <!-- Code -->
+      {% # Code %}
   endcase
 -%}
 ```
@@ -281,8 +300,8 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 ### Don't
 
 ```html
-<!-- A custom page slider so four slides have been hard-coded in section settings -->
-<!-- This means we can't use {% for block in section.blocks %} -->
+{% # A custom page slider so four slides have been hard-coded in section settings %}
+{% # This means we can't use {% for block in section.blocks %}
 <div class="slide slide--1">
   <div
     class="slide__background"
@@ -305,7 +324,7 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
   </div>
 </div>
 
-<!-- All of the code is repeat for each hard-coded slide instance -->
+{% # All of the code is repeat for each hard-coded slide instance %}
 <div class="slide slide--2">...</div>
 <div class="slide slide--3">...</div>
 <div class="slide slide--4">...</div>
@@ -354,7 +373,7 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 {% endfor %}
 ```
 
-* Use `{% for i in (1..#) %}` in combination with `{% assign %}` to replace repetitive code
+* Use an numerical forloop (e.g. `{% for i in (1..#) %}`) in combination with `{% assign %}` to replace repetitive code
 * Use the iteration to set variables which are then used to call the block's settings
 * Use Liquid's built in tags to avoid repeating code
 
@@ -484,11 +503,11 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 * Separate blocks of Liquid code with a newline
 * Opening `{% if %}` tags should be on separate lines
 * `{% if %}` tags with more than two filters and exceeding 80 characters should be split onto multiple lines
-* If the contents of an `{% if %}` condition spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
+* If the contents of an `{% if %}` condition branch spans more than two lines add a newline before any following `{% elsif %}` or `{% else %}` tags
 * Once you are writing something over multiple lines, each line should only have one attribute or value on it
 * For details on HTML spacing see the [HTML](../html/README.md) rule for [Spacing & line character limit](../html/README.md#spacing--line-character-limits)
 
-#### Liquid tags
+#### Liquid filters
 
 * Previously we recommended placing Liquid filters on newlines when there are more than two and the Liquid exceeded 80 characters
 * This approach is not compatible with the [`{% liquid %}` tag](#-liquid--tag)
@@ -549,17 +568,10 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 main-[section].liquid
 ```
 
-* If a section replaces the template's content it should be prefixed with `main-` and moved into the _main_ folder in _sections_ (if it isn't a dynamic component)
+* If a section replaces the template's content it should be prefixed with `main-` and moved into the _main_ folder in _sections_ (if it isn't an async component)
 * E.g. `main-product.liquid` or `main-collection.liquid`
 
 ### Snippet naming
-
-```html
-icon-[snippet].liquid
-```
-
-* Snippets used to contain inline SVGs should be prefixed with `icon-`
-* E.g. `icon-payment.liquid`
 
 ```html
 section-[snippet].liquid
@@ -576,13 +588,13 @@ tag_name: [value]
 tag_name: [value1]_[value2] (etc.)
 ```
 
-* Use the naming convention `tag_name: [value]` for admin tags (products, orders, customers) with a value and `tag_name` for tags without a value
+* Use the naming convention `tag_name: [value]` for tags in Shopify admin (products, orders, customers) with a value and `tag_name` for tags without a value
 * In most cases `[value]` should be in lowercase to make comparisons easier
 * However in instances where the value is outputted on the front-end in a specific case (e.g. Title Case) make sure this is clear in the tech spec
 * If you need to store separate values in the same tag then separate them using `_`  such as `type_modal: [Model]_[Year]` (this isn't snake_case)
 * Do not use boolean values (e.g. `has_addon: true`) as simply having the tag in the first place is enough to know that it is `true` (e.g. `has_addon`)
 * If the tag is to be used in a search string (and therefore needs to be handlelised) then use the naming convention `tag_name--[value]`, this allows the value to be kebab-cased (e.g. `build_date--2019-07-03`)
-* Never put formatted money into the tag (e.g. `monthly_cost: £10`) as tags do not support all the formatting standards required by international stores (e.g. `monthly_cost: €12,34` will not be allowed because the comma ends the tag), instead use `monthly_cost: 1234` and format the cost using Liquid or JavaScript
+* Never put formatted money into the tag (e.g. `monthly_cost: £12.34`) as tags do not support all the formatting standards required by international stores (e.g. `monthly_cost: €12,34` will not be allowed because the comma ends the tag), instead provide the value in cents (e.g. `monthly_cost: 1234`) and format the cost using Liquid or JavaScript
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -672,7 +684,7 @@ Specific rules for certain settings of `type`:
 
 * Use Liquid snippets to keep files small and manageable
 * In the same way a block gets its own SCSS and JS file, consider splitting it into its own snippet
-* Snippets are especially useful for repeating content
+* Snippets are especially useful for repetitive content
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -754,7 +766,7 @@ Split characters are used to effectively provide multiple description fields on 
 
 * Assign the default state of a variable before you first use it
 * This avoids false positives in `{% for %}` loops as it resets the variable at the start of each item
-* In the Don't example above once one product had the tag the variable is set to `true`, but nothing resets it meaning all products after it will have the variable set to `true`
+* In the Don't example above once the variable is set to `true` it will never be reset meaning all products after the variable changes will be `true` even if they don't meet the conditions
 
 ### Variable grouping
 
@@ -794,6 +806,7 @@ Split characters are used to effectively provide multiple description fields on 
 
 {% for variant in product.variants %}
   {% assign variable_d = variant.title %}
+
   <h2>{{ variable_d }}</h2>
 {% endfor %}
 
@@ -810,6 +823,7 @@ Split characters are used to effectively provide multiple description fields on 
 
 ```html
 {% assign variableName = 'Hello world' %}
+
 {% capture img-var %}
   This isn't right
 {% endcapture %}
@@ -819,6 +833,7 @@ Split characters are used to effectively provide multiple description fields on 
 
 ```html
 {% assign variable_string = 'Hello world' %}
+
 {% capture another_string %}
   This is correct
 {% endcapture %}
@@ -850,7 +865,7 @@ Split characters are used to effectively provide multiple description fields on 
 
 ## Whitespace controls
 
-* Only use whitespace controls when using a `{% liquid %}` tag
+* Only use whitespace controls when using a `{% liquid %}` tag or providing props to a Vue component
 * If you need to trim whitespace from objects then you can use whitespace controls, e.g. `{{- section.settings.body_copy -}}`
 
 > Not all apps support whitespace controls.

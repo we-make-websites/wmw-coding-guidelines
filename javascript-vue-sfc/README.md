@@ -192,6 +192,7 @@ bar.forEach((item) => {
   if (item) return
   runFunction(item)
 })
+if (condition) { foo = 'Baz' }
 ```
 
 ## Do
@@ -212,6 +213,10 @@ bar.forEach((item) => {
 
   runFunction(item)
 })
+
+if (condition) {
+  foo = 'Baz'
+}
 ```
 
 * Newlines are free, use them to break up blocks of code
@@ -246,7 +251,7 @@ const bar = {
 * Each property in an object should be on a newline if there are multiple properties
 * For single property objects there should be a space after the opening brace and before the closing brace
 * Single word keys should not use an apostrophes/single quotations (`'`)
-* All properties in a multi line object must always have a trailing comma
+* All properties in a multi-line object must always have a trailing comma
 
 [ꜛ Back to TOC](#table-of-contents)
 

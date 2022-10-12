@@ -72,7 +72,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 </div>
 ```
 
-* Use multi line attributes if as a single line it would exceed 80 characters
+* Use multi-line attributes if as a single line it would exceed 80 characters
 
 ### [Attribute values](#attribute-values)
 
@@ -211,7 +211,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 * [Block-level elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements) should open onto a new line and indent
 * [Inline-level elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements#Elements) should be written on a single line
 * Single line elements should be grouped together by type
-* Multi line elements should have a newline between them
+* Multi-line elements should have a newline between them
 * This guideline includes empty block-level elements, e.g. the following is correct:
 
 ```html
@@ -243,7 +243,7 @@ The below guidelines cover only specific scenarios and should not be considered 
 ### Exceptions
 
 * Short block-level elements like `<h1>`, `<li>` or `<title>` can be displayed on a single line unless they're greater than 80 characters long
-* Inline-level elements greater than 80 characters long should follow multi line rules
+* Inline-level elements greater than 80 characters long should follow multi-line rules
 
 [ꜛ Back to TOC](#table-of-contents)
 

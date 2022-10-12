@@ -25,15 +25,15 @@
 
 ```scss
 .foo {
-  background-color: #fff;
-  border: 1px solid #000;
-  color: #000;
+  background-color: var(--color-background-light);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-text-primary);
 }
 
 .bar {
-  background-color: #fff;
-  border: 1px solid #000;
-  color: #000;
+  background-color: var(--color-background-light);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-text-primary);
 }
 ```
 
@@ -41,20 +41,20 @@
 
 ```scss
 .btn {
-  background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(0, 0, 0);
-  color: rgb(0, 0, 0);
+  background-color: var(--color-background-light);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-text-primary);
 }
 ```
 
-* Keep things DRY, aim to use standard classes to so you can re-use your code
-* SASS includes and extends can encourage poor coding practice, just because it's one line in your code doesn't mean it is when exported
+* Keep things DRY, aim to use standard classes so you can re-use your code
+* SCSS `@include` and `@extend` can encourage poor coding practice, just because it's one line in your code doesn't mean it is when compiled
 * If you're applying the same include or styles on lots of selectors, create a class and apply it in HTML to keep things DRY
-* Make sure you inspect elements in Figma to find their text styles to avoid repeating them
+* Make sure you inspect elements in Figma to find their corresponding classes and CSS variables to avoid repeating them
 
 #### Exceptions
 
-* Sometimes it's still better to KISS (Keep It Simple, Stupid) than DRY.
+* Sometimes it's still better to KISS (Keep It Simple, Stupid) than DRY
 
 ### Overriding stylelint
 
@@ -75,8 +75,7 @@
 #### Do
 
 ```scss
-// stylelint-disable declaration-no-important
-// stylelint-disable selector-max-id
+// stylelint-disable declaration-no-important, selector-max-id
 
 #app {
   background-color: var(--color-background-dark) !important;
@@ -87,7 +86,7 @@
 ```
 
 * If you must override stylelint then add a document rule at the beginning of file instead of lots of comments
-* Add the rule comments at the top of the file just after the intro comment with a newline between the rule comments and the first declaration block
+* Add the rule comment at the top of the file just after the intro comment with a newline between the rule comment and the first declaration block
 * Add the rule comments in alphabetical order
 
 [ꜛ Back to TOC](#table-of-contents)
@@ -143,13 +142,25 @@
 ```scss
 .foo {
   // 16:9 ratio
-  padding-block-end: 56.25%
+  padding-block-end: 56.25%;
+  // Or
+  padding-block-end: percentage(math.div(9, 16));
+}
+```
+
+#### Or
+
+```scss
+@use 'sass:math';
+
+.foo {
+  padding-block-end: percentage(math.div(9, 16));
 }
 ```
 
 * When using padding to create a responsive banner always use `padding-block-end`
 * Also add a preceding comment explaining the ratio of the banner
-* `aspect-ratio` is not yet supported in the latest two whole versions of Safari
+* `aspect-ratio` is still not supported in browsers that we [support](https://wemakewebsites.com/msa/supported)
 
 ### Fullscreen elements
 
@@ -199,7 +210,7 @@
 }
 ```
 
-#### If you have to
+#### Or if you have to
 ```scss
 .foo {
   // This values matches the sum of widths above it
@@ -311,7 +322,8 @@
 
 * Avoid shorthand for `background` and `font` properties
 * For these properties the non-described properties automatically are set to `none`/`default`/`0` which causes issues
-* Don't use `margin` and `padding` shorthand properties, instead using `margin-block`, `margin-inline`, `padding-block`, and `padding-inline`
+* Don't use `margin` and `padding` shorthand properties
+* Safari does not support CSS variables when `margin-block`, `margin-inline`, `padding-block`, and `padding-inline` so use individual styles when using CSS variables
 
 #### Exceptions
 
@@ -424,7 +436,7 @@ The order should be as follows, all items within each group should be sorted alp
 
 ### Variables
 
-**If you're using Canvas 3.0.0 or newer then use the `design` command in conjunction with the _tokens.json_ file that the designer provided to automatically create your project's variable and classes.**
+**If you're using Canvas 3.0.0 or newer then use the `design` command in conjunction with the _tokens.json_ file that the designer provided to automatically create your project's variable and classes. [See documentation](https://we-make-websites.gitbook.io/canvas/features/styles/design-tokens)**
 
 When first setting up your project you should go through and define a series of variables and mixins to help with the maintenance of the project, it's a lot easier to change the property of one variable rather than hunting for all appearances of, say, a `font-family`.
 
@@ -554,6 +566,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ```scss
 .foo {
   .foo__bar {
+    &-bez {}
     .foo__bar--modifier {}
   }
 }
@@ -566,6 +579,8 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
   &__bar {
     &#{&}--modifier {}
   }
+
+  &__bar-bez {}
 }
 ```
 
@@ -573,6 +588,27 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * The modifier has interpolation brackets `#{}` because `&&` is invalid SCSS
 * The modifier will compile as `.foo__bar.foo__bar--modifier` in CSS
 * This means it has greater specificity, without this any later changes to `.foo__bar` would override the modifier (for example in media queries) as `.foo__bar` and `.foo__bar--modifier` would have the same specificity so the properties applied later in the file would trump the modifier's
+
+#### Don't
+
+```scss
+.foo {
+  &__bar {
+    &-bez {}
+  }
+}
+```
+
+#### Do
+
+```scss
+.foo {
+  &__bar {}
+  &__bar-bez {}
+}
+```
+
+* Do not use concatenation to join hyphenated class names
 
 > Read more about [CSS specificity](https://www.smashingmagazine.com/2007/07/css-specificity-things-you-should-know/).
 
@@ -633,11 +669,12 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 ### Variable naming
 
 #### Canvas 3.0.0 and newer
-* Use kebab-case for CSS and SASS variables
+* Use the `design` command
+* Use kebab-case for CSS and SCSS variables
 * Global CSS variables should be set in the `:root {}` declaration
-* Global SASS variables should be set in a SCSS file in the _styles/config/_ folder
-* Local CSS and SASS variables are only available in the declaration they are defined in
-* Prefer CSS variables, only use SASS variables where SASS functions would break with CSS variables
+* Global SCSS variables should be set in a SCSS file in the _styles/config/_ folder
+* Local CSS and SCSS variables are only available in the declaration they are defined in
+* Prefer CSS variables, only use SCSS variables where SCSS functions would break with CSS variables
 
 #### Canvas 2.3.0 or older
 

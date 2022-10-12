@@ -52,7 +52,7 @@ Visit [@we-make-websites/stylelint-config](https://www.npmjs.com/package/@we-mak
 ```
 
 * Keep things DRY, aim to use standard classes to so you can re-use your code
-* SASS includes and extends can encourage poor coding practice, just because it's one line in your code doesn't mean it is when exported
+* SCSS includes and extends can encourage poor coding practice, just because it's one line in your code doesn't mean it is when exported
 * If you're applying the same include or styles on lots of selectors, create a class and apply it in HTML to keep things DRY
 * This is where defined h1, h2, p etc. in Sketch files would be really useful so we can re-use established styles
 
@@ -67,7 +67,7 @@ You are expected to follow the guidelines to the letter without fail, Frame 3 re
 When building a new project using Frame 2.0 it is expected that if you build any new sections or re-build existing templates you will follow these guidelines.
 
 #### Frame 1 and Old Workflow
-Not all of these guidelines will be possible when working with an existing site (or any site built before these guidelines). Frame 2.0 local concatenation of code allows us to use SASS features that are not available with Shopify's old version of SASS, these should be highlighted in the Notes or Exceptions are the end of the page.
+Not all of these guidelines will be possible when working with an existing site (or any site built before these guidelines). Frame 2.0 local concatenation of code allows us to use SCSS features that are not available with Shopify's old version of SCSS, these should be highlighted in the Notes or Exceptions are the end of the page.
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -536,7 +536,7 @@ The below example will only work when you are using Frame 2 or higher as previou
 * The modifier would render as `.foo__bar.foo__bar--modifier` in CSS
 * This means it has greater specificity, without this any later changes to .foo__bar would override the modifier (for example in media queries) as `.foo__bar` and `.foo__bar--modifier` would have the same specificity so the properties appear later would trump the modifier's
 
-> **❗Exception:** If you're working on a site using the Old Workflow or Frame 1.0 this can't be done as Shopify's version of SASS doesn't support concatenating or interpolation brackets.
+> **❗Exception:** If you're working on a site using the Old Workflow or Frame 1.0 this can't be done as Shopify's version of SCSS doesn't support concatenating or interpolation brackets.
 
 ### [BEM naming](#bem-naming)
 

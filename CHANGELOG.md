@@ -2,6 +2,7 @@
 
 ## 2.6.0 - 2022-10-12
 
+* General proof reading updates
 * Updated Canvas and Frame to be Title case
 * Removed permalinks as GitHub adds them automatically
 * VS Code - Updated recommended extensions and settings

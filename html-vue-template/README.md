@@ -41,15 +41,14 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 #### Don't
 
 ```html
-<!-- .liquid file -->
+{% # Liquid file %}
 <input id="NewsletterModal-Email" class="newsletter-modal__textarea" autocapitalize="off" autocomplete="newsletter-address" autocorrect="off" name="contact[email]" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}" type="email" value="{{ customer.email }}" aria-labelledby="NewsletterModal-EmailLabel" data-show="true" js-newsletter="email">
->
 ```
 
 #### Do
 
 ```html
-<!-- .liquid file -->
+{% # Liquid file %}
 <input
   id="newsletter-modal-email"
   class="newsletter-modal__textarea"
@@ -87,6 +86,7 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 * { native } covers everything else, items within { native } should be in alphabetical order
 * This makes it easier for managing merges in Git
 * Make sure you trim trailing spaces after each line
+* See also [spacing & line character limits](#spacing--line-character-limits)
 
 > Be sure to follow the formatting; the trailing `>` should be on a newline with the attributes indented in two spaces.
 
@@ -104,7 +104,8 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 <div class="foo"></div>
 ```
 
-* Use double quotations `"` HTML elements, not apostrophes/single quotations `'`
+* Use double quotations `"` in HTML elements, not apostrophes/single quotations `'`
+* Note that you should use single quotations in Liquid tags and filters
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -145,7 +146,7 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 ### Don't
 
 ```html
-<!-- .liquid file -->
+{% # Liquid file %}
 <div id="Product" class="product" data-id="{{ product.id }}" js-product="container">
   <h1 class="product__title">{{ product.title }}</h1>
   <h2 class="product__subtitle">{{ product.type }}</h2>
@@ -161,7 +162,7 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 ### Do
 
 ```html
-<!-- .liquid file -->
+{% # Liquid file %}
 <div
   id="Product"
   class="product"
@@ -209,11 +210,11 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 * [Block-level elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements) should open onto a new line and indent
 * [Inline-level elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements#Elements) should be written on a single line
 * Single line elements should be grouped together by type
-* Multi line elements should have a newline between them
+* Multi-line elements should have a newline between them
 * This guideline includes empty block-level elements, e.g. the following is correct:
 
 ```html
-<!-- .liquid file -->
+{% # Liquid file %}
 <div
   class="article__image"
   data-bgset="{% render 'responsive-bg-image' with image: article.image %}"
@@ -222,10 +223,10 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 ```
 
 * Once you are writing something over multiple lines, each line should only have one attribute or value on it
-* If an attribute's value exceeds 80 characters then it should be split in the following format:
+* If an attribute's value exceeds 80 characters then it too should be split in the following format:
 
 ```html
-<!-- .liquid file -->
+{% # Liquid file %}
 <div
   class="
     class-1
@@ -236,14 +237,14 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
   data-handle="{{ product.handle }}"
   js-product="content"
 >
-  <!-- Content -->
+  {% # Content %}
 </div>
 ```
 
 ### Exceptions
 
 * Short block-level elements like `<h1>`, `<li>` or `<title>` can be displayed on a single line unless they're greater than 80 characters long
-* Inline-level elements greater than 80 characters long should follow multi line rules
+* Inline-level elements greater than 80 characters long should follow multi-line rules
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -252,7 +253,9 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 ### Don't
 
 ```html
-<!-- .liquid file -->
+{% # Liquid file %}
+<component-handle />
+
 <img
   alt=""
   src="{{ 'image.png' | file_url: '200x' }}"
@@ -268,7 +271,9 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 ### Do
 
 ```html
-<!-- .liquid file -->
+{% # Liquid file %}
+<component-handle></component-handle>
+
 <img
   alt=""
   src="{{ 'image.png' | file_url: '200x' }}"
@@ -281,7 +286,8 @@ See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
 >
 ```
 
-* The `/` in self-closing tags is obsolete in HTML elements, do not use it
+* Vue custom elements in Liquid files should not use a self-closing tag as this is invalid and causes errors
+* The `/` in self-closing tags is obsolete in most HTML elements, do not use it
 
 ### Exceptions
 
