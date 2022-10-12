@@ -1,9 +1,10 @@
 # Changelog
 
-## 2.6.0 - 2022-07-??
+## 2.6.0 - 2022-10-12
 
 * Updated Canvas and Frame to be Title case
 * Removed permalinks as GitHub adds them automatically
+* VS Code - Updated recommended extensions and settings
 
 ### JavaScript & Vue SFC
 * Add if conditions, newlines, passing parameters, and whitespace rules

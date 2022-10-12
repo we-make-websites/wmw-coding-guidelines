@@ -12,13 +12,13 @@ These links will open the Visual Studio Marketplace.
 
 * [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 * [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-* [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
 * [GraphQL](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql)
+* [GraphQL Syntax](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql-syntax)
 * [Highlight Matching Tag](https://marketplace.visualstudio.com/items?itemName=vincaslt.highlight-matching-tag)
 * [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)
-* [Liquid](https://marketplace.visualstudio.com/items?itemName=sissel.shopify-liquid)
+* [Shopify Liquid](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode) (disable Theme check, see below)
 * [stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
-* [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+* [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 * [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
 
 We do not recommend the Prettier extension as it's _too_ opinionated.
@@ -41,6 +41,7 @@ Canvas projects can automatically apply these settings in VS Code.
 * [Character limit](#character-limit)
 * [Diff whitespace](#diff-whitespace)
 * [Disable file preview](#disable-file-preview)
+* [Disable theme check](#disable-theme-check)
 * [End of line character](#end-of-line-character)
 * [File associations](#file-associations)
 * [Git autofetch](#git-autofetch)
@@ -83,11 +84,26 @@ Canvas projects can automatically apply these settings in VS Code.
 ### Disable file preview
 
 ```json
-"workbench.editor.enablePreviewFromQuickOpen": false,
+"workbench.editor.enablePreviewFromQuickOpen": false
 ```
 
 * When opening files from `cmd` + `p` (or `ctrl` + `p` on Windows) file search they won't open in preview mode
 * This means that opening another file won't close the previous one
+
+### Disable theme check
+
+```json
+"shopifyLiquid.disableWindowsWarning": true,
+"shopifyLiquid.formatterDevPreview": false,
+"themeCheck.checkOnChange": false,
+"themeCheck.checkOnOpen": false,
+"themeCheck.checkOnSave": false,
+"themeCheck.onlySingleFileChecks": true,
+"workbench.editor.enablePreviewFromQuickOpen": false
+```
+
+* We use the Shopify Liquid extension to add syntax highlight and autocomplete, however it also comes with Theme Check which does not support Canvas
+* These settings disable theme check
 
 ### End of line character
 
