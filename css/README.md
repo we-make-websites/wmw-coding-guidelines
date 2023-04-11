@@ -780,7 +780,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * [Commenting (introductory)](#commenting-introductory)
 * [Negative CSS variables](#negative-css-variables)
 * [Parenthesise on @includes](#parenthesise-on-includes)
-* [Zero values & units](#zero-values-&-units)
+* [Zero values & units](#zero-values--units)
 
 ### Calculations
 
