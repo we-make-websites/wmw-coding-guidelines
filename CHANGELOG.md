@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.6.1 - 2023-04-11
+
+* CSS - Fixed title linking
+
 ## 2.6.0 - 2022-10-12
 
 * General proof reading updates

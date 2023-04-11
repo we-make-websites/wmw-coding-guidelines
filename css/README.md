@@ -438,8 +438,6 @@ The order should be as follows, all items within each group should be sorted alp
 
 **If you're using Canvas 3.0.0 or newer then use the `design` command in conjunction with the _tokens.json_ file that the designer provided to automatically create your project's variable and classes. [See documentation](https://we-make-websites.gitbook.io/canvas/features/styles/design-tokens)**
 
-**If you're using Canvas 3.0.0 or newer then use the `design` command in conjunction with the _tokens.json_ file that the designer provided to automatically create your project's variable and classes.**
-
 When first setting up your project you should go through and define a series of variables and mixins to help with the maintenance of the project, it's a lot easier to change the property of one variable rather than hunting for all appearances of, say, a `font-family`.
 
 It is the project lead developer's responsibility to set them up to maintain conformity.
@@ -782,7 +780,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * [Commenting (introductory)](#commenting-introductory)
 * [Negative CSS variables](#negative-css-variables)
 * [Parenthesise on @includes](#parenthesise-on-includes)
-* [Zero values & units](#zero-values-&-units)
+* [Zero values & units](#zero-values--units)
 
 ### Calculations
 
@@ -1176,7 +1174,6 @@ $LIGHT_GREY: #d4d7d9;
 .foo {
   border: none;
 }
-
 .bar {
   border: 2px solid var(--border-light);
 
@@ -1187,6 +1184,7 @@ $LIGHT_GREY: #d4d7d9;
 ```
 
 #### Do
+
 ```scss
 .foo {
   border: 0;
