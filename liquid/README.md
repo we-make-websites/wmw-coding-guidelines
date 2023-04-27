@@ -111,7 +111,6 @@ For details on how to pass Liquid variables to Vue props, see [Canvas documentat
 * Include an introductory comment at the start of each file
 * Describe what folder it's in, the file's name, and list any special features or conditions
 * If it's a snippet then provide a list of parameters that it supports using the [JSDoc format](https://jsdoc.app/)
-
 ```html
 {% comment %}
 -----------------------------------------------------------------------------
@@ -806,7 +805,6 @@ Split characters are used to effectively provide multiple description fields on 
 
 {% for variant in product.variants %}
   {% assign variable_d = variant.title %}
-
   <h2>{{ variable_d }}</h2>
 {% endfor %}
 

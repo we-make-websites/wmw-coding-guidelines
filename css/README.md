@@ -951,7 +951,6 @@ $margin: var(--spacing-m);
 ```
 
 #### Do
-
 ```scss
 .foo {
   animation-delay: 0s;
@@ -1175,7 +1174,6 @@ $LIGHT_GREY: #d4d7d9;
 .foo {
   border: none;
 }
-
 .bar {
   border: 2px solid var(--border-light);
 
@@ -1257,7 +1255,6 @@ $LIGHT_GREY: #d4d7d9;
   // Canvas 2.3.0 or older
   @include ms(0);
 }
-```
 
 * Use rem, relative ems
 * They're easier to understand as they're always relative to the base font-size
