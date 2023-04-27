@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.0 - 2023-04-??
+
+* CSS - Updated to reflect new rules
+
 ## 2.6.1 - 2023-04-11
 
 * CSS - Fixed title linking
