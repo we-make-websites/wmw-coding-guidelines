@@ -1,4 +1,4 @@
-# Changelog
+# 📏 Coding Guidelines Changelog
 
 ## 2.7.0 - 2023-05-03
 
