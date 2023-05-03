@@ -1,6 +1,7 @@
 <p align="center"><img src="https://raw.githubusercontent.com/we-make-websites/wmw-coding-guidelines/master/assets/logo.png" alt="We Make Websites" width="170"></p>
 
-# Coding Guidelines
+# 📏 Coding Guidelines
+
 Standards, guidelines, and best practice when working on our Canvas framework.
 
 Updates to Basis and projects using Basis Adapter must also follow these guidelines.

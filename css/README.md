@@ -25,15 +25,15 @@
 
 ```scss
 .foo {
-  background-color: var(--color-background-light);
-  border: 1px solid var(--color-border-dark);
-  color: var(--color-text-primary);
+  background-color: var(--color-neutral-3);
+  border: 1px solid var(--color-neutral-1);
+  color: var(--color-neutral-2);
 }
 
 .bar {
-  background-color: var(--color-background-light);
-  border: 1px solid var(--color-border-dark);
-  color: var(--color-text-primary);
+  background-color: var(--color-neutral-3);
+  border: 1px solid var(--color-neutral-1);
+  color: var(--color-neutral-2);
 }
 ```
 
@@ -41,9 +41,9 @@
 
 ```scss
 .btn {
-  background-color: var(--color-background-light);
-  border: 1px solid var(--color-border-dark);
-  color: var(--color-text-primary);
+  background-color: var(--color-neutral-3);
+  border: 1px solid var(--color-neutral-1);
+  color: var(--color-neutral-2);
 }
 ```
 
@@ -61,33 +61,47 @@
 #### Don't
 
 ```scss
-// stylelint-disable-next-line
-#app {
+.foo {
   // stylelint-disable-next-line
-  background-color: var(--color-background-dark) !important;
-  margin-block: 0;
-  margin-inline: 0;
+  background-color: var(--color-neutral-1) !important;
+  margin: 0;
   // stylelint-disable-next-line
   position: absolute !important;
+}
+
+// stylelint-disable-next-line
+.barClass {
+  color: var(--color-neutral-6)
 }
 ```
 
 #### Do
 
 ```scss
-// stylelint-disable declaration-no-important, selector-max-id
+// stylelint-disable declaration-no-important
 
-#app {
-  background-color: var(--color-background-dark) !important;
+.foo {
+  background-color: var(--color-neutral-1) !important;
   margin-block: 0;
   margin-inline: 0;
   position: absolute !important;
 }
+
+// Custom class from app
+// stylelint-disable-next-line selector-class-pattern
+.barClass {
+  color: var(--color-neutral-6)
+}
 ```
 
-* If you must override stylelint then add a document rule at the beginning of file instead of lots of comments
+* Sometimes it's necessary to override stylelint, usually due to app code
+* When this happens do not use `stylelint-disable` to disable all linting in the whole file
+* Instead use `stylelint-disable-next-line [rule]` to disable just that rule on the next line, then add a preceding comment explaining why it's necessary
+* If you find yourself disabling the same rule frequently in a file then add a comment at the top of the file disabling _just_ that rule using `stylelint-disable [rule]
 * Add the rule comment at the top of the file just after the intro comment with a newline between the rule comment and the first declaration block
 * Add the rule comments in alphabetical order
+* Stylelint will tell you which rule you're breaking when hovering over the error
+* Note that the stylelint rules listed under [deprecated](https://stylelint.io/user-guide/rules/#deprecated) are supported by prefixing the rule with `stylistic/`, e.g. `stylistic/color-hex-case` instead of just `color-hex-case` as these rules are set to be removed in stylelint 16
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -97,6 +111,7 @@
 * [Responsive banner padding](#responsive-banner-padding)
 * [Fullscreen elements](#fullscreen-elements)
 * [Magic numbers](#magic-numbers)
+* [RTL](#rtl)
 
 ### Mobile first
 
@@ -143,8 +158,6 @@
 .foo {
   // 16:9 ratio
   padding-block-end: 56.25%;
-  // Or
-  padding-block-end: percentage(math.div(9, 16));
 }
 ```
 
@@ -160,7 +173,7 @@
 
 * When using padding to create a responsive banner always use `padding-block-end`
 * Also add a preceding comment explaining the ratio of the banner
-* `aspect-ratio` is still not supported in browsers that we [support](https://wemakewebsites.com/msa/supported)
+* `aspect-ratio` is still not supported in all the browsers that we [support](https://wemakewebsites.com/msa/supported)
 
 ### Fullscreen elements
 
@@ -206,7 +219,7 @@
 ```scss
 .foo {
   // 10px because of font height
-  left: calc(var(--gutter) - 10px - (var(--nav-height) / 2));
+  left: calc(var(--layout-gutter) - 10px - (var(--nav-height) / 2));
 }
 ```
 
@@ -224,6 +237,25 @@
 * If you have to use magic numbers then leave a comment explaining why that number, it can be just because it works, but explain what will break if it's changed
 
 > Read more about [magic numbers](https://css-tricks.com/magic-numbers-in-css/).
+
+### RTL
+
+* Use properties that automatically updated based on writing direction
+* See [`margin` & `padding`](#margin--padding) for details on `margin` and `padding`
+* [`inset`](#inset) does not have the necessary support yet
+* Continue using `top`, `right`, `bottom`, and `left` properties for now
+* Use the RTL selector to switch positions in right-to-left writing directions
+
+```scss
+.foo {
+  left: var(--spacing-m);
+
+  [dir=rtl] & {
+    left: unset;
+    right: var(--spacing-m);
+  }
+}
+```
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -243,7 +275,7 @@
 
 ```scss
 #foo {
-  background-color: #000;
+  background-color: var(--color-neutral-1);
 }
 ```
 
@@ -251,7 +283,7 @@
 
 ```scss
 .foo {
-  background-color: rgb(0, 0, 0);
+  background-color: var(--color-neutral-1);
 }
 ```
 
@@ -270,7 +302,7 @@
 
 ```scss
 .foo {
-  color: red !important;
+  color: var(--color-brand-1-default) !important;
 }
 ```
 
@@ -301,8 +333,8 @@
 
 ```scss
 .foo {
-  background: url('/path/to/image.jpg') no-repeat 50% 50% #fff;
-  font: 2rem/1.6 'Helvetica', sans-serif;
+  background: url('/path/to/image.jpg') no-repeat 50% 50% var(--color-neutral-6);
+  font: var(--font-size-m)/var(--line-height-0) var(--font-family-1);
 }
 ```
 
@@ -310,24 +342,38 @@
 
 ```scss
 .foo {
-  background-color: #fff;
+  background-color: var(--color-neutral-6);
   background-image: url('/path/to/image.jpg');
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  font-family: 'Helvetica', sans-serif;
-  font-size: 2rem;
-  line-height: 1.6;
+  font-family: var(--font-family-1);
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-0);
 }
 ```
 
-* Avoid shorthand for `background` and `font` properties
+* Avoid the shorthand `background` and `font` properties
 * For these properties the non-described properties automatically are set to `none`/`default`/`0` which causes issues
-* Don't use `margin` and `padding` shorthand properties
-* Safari does not support CSS variables when `margin-block`, `margin-inline`, `padding-block`, and `padding-inline` so use individual styles when using CSS variables
+* It's also recommended that you don't use [`transform`](#transform)
 
 #### Exceptions
 
+* You can use `margin` or `padding` if all the values are the same, or if you're setting the same value for both vertical properties, and both horizontal properties
 * Feel free to use shorthand properties for `border` and `transform`
+
+```scss
+.foo {
+  // This is okay
+  margin: var(--spacing-m) var(--spacing-l);
+  // This isn't okay as left and right have different values
+  margin: var(--spacing-m) var(--spacing-l) var(--spacing-m) var(--spacing-xl);
+  // Instead of the above use the following, can't use margin-block as Safari doesn't support it fully
+  margin-block-end: var(--spacing-m);
+  margin-block-start: var(--spacing-m);
+  margin-inline-end: var(--spacing-l);
+  margin-inline-start: var(--spacing-xl);
+}
+```
 
 ### Prefixes
 
@@ -345,10 +391,14 @@
 
 ```scss
 .foo {
-  // Extends
-  @extend .grid;
   // Includes
   @include transition(opacity);
+  // Extends
+  @extend .grid;
+  // SASS variables
+  $variable: var(--spacing-m);
+  // CSS variables
+  --variable: var(--spacing-m);
   // Properties in alphabetical order
   background-color: transparent;
   border: 0;
@@ -361,12 +411,12 @@
 
   // Nested elements
   &__bar {
-    color: var(--color-text-light);
+    color: var(--color-neutral-4);
   }
 
   // Direct descendents
   > .baz {
-    color: var(--color-text-secondary);
+    color: var(--color-neutral-3);
   }
 
   // Sibling selectors
@@ -378,7 +428,7 @@
   // Pseudo-selectors
   &:focus,
   &:hover {
-    box-shadow: 0 0 5px color(blue, 0.3);
+    border: 1px solid var(--color-brand-1-default)
   }
 
   // Modifiers
@@ -390,13 +440,23 @@
   .parent & {
     display: none;
   }
+
+  // @media queries
+  @media print {}
+
+  // @supports queries
+  @supports (display: flex) {}
+
+  // mq media queries
+  @include mq($from: l) {}
 }
 ```
 
 The order should be as follows, all items within each group should be sorted alphabetically:
-1. Local variables (e.g. `$local-margin`)
+1. Includes (e.g. `@include button-reset()`)
 1. Extends (e.g. `@extend %font`)
-1. Includes (e.g. `@include ms-respond()`)
+1. SASS variables (e.g. `$local-margin`)
+1. CSS variables (e.g. `--local-padding`)
 1. Properties (e.g. `background-color`)
 1. Pseudo-elements (e.g. `&::before`, `&::placeholder` etc.)
 1. Nested elements (e.g. `&__bar`)
@@ -404,7 +464,9 @@ The order should be as follows, all items within each group should be sorted alp
 1. Pseudo-selectors (e.g. `&:hover`), this way they can change nested elements
 1. Modifiers (e.g. `&#{&}--big`), this gives them precedence over all nested elements
 1. Parents (e.g. `.parent &`), so that they have the greatest priority
-1. Media queries (e.g. `@include mq($from: large)`)
+1. Media queries (e.g. `@media print`)
+1. Support queries (e.g. `@supports (display: flex)`)
+1. MQ media queries (e.g. `@include mq($from: l)`)
 
 ### Pseudo-elements & -selectors
 
@@ -412,9 +474,9 @@ The order should be as follows, all items within each group should be sorted alp
 
 ```scss
 .foo {
-  &:placeholder {}
-
   &:after {}
+
+  &:placeholder {}
 }
 ```
 
@@ -451,6 +513,7 @@ It is the project lead developer's responsibility to set them up to maintain con
 * [BEM naming](#bem-naming)
 * [Descriptive naming](#descriptive-naming)
 * [Variable naming](#variable-naming)
+* [Naming conventions](#naming-conventions)
 
 ### BEM & CSS
 
@@ -504,9 +567,13 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 // product.scss
 .product {
   &__title {}
+
   &__subtitle {}
+
   &__image-container {}
+
   &__image {}
+
   &__description {}
 
   // Newlines and spacing removed for brevity
@@ -633,6 +700,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * Always use classes to select elements
 * Elements may change and no longer be a `<label>` or `<input>`, breaking the CSS, causing maintenance issues
 * With decent BEM naming you shouldn't need to comment your CSS to say what things are or where they sit
+* Class names should be kebab-case
 
 #### Exceptions
 
@@ -676,11 +744,35 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * Local CSS and SCSS variables are only available in the declaration they are defined in
 * Prefer CSS variables, only use SCSS variables where SCSS functions would break with CSS variables
 
-#### Canvas 2.3.0 or older
+#### Before Canvas 3.0.0
 
 * For global variables use `$SCREAMING_SNAKE_CASE`
 * For local variables use `$snake_case`
 * Local variables are only available in the declaration they are defined in
+
+### Naming conventions
+
+#### Don't
+
+```scss
+@function FunctionName() {}
+
+@mixin mixin_name() {}
+
+@keyframes KEYFRAME_NAME() {}
+```
+
+#### Do
+
+```scss
+@function function-name() {}
+
+@mixin mixin-name() {}
+
+@keyframes keyframe-name() {}
+```
+
+* Functions, mixins, and keyframes should all be kebab-case
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -777,6 +869,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * [Calculations](#calculation)
 * [Capitalisation](#capitalisation)
 * [Commenting (inline)](#commenting-inline)
+* [Commenting (loud)](#commenting-loud)
 * [Commenting (introductory)](#commenting-introductory)
 * [Negative CSS variables](#negative-css-variables)
 * [Parenthesise on @includes](#parenthesise-on-includes)
@@ -824,7 +917,7 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 
 ```scss
 .Foo {
-  Color: var(--Color-Text-Primary);
+  Color: var(--Color-Neutral-2);
 }
 ```
 
@@ -832,11 +925,11 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 
 ```scss
 .foo {
-  color: var(--color-text-primary);
+  color: var(--color-neutral-2);
 }
 ```
 
-* Use lowercase for selectors and properties
+* Use kebab-case for selectors and properties
 * Refer to [Variable naming](#variable-naming) for global and local variables
 
 ### Commenting (inline)
@@ -862,11 +955,32 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 }
 ```
 
-* Use `//` for commenting not the block level `/* */`
+* Use `//` for inline comments not the block level `/* */`
 * It's easier to un-comment
 * Inline comments should start on a new line preceding the property they're describing
 * Use sentence case for your comments
 * Do not end with a full stop
+
+### Commenting (loud)
+
+```scss
+.foo {
+  color: var(--color-neutral-2);
+  width: 100%;
+
+  /**
+   * Media queries.
+   */
+  @include mq($from: l) {
+    color: var(--color-neutral-1);
+  }
+}
+```
+
+* Loud comments can be used to break up long code and make it easier to navigate
+* Use the format above for loud comments
+* Use sentence case for your comments
+* End each line with a full stop
 
 ### Commenting (introductory)
 
@@ -989,13 +1103,14 @@ $margin: var(--spacing-m);
 
 ```scss
 .foo {
-  color: rgb(255, 0, 0);
+  color: rgb(255 0 0);
   // Or
-  color: rgba(255, 0, 0, 0.5);
+  color: rgb(255 0 0 / 50%);
 }
 ```
 
-* Use rgb (or rgba) colour values as they are more human readable
+* Use `rgb()` colour functions using space separation as they are more human readable
+* Do not use comma separated `rgb()` colour functions
 * These values are often supplied in brand guidelines
 
 #### Exceptions
@@ -1015,15 +1130,14 @@ $LIGHT_GREY: #d4d7d9;
 #### Do
 
 ```scss
---color-primary: rgb(97, 149, 237);
---color-text-primary: rgb(226, 227, 228);
---color-border-light: rgb(212, 215, 217);
+--color-brand-1-default: rgb(97 149 237);
+--color-neutral-2: rgb(226 227 228);
+--color-neutral-3: rgb(212 215 217);
 ```
 
+* Use the `design` command to generate variables and classes
 * All colours should have variables defined for them, this will come from the designs
 * Designers will determine the name of colours
-* Colours will generally be named for what they are used for, e.g. `color-text-primary`
-* If you're using Canvas 3.0.0 or newer than use the `design` command to generate variables and classes
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -1159,12 +1273,20 @@ $LIGHT_GREY: #d4d7d9;
 
 ## Properties
 
+* [`aspect-ratio`](#aspect-ratio)
 * [`border`](#border)
 * [`font-family`](#font-family)
 * [`font-size`](#font-size)
+* [`inset`](#inset)
 * [`line-height`](#line-height)
 * [`margin` & `padding`](#margin--padding)
+* [`transform`](#transform)
 * [`transition`](#transition)
+
+### `aspect-ratio`
+
+* The `aspect-ratio` property does not have the necessary browser support yet, avoid using it
+* See [responsive banner padding](#responsive-banner-padding)
 
 ### `border`
 
@@ -1174,11 +1296,12 @@ $LIGHT_GREY: #d4d7d9;
 .foo {
   border: none;
 }
+
 .bar {
-  border: 2px solid var(--border-light);
+  border: 2px solid var(--color-neutral-5);
 
   &:hover {
-    border: 2px solid var(--border-dark);
+    border: 2px solid var(--color-neutral-1);
   }
 }
 ```
@@ -1191,15 +1314,15 @@ $LIGHT_GREY: #d4d7d9;
 }
 
 .bar {
-  border: 2px solid var(--border-light);
+  border: 2px solid var(--color-neutral-5);
 
   &:hover {
-    border-color: var(--border-dark);
+    border-color: var(--color-neutral-1);
   }
 }
 ```
 
-* Use `0` instead of none for borders
+* Use `0` instead of `none` for borders
 * When a border is set to `0` it will never display, however if a border is set to `none` but later overridden by a `border-style` it will display
 * If you're changing a single part of the property then target that specific property rather than setting all the properties again, this is much easier to maintain
 
@@ -1217,16 +1340,17 @@ $LIGHT_GREY: #d4d7d9;
 
 ```scss
 :root {
-  --font-family-body: 'Avenir', Helvetica, Arial, sans-serif;
+  --font-family-1: 'Avenir', Helvetica, Arial, sans-serif;
 }
 
 .foo {
-  font-family: var(--font-family-body);
+  font-family: var(--font-family-1);
 }
 ```
 
 * Don't just declare the custom font
 * Always provide a font stack which includes web-safe fonts
+* Edit `fontStacks` in _design.config.js_ in Canvas to add font stacks
 * This prevents loading blank pages until the font loads
 * The `font-family` should be declared in a global variable
 
@@ -1252,17 +1376,21 @@ $LIGHT_GREY: #d4d7d9;
 .foo {
   // Canvas 3.0.0 or newer
   font-size: var(--font-size-m);
-  // Canvas 2.3.0 or older
+  // Before Canvas 3.0.0
   @include ms(0);
 }
-```
 
 * Use rem, relative ems
 * They're easier to understand as they're always relative to the base font-size
 * `em` units change based on the current elements `font-size`
 * `px` units are not as responsive to device or zoom level
-* Canvas 3.0.0 or newer defines font sizes as global variables, use them
-* Canvas 2.3.0 or older comes with the font function `ms()`, use this
+* Canvas 3.0.0 or newer defines font sizes as global variables
+* Before Canvas 3.0.0 we used the font function `ms()`
+
+### `inset`
+
+* The `inset` property (and its longhand versions) do not have full browser support yet, avoid using
+* See [RTL](#rtl) for more details
 
 ### `line-height`
 
@@ -1317,17 +1445,18 @@ $LIGHT_GREY: #d4d7d9;
 * Use `margin-block-*`, `margin-inline-*`, `padding-block-*`, and `padding-inline-*` properties
 * These reflect the current `writing-mode`, `direction`, and `text-orientation` of the page meaning they better support multi-language, especially right-to-left languages
 * Be wary of using `margin-block-start` as vertical margins collapse
-* Avoid using `margin` or `padding` as they're not the shorthand properties of these new selectors
+* Use `margin` and `padding` shorthand properties only when all values match, or if values of properties on the same axis match
+* Safari does not support CSS variables when `margin-block`, `margin-inline`, `padding-block`, and `padding-inline` so use individual styles when using CSS variables
 
 > Read more about [`margin-block`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block), [`margin-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline), [`padding-block`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block), and [`padding-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline).
 
-### `transition`
+### `transform`
 
 #### Don't
 
 ```scss
 .foo {
-  transition: ease transform 0.4s 0.2s;
+  transform: translateY(var(--spacing-m)) scale(2) rotate(45deg)
 }
 ```
 
@@ -1335,13 +1464,37 @@ $LIGHT_GREY: #d4d7d9;
 
 ```scss
 .foo {
-  @include transition(transform)
+  rotate: 45deg;
+  scale: 2;
+  translate: 0 var(--spacing-m);
+}
+```
+
+* Do not use the shorthand `transform` property to `rotate`, `scale`, or `translate` as these keywords have their own properties
+* This allows you to animate and transition individual properties
+* Continue using `transform` to use the `matrix` and `skew` keywords
+
+### `transition`
+
+#### Don't
+
+```scss
+.foo {
+  transition: ease opacity 0.4s 0.2s;
+}
+```
+
+#### Do
+
+```scss
+.foo {
+  @include transition(opacity)
 }
 ```
 
 * Use the `transition` mixin
 * See the `get-transition-properties` function for default values used for timing and ease
-* You can customise on a per mixin basis:
+* You can customise on a per mixin basis
 
 ```scss
 .foo {
@@ -1350,6 +1503,6 @@ $LIGHT_GREY: #d4d7d9;
 ```
 
 * Do not transition `margin` or positional properties (`top`, `left`, `right`, `bottom`) as these don't perform well and lead to poor frame rates
-* Instead use `padding` or `transform` as they can be hardware-accelerated
+* Instead use `padding` or `translate` as these can be hardware-accelerated
 
 [ꜛ Back to TOC](#table-of-contents)

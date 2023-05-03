@@ -1,4 +1,8 @@
-# Changelog
+# 📏 Coding Guidelines Changelog
+
+## 2.7.0 - 2023-05-03
+
+* CSS - Updated to reflect new rules
 
 ## 2.6.1 - 2023-04-11
 
