@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.7.0 - 2023-04-??
+## 2.7.0 - 2023-05-03
 
 * CSS - Updated to reflect new rules
 
