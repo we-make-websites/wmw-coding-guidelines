@@ -1,5 +1,12 @@
 # 📏 Coding Guidelines Changelog
 
+## 2.8.0 - 2023-08-09
+
+* CSS - Added `height` & `width` rules
+* CSS - Expanded `margin` & `padding` rules with variable calculation details
+* CSS - Re-ordered rules to be in alphabetical order
+* CSS - Moved spacing category rules into formatting category
+
 ## 2.7.0 - 2023-05-03
 
 * CSS - Updated to reflect new rules
