@@ -6,7 +6,6 @@
 * [Methods](#methods)
 * [Declarations](#declarations)
 * [Naming](#naming)
-* [Spacing](#spacing)
 * [Formatting](#formatting)
 * [Colours](#colours)
 * [Nesting](#nesting)
@@ -107,73 +106,11 @@
 
 ## Methods
 
-* [Mobile first](#mobile-first)
-* [Responsive banner padding](#responsive-banner-padding)
 * [Fullscreen elements](#fullscreen-elements)
 * [Magic numbers](#magic-numbers)
+* [Mobile first](#mobile-first)
+* [Responsive banner padding](#responsive-banner-padding)
 * [RTL](#rtl)
-
-### Mobile first
-
-#### Don't
-
-```scss
-.foo {
-  // Desktop code
-
-  @include mq($until: l) {
-    // Mobile code
-  }
-}
-```
-
-### Do
-```scss
-.foo {
-  // Mobile code
-
-  @include mq($from: l) {
-    // Desktop code
-  }
-}
-```
-
-* We should always develop mobile first
-* This means we're expanding to fill desktop instead of cramming things in to fit mobile
-* If we fail to add desktop styles then the site will still be usable
-
-### Responsive banner padding
-
-#### Don't
-
-```scss
-.foo {
-  padding-block-start: 60%;
-}
-```
-
-#### Do
-
-```scss
-.foo {
-  // 16:9 ratio
-  padding-block-end: 56.25%;
-}
-```
-
-#### Or
-
-```scss
-@use 'sass:math';
-
-.foo {
-  padding-block-end: percentage(math.div(9, 16));
-}
-```
-
-* When using padding to create a responsive banner always use `padding-block-end`
-* Also add a preceding comment explaining the ratio of the banner
-* `aspect-ratio` is still not supported in all the browsers that we [support](https://wemakewebsites.com/msa/supported)
 
 ### Fullscreen elements
 
@@ -237,6 +174,68 @@
 * If you have to use magic numbers then leave a comment explaining why that number, it can be just because it works, but explain what will break if it's changed
 
 > Read more about [magic numbers](https://css-tricks.com/magic-numbers-in-css/).
+
+### Mobile first
+
+#### Don't
+
+```scss
+.foo {
+  // Desktop code
+
+  @include mq($until: l) {
+    // Mobile code
+  }
+}
+```
+
+### Do
+```scss
+.foo {
+  // Mobile code
+
+  @include mq($from: l) {
+    // Desktop code
+  }
+}
+```
+
+* We should always develop mobile first
+* This means we're expanding to fill desktop instead of cramming things in to fit mobile
+* If we fail to add desktop styles then the site will still be usable
+
+### Responsive banner padding
+
+#### Don't
+
+```scss
+.foo {
+  padding-block-start: 60%;
+}
+```
+
+#### Do
+
+```scss
+.foo {
+  // 16:9 ratio
+  padding-block-end: 56.25%;
+}
+```
+
+#### Or
+
+```scss
+@use 'sass:math';
+
+.foo {
+  padding-block-end: percentage(math.div(9, 16));
+}
+```
+
+* When using padding to create a responsive banner always use `padding-block-end`
+* Also add a preceding comment explaining the ratio of the banner
+* `aspect-ratio` is still not supported in all the browsers that we [support](https://wemakewebsites.com/msa/supported)
 
 ### RTL
 
@@ -387,8 +386,6 @@
 
 ### Property order
 
-#### Do
-
 ```scss
 .foo {
   // Includes
@@ -512,8 +509,8 @@ It is the project lead developer's responsibility to set them up to maintain con
 * [BEM modifiers](#bem-modifiers)
 * [BEM naming](#bem-naming)
 * [Descriptive naming](#descriptive-naming)
-* [Variable naming](#variable-naming)
 * [Naming conventions](#naming-conventions)
+* [Variable naming](#variable-naming)
 
 ### BEM & CSS
 
@@ -734,22 +731,6 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 
 * CSS selectors should describe hierarchy, not the look as the look can change
 
-### Variable naming
-
-#### Canvas 3.0.0 and newer
-* Use the `design` command
-* Use kebab-case for CSS and SCSS variables
-* Global CSS variables should be set in the `:root {}` declaration
-* Global SCSS variables should be set in a SCSS file in the _styles/config/_ folder
-* Local CSS and SCSS variables are only available in the declaration they are defined in
-* Prefer CSS variables, only use SCSS variables where SCSS functions would break with CSS variables
-
-#### Before Canvas 3.0.0
-
-* For global variables use `$SCREAMING_SNAKE_CASE`
-* For local variables use `$snake_case`
-* Local variables are only available in the declaration they are defined in
-
 ### Naming conventions
 
 #### Don't
@@ -774,93 +755,21 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 
 * Functions, mixins, and keyframes should all be kebab-case
 
-[ꜛ Back to TOC](#table-of-contents)
+### Variable naming
 
-## Spacing
+#### Canvas 3.0.0 and newer
+* Use the `design` command
+* Use kebab-case for CSS and SCSS variables
+* Global CSS variables should be set in the `:root {}` declaration
+* Global SCSS variables should be set in a SCSS file in the _styles/config/_ folder
+* Local CSS and SCSS variables are only available in the declaration they are defined in
+* Prefer CSS variables, only use SCSS variables where SCSS functions would break with CSS variables
 
-* [Indenting](#indenting)
-* [Whitespace](#whitespace)
+#### Before Canvas 3.0.0
 
-### Indenting
-
-#### Don't
-
-```scss
-.foo {
-    color: red;
-
-    &_bar {
-        // No good
-    }
-}
-```
-
-#### Do
-
-```scss
-.foo {
-  color: red;
-
-  &_bar {
-    // Better
-  }
-}
-```
-
-* Indent with 2 spaces, not tabs or 4 spaces
-* Shopify uses 2 spaces
-* Using spaces is easier to copy and paste
-
-### Whitespace
-
-#### Don't
-
-```scss
-.foo{box-shadow: 0 0 rgba(0,0,0,0.5);color:red;font:{size:1em;weight:700;}}
-
-.foo,.spanner,.foobar{
-  color:red;
-  .baz{color:blue}}
-
-.foo>.bar {color:red;}
-```
-
-#### Do
-
-```scss
-.foo {
-  box-shadow: 0 0 rgba(0, 0, 0, 0.5);
-  color: rgb(255, 0, 0);
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.foo, .foobar,
-.spanner {
-  color: rgb(0, 255, 0);
-
-  .baz {
-    color: rgb(0, 0, 255);
-  }
-}
-
-.foo > .bar {
-  color: rgb(255, 0, 0);
-}
-```
-
-* Add whitespace after commas (including property values), after selector name, after property colon and before and after child selector
-* Each element selector block should have an empty line above it
-* Each property on a new line and a new line for the closing }
-* Keep related selectors on the same line, separate selectors go on a new line
-* Add spaces between child selectors
-* Put a semi-colon after a property, even if it's the last one
-* Put a newline after the last selector
-
-#### Why
-* It's easier to read
-* Whitespace is free
-* Code is minified anyway
+* For global variables use `$SCREAMING_SNAKE_CASE`
+* For local variables use `$snake_case`
+* Local variables are only available in the declaration they are defined in
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -871,8 +780,10 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * [Commenting (inline)](#commenting-inline)
 * [Commenting (loud)](#commenting-loud)
 * [Commenting (introductory)](#commenting-introductory)
+* [Indenting](#indenting)
 * [Negative CSS variables](#negative-css-variables)
 * [Parenthesise on @includes](#parenthesise-on-includes)
+* [Whitespace](#whitespace)
 * [Zero values & units](#zero-values--units)
 
 ### Calculations
@@ -997,7 +908,37 @@ This HTML example also includes a suggested way of targeting elements in JavaScr
 * Describe what folder it's in, the file's name, and list any special features or conditions
 * All lines except the first one should have a full stop
 
-### Negative variables
+### Indenting
+
+#### Don't
+
+```scss
+.foo {
+    color: red;
+
+    &_bar {
+        // No good
+    }
+}
+```
+
+#### Do
+
+```scss
+.foo {
+  color: red;
+
+  &_bar {
+    // Better
+  }
+}
+```
+
+* Indent with 2 spaces, not tabs or 4 spaces
+* Shopify uses 2 spaces
+* Using spaces is easier to copy and paste
+
+### Negative CSS variables
 
 #### Don't
 
@@ -1051,6 +992,57 @@ $margin: var(--spacing-m);
 ```
 
 * Do not include parenthesise on argument-less mixins
+
+### Whitespace
+
+#### Don't
+
+```scss
+.foo{box-shadow: 0 0 rgba(0,0,0,0.5);color:red;font:{size:1em;weight:700;}}
+
+.foo,.spanner,.foobar{
+  color:red;
+  .baz{color:blue}}
+
+.foo>.bar {color:red;}
+```
+
+#### Do
+
+```scss
+.foo {
+  box-shadow: 0 0 rgba(0, 0, 0, 0.5);
+  color: rgb(255, 0, 0);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.foo, .foobar,
+.spanner {
+  color: rgb(0, 255, 0);
+
+  .baz {
+    color: rgb(0, 0, 255);
+  }
+}
+
+.foo > .bar {
+  color: rgb(255, 0, 0);
+}
+```
+
+* Add whitespace after commas (including property values), after selector name, after property colon and before and after child selector
+* Each element selector block should have an empty line above it
+* Each property on a new line and a new line for the closing }
+* Keep related selectors on the same line, separate selectors go on a new line
+* Add spaces between child selectors
+* Put a semi-colon after a property, even if it's the last one
+* Put a newline after the last selector
+
+#### Why
+* It's easier to read
+* Whitespace is free
+* Code is minified anyway
 
 ### Zero values & units
 
@@ -1277,6 +1269,7 @@ $LIGHT_GREY: #d4d7d9;
 * [`border`](#border)
 * [`font-family`](#font-family)
 * [`font-size`](#font-size)
+* [`height` & `width`](#height--width)
 * [`inset`](#inset)
 * [`line-height`](#line-height)
 * [`margin` & `padding`](#margin--padding)
@@ -1354,6 +1347,44 @@ $LIGHT_GREY: #d4d7d9;
 * This prevents loading blank pages until the font loads
 * The `font-family` should be declared in a global variable
 
+### `height` & `width`
+
+#### Don't
+
+```scss
+.foo {
+  height: calc(var(--spacing-m) + var(--spacing-2xs));
+  width: 32px;
+}
+```
+
+#### Do
+
+```scss
+.foo {
+  height: 1.25rem;
+  width: 2rem;
+}
+```
+
+* Don't use spacing variables to build `height` or `width` values
+* Don't use `px` units for `height` or `width` values
+* Instead use `rem` values
+* The spacing variables are only intended to keep spacing relative and not for dimensions
+* `rem` units scale relatively when the user zooms in, whereas `px` units may cause issues
+
+#### Exceptions
+
+```scss
+.icon {
+  height: var(--icon-m);
+  width: var(--icon-m);
+}
+```
+
+* There are existing variables for icon sizes
+* Use these for icon element styles
+
 ### `font-size`
 
 #### Don't
@@ -1424,10 +1455,10 @@ $LIGHT_GREY: #d4d7d9;
 
 ```scss
 .foo {
-  margin-top: var(--spacing-m);
-  margin-right: var(--spacing-m);
+  margin-top: var(--spacing-xs);
+  margin-right: calc(var(--spacing-s) - var(--spacing-3xs));
   padding-bottom: var(--spacing-m);
-  padding-left: var(--spacing-m);
+  padding-left: var(--spacing-l);
 }
 ```
 
@@ -1435,20 +1466,26 @@ $LIGHT_GREY: #d4d7d9;
 
 ```scss
 .foo {
-  margin-block-start: var(--spacing-m);
-  margin-inline-end: var(--spacing-m);
+  margin-block-start: var(--spacing-xs);
+  margin-inline-end: var(--spacing-s);
   padding-block-end: var(--spacing-m);
-  padding-inline-start: var(--spacing-m);
+  padding-inline-start: var(--spacing-l);
 }
 ```
 
+#### Logical properties
 * Use `margin-block-*`, `margin-inline-*`, `padding-block-*`, and `padding-inline-*` properties
 * These reflect the current `writing-mode`, `direction`, and `text-orientation` of the page meaning they better support multi-language, especially right-to-left languages
 * Be wary of using `margin-block-start` as vertical margins collapse
 * Use `margin` and `padding` shorthand properties only when all values match, or if values of properties on the same axis match
-* Safari does not support CSS variables when `margin-block`, `margin-inline`, `padding-block`, and `padding-inline` so use individual styles when using CSS variables
+* Safari does not support CSS variables when using `margin-block`, `margin-inline`, `padding-block`, and `padding-inline` so use individual styles when using CSS variables
 
 > Read more about [`margin-block`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block), [`margin-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline), [`padding-block`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block), and [`padding-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline).
+
+#### Variable calculations
+* Don't use `calc()` to combine spacing variables to perfectly match the pixel value of designs
+* Instead use the closest existing spacing variable if possible
+* Where the difference between the desired value and the available variables is too great you can use `calc()`, just remember to add a [magic number comment](#magic-numbers) explaining why
 
 ### `transform`
 
