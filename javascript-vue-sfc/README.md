@@ -2,7 +2,7 @@
 
 Our guidelines are predominately based on [@shopify/eslint-plugin](https://github.com/Shopify/web-configs/tree/main/packages/eslint-plugin) with exceptions.
 
-See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
+See also [Vue's style guide](https://vuejs.org/style-guide/).
 
 When saving `eslint --fix` should run and automatically fix most issues.
 
@@ -262,7 +262,7 @@ const bar = {
 
 ### Attributes
 
-* As per [Vue's style guide](https://v3.vuejs.org/style-guide/#component-instance-options-order-recommended) your Vue `<script>` export should follow this order:
+* As per [Vue's style guide](https://vuejs.org/style-guide/rules-recommended.html#component-instance-options-order) your Vue `<script>` export should follow this order:
   * `name`
   * `components`
   * `props`
