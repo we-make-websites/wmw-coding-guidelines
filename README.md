@@ -14,6 +14,7 @@ For Frame projects [follow these guidelines](frame/README.md).
 * [Liquid](liquid/README.md)
 * [CSS/SCSS](css/README.md)
 * [JavaScript & Vue SFC](javascript-vue-sfc/README.md)
+* [Accessibility](accessibility/README.md)
 * [VS Code](vs-code/README.md)
 
 ## Why do we need guidelines?
