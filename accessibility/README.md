@@ -3,6 +3,7 @@
 These rules apply to all Liquid, HTML, and Vue `<template>` code.
 
 ## Table on contents
+
 * Native elements
 * Keyboard focus
 * Accessible Text
@@ -33,6 +34,7 @@ These rules apply to all Liquid, HTML, and Vue `<template>` code.
 ```
 
 #### Do
+
 ```vue
 <button
   class="dropdown-menu__input"
@@ -50,6 +52,9 @@ These rules apply to all Liquid, HTML, and Vue `<template>` code.
 ```
   
 * Prefer using native `<button>` element instead of adding click event handlers to non-interactive elements like `<div>`
+
+#### Why
+
 * The native `<button>` element comes with accessible defaults out of the box such as:
   * Keyboard interaction (buttons can be triggered with `Space` or `Enter` keys)
   * Keyboard focusable
@@ -73,7 +78,7 @@ These rules apply to all Liquid, HTML, and Vue `<template>` code.
   Click me
 </button>
 ```
-  * This `<div>` in the example does not include additional features that the `<button>` comes with, such as indicating a `disabled` state, the code for `handleKeyDown` so that only responds to `Enter` and `Tab` 
+  * Note: This `<div>` in the example does not include additional features that the `<button>` comes with, such as indicating a `disabled` state, the code for `handleKeyDown` so that only responds to `Enter` and `Tab` 
 
 
 ### Don't use `<a>` elements where a `<button>` would be better
@@ -112,16 +117,15 @@ These rules apply to all Liquid, HTML, and Vue `<template>` code.
 
 ```vue
 <a
-  v-for="product in swatchProducts"
-  :key="product.handle"
-  :href="`/products/${product.handle}`"
+  :href="`/products/${swatchProduct.handle}`"
   @click.prevent="handleSwatchClick"
-  v-text="product.colour"
+  v-text="swatchProduct.color"
 />
 ```
 
 ### Use input events rather than wrapping click events
- Don't
+
+#### Don't
 
 ```vue
 <li
@@ -143,6 +147,7 @@ These rules apply to all Liquid, HTML, and Vue `<template>` code.
 ```
 
 #### Do
+
 ```vue
 <li
   v-for="item in items"
