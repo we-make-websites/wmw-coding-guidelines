@@ -2,6 +2,8 @@
 
 These rules apply to all Liquid, HTML, and Vue `<template>` code.
 
+The examples given here will mainly be written in Vue, but the same rules apply for vanilla JS code-bases.
+
 ## Table on contents
 
 * Native elements
@@ -166,3 +168,22 @@ These rules apply to all Liquid, HTML, and Vue `<template>` code.
 ```
 
 * Instead of adding a click event to an `input` element's parent, use the native `input` or `change` events
+
+## Keyboard Support
+
+### Test keyboard focus
+* Ensure that interactive elements can be focussed and activated using a keyboard
+* Ensure that functionality that supports mouse interactions (click, mousedown, mouseleave etc) have suitable keyboard-accessible alternatives
+
+### Test keyboard tab order
+* Ensure that keyboard focus order is correct
+  * The order that items are focussed when tabbing should match the visual order of the elements on the page
+  * Try an ensure that the order elements in the DOM match the visual order on the site
+* Exceptions can be made here when the order changes responsively, e.g. when the order is correct on mobile screen sizes 
+
+### Focus Trap
+
+* Use a focus trap when opening overlays so that a keyboard user is only able to tab between elements inside the overlay
+* This prevents users from tabbing to elements outside of the overlay element, preventing an issue where the user might not know which element they are focussed on
+* Focus trapping can be achieved in Canvas projects with the `focusTrap` and `previousElement` helpers in the `accessibility.js` store - see [Canvas Gitbook - accessibility.js](https://we-make-websites.gitbook.io/canvas/features/vuex-stores/accessibility.js)
+* Focus trapping can be achieved in Frame 3 projects by using the `@shopify/theme-a11y` package - see [@shopify/theme-ally docs](https://github.com/Shopify/theme-scripts/blob/master/packages/theme-a11y/README.md)
