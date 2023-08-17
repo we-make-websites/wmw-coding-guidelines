@@ -195,3 +195,164 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 
 * Using a focus trap prevents users from tabbing to elements outside of the overlay element, preventing an issue where the user might not know which element they are focussed on
 
+## Accessible Text
+
+### Ensure that `input` elements have corresponding `label` elements
+
+#### Don't
+
+```html
+<input
+  id="newsletter-email"
+  name="email" 
+  type="email"
+  placeholder="Enter your email"
+>
+```
+
+#### Do
+
+```html
+<label for="newsletter-email">
+  Enter your email
+</label>
+
+<input
+  id="newsletter-email"
+  name="email" 
+  type="email"
+  placeholder="Enter your email"
+>
+```
+
+* Ensuring that you have that an `input` has a corresponding `label` element helps to describe the purpose and can provide instructions for the input for users
+* A `label` should be used even when the input has a `placeholder` attribute.
+  * Assistive technology, such as screen-readers do not treat placeholder text as labels, so a `placeholder` should be used alongside a label, not instead of a label
+* In some cases, a site's design may show inputs without visible labels. Sometimes this may be because other elements on the page give the input some context - for example a search text input placed directly next to a "Search" button.
+  * If a input does not have a visible label, a `<label>` element should still be added for the benefit of screen readers
+  * A label can be hidden visually by adding the `visually-hidden` class to the `label`
+  ```html
+  <!-- Label will be available to assistive technology, but visually hidden -->
+  <label class="visually-hidden" for="search">
+    Search the site
+  </label>
+
+  <input id="search" type="text" name="search">
+  ```
+
+### Ensure interactive elements have accessible text
+
+#### Don't
+
+```vue
+<a class="site-logo" href="/">
+  <brand-logo />
+</a>
+
+<button
+  type="button"
+  @click="openMenuDrawer"
+>
+  <icon-menu />
+</button>
+
+<a href="/account">
+  <icon-account />
+</a>
+
+<a href="/sale">
+  <!-- Image containing embedded text about a 10% off sale -->
+  <img src="10-off-promo-image.jpg">
+</a>
+
+
+```
+
+#### Do
+
+```vue
+<a class="site-logo" href="/">
+  <brand-logo />
+  
+  <span class="visually-hidden">
+    My Shop Name
+  </span>
+</a>
+
+<button
+  type="button"
+  @click="openMenuDrawer"
+>
+  <icon-menu />
+  
+  <span class="visually-hidden">
+    Toggle Menu
+  </span>
+</button>
+
+<a href="/account">
+  <icon-account />
+  
+  <span class="visually-hidden">
+    Account
+  </span>
+</a>
+
+<a href="/sale">
+  <!-- Image containing embedded text about a 10% off sale -->
+  <img src="10-off-promo-image.jpg" alt="Get 10% off">
+</a>
+```
+
+* When using `<button>` or `<a>` elements containing SVG elements, ensure that accessible text is also included
+  * If the text should not be visible, the `visually-hidden` class can be used
+* If a `<button>` or `<a>` contains a `<img>` element - ensure that there is either appropriate `alt` text on the image, or add a supporting `visually-hidden` span with appropriate text
+
+### Ensure correct usage of `aria-labelledby` and `aria-label` 
+
+* The `aria-labelledby` and `aria-label` attributes provide another method for adding labels to elements
+* These are alternatives to using a `visually-hidden` element showcased in the examples above
+
+#### `aria-labelledby`
+
+* `aria-labelledby` can be used to label an element based on the text content of another existing element by it's unique `id`
+* If a heading is present inside a region, this could be a good candidate for `aria-labelledby`
+
+```html
+<section aria-labelledby="template-title">
+  <h1 id="template-title">
+    Title for the section
+  </h1>
+
+  <!-- other content -->
+</section>
+```
+* Ensure that the element referenced by `aria-labelledby` exists on the page.
+  * If the referenced element is missing, screen readers will still read out the the other text content contained in the element, but users may be missing out on the additional context that the referenced element might be adding
+* When using `aria-labelledby` in a component, consider whether the element you are referencing existing inside the component's template code.
+  * If the element you are targeting with `aria-labelledby` is stored in another component or snippet, you may not be able to guarantee that it will always be on the page.
+  * In this case, opt to use `<span class="visually-hidden">` or `aria-label` instead.
+* Additional documentation: [MDN - aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby)
+
+#### `aria-label`
+* `aria-label` is another approach for labelling elements, and can be used when there is no visible element in the DOM that can be used directly as a label or referenced with `aria-labelledby`
+* Examples of using this are similar to adding a `<span class="visually-hidden">` element
+
+```vue
+<button
+  type="button"
+  aria-label="Toggle Menu"
+  @click="openMenuDrawer"
+>
+  <icon-menu />
+</button>
+
+<a href="/account" aria-label="Account">
+  <icon-account />
+</a>
+```
+
+
+# Additional Resources
+https://www.powermapper.com/tests/screen-readers/aria/index.html
+https://webaim.org/techniques/keyboard/
