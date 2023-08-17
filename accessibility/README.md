@@ -184,6 +184,14 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 ### Focus Trap
 
 * Use a focus trap when opening overlays so that a keyboard user is only able to tab between elements inside the overlay
-* This prevents users from tabbing to elements outside of the overlay element, preventing an issue where the user might not know which element they are focussed on
+* Ensure that the focus trap is cleared when an overlay is closed
+* Ensure that the focus trap is updated when the overlay state changes
+  * Example: if you have a multi-tiered navigation, ensure that the focus trap updates as the user navigates between tiers
+  * Example: if you have a search overlay and the results update as you type, ensure that focus trap updates as the content changes
 * Focus trapping can be achieved in Canvas projects with the `focusTrap` and `previousElement` helpers in the `accessibility.js` store - see [Canvas Gitbook - accessibility.js](https://we-make-websites.gitbook.io/canvas/features/vuex-stores/accessibility.js)
 * Focus trapping can be achieved in Frame 3 projects by using the `@shopify/theme-a11y` package - see [@shopify/theme-ally docs](https://github.com/Shopify/theme-scripts/blob/master/packages/theme-a11y/README.md)
+
+#### Why
+
+* Using a focus trap prevents users from tabbing to elements outside of the overlay element, preventing an issue where the user might not know which element they are focussed on
+
