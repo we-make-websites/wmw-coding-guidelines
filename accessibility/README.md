@@ -6,12 +6,20 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 
 ## Table on contents
 
-* Native elements
-* Keyboard focus
-* Accessible Text
-* Element IDs
+* [Native Elements](#native-elements)
+* [Keyboard Support](#keyboard-support)
+* [Accessible Text](#accessible-text)
+* [Alt Text](#alt-text)
+* [Element IDs](#element-ids)
+* [Additional Resources](#additional-resources)
+
+[← Back to homepage](../README.md)
 
 ## Native Elements
+
+* [Use `<button>` elements for clickable items](#use-button-element-for-clickable-items)
+* [Don't use `<a>` elements where a `<button>` would be better](#dont-use-a-elements-where-a-button-would-be-better)
+* [Use input events rather than wrapping click events](#use-input-events-rather-than-wrapping-click-events)
 
 ### Use `<button>` element for clickable items
 
@@ -169,7 +177,13 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 
 * Instead of adding a click event to an `input` element's parent, use the native `input` or `change` events
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## Keyboard Support
+
+* [Test keyboard focus](#test-keyboard-focus)
+* [Test keyboard tab order](#test-keyboard-tab-order)
+* [Focus Trap](#focus-trap)
 
 ### Test keyboard focus
 * Ensure that interactive elements can be focussed and activated using a keyboard
@@ -195,7 +209,13 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 
 * Using a focus trap prevents users from tabbing to elements outside of the overlay element, preventing an issue where the user might not know which element they are focussed on
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## Accessible Text
+
+* [Ensure that `input` elements have corresponding `label` elements](#ensure-that-input-elements-have-corresponding-label-elements)
+* [Ensure interactive elements have accessible text](#ensure-interactive-elements-have-accessible-text)
+* [Ensure correct usage of `aria-labelledby` and `aria-label`](#ensure-correct-usage-of-aria-labelledby-and-aria-label)
 
 ### Ensure that `input` elements have corresponding `label` elements
 
@@ -352,6 +372,8 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 </a>
 ```
 
+[ꜛ Back to TOC](#table-of-contents)
+
 ## Alt Text
 * Alt text is extremely useful for ensuring that images on the site can be used by people with various disabilities.
 * Images can be categorised in different ways and there are some different recommendations for alt text depending on the type of image.
@@ -359,6 +381,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
   * [Images Tutorial](https://www.w3.org/WAI/tutorials/images/) - Outlines the different purposes an image might have and recommendations for adding accessible text
   * [`alt` Decision Tree](https://www.w3.org/WAI/tutorials/images/decision-tree/) - Provides a helpful decision tree on how to handle different situations with images, including when an empty `alt` attribute is appropriate. 
 
+[ꜛ Back to TOC](#table-of-contents)
 
 ## Element IDs
 
@@ -456,8 +479,12 @@ export default {
   * Often when a component is in a loading state it might not have access prop data that could be used for a unique id - For example using a `product.id` in an element's id, but the product is still being fetched and not yet set
   * Consider testing your loading states to check for non-unique ids
 
+[ꜛ Back to TOC](#table-of-contents)
 
-# Additional Resources
+
+## Additional Resources
 * https://www.powermapper.com/tests/screen-readers/aria/index.html - Outlines how different ARIA attributes are handled by different screen-readers
 * https://webaim.org/techniques/keyboard/ - An outline of keyboard accessibility best-practices
   * Also includes a table of some of the most common keyboard interactions to consider when testing a site's keyboard accessibility
+
+[ꜛ Back to TOC](#table-of-contents)
