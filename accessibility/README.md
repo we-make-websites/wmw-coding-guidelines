@@ -326,7 +326,9 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 
 * When using `<button>` or `<a>` elements containing SVG elements, ensure that accessible text is also included
   * If the text should not be visible, the `visually-hidden` class can be used
-* If a `<button>` or `<a>` contains a `<img>` element - ensure that there is either appropriate `alt` text on the image, or add a supporting `visually-hidden` span with appropriate text
+* If a `<button>` or `<a>` contains a `<img>` element - ensure that there is either appropriate `alt` text on the image, or add a supporting `visually-hidden` span with appropriate text.
+  * Avoid using both `alt` and `visually-hidden` text for the same element, otherwise screen readers will read out possibly duplicate or irrelevant content.
+  * Setting an empty `alt` text is fine when using `visually-hidden` text - see [Alt Text](#alt-text) for more details.
 
 ### Ensure correct usage of `aria-labelledby` and `aria-label` 
 
@@ -356,6 +358,10 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 
 #### `aria-label`
 * `aria-label` is another approach for labelling elements, and can be used when there is no visible element in the DOM that can be used directly as a label or referenced with `aria-labelledby`
+* **Use `aria-label` with caution** - if adding `visually-hidden` text is possible, this is preferred instead
+  * `aria-label` has a rocky history with screen reader support with certain combinations of screen readers and browsers, whereas printed text is always read out (unless `display: none` or `visibility: hidden` styles or the `hidden` or `aria-hidden` attributes are used)
+  * Using `visually-hidden` text that is rendered in the DOM can also benefit users users that are translating the language of your site as these services are often better at detecting `visually-hidden` text then they are `aria-label` attributes
+  * See [this blog post from 2020](https://gomakethings.com/revisting-aria-label-versus-a-visually-hidden-class/)
 * Examples of using this are similar to adding a `<span class="visually-hidden">` element
 
 ```vue
@@ -457,7 +463,6 @@ export default {
     options: {
       type: Array,
       default: () => [],
-
     }
   }
 }
