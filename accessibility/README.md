@@ -458,5 +458,6 @@ export default {
 
 
 # Additional Resources
-https://www.powermapper.com/tests/screen-readers/aria/index.html
-https://webaim.org/techniques/keyboard/
+* https://www.powermapper.com/tests/screen-readers/aria/index.html - Outlines how different ARIA attributes are handled by different screen-readers
+* https://webaim.org/techniques/keyboard/ - An outline of keyboard accessibility best-practices
+  * Also includes a table of some of the most common keyboard interactions to consider when testing a site's keyboard accessibility
