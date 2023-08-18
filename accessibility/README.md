@@ -352,6 +352,14 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 </a>
 ```
 
+## Alt Text
+* Alt text is extremely useful for ensuring that images on the site can be used by people with various disabilities.
+* Images can be categorised in different ways and there are some different recommendations for alt text depending on the type of image.
+* The W3C Web Accessibility Initiative has some good resources around Images:
+  * [Images Tutorial](https://www.w3.org/WAI/tutorials/images/) - Outlines the different purposes an image might have and recommendations for adding accessible text
+  * [`alt` Decision Tree](https://www.w3.org/WAI/tutorials/images/decision-tree/) - Provides a helpful decision tree on how to handle different situations with images, including when an empty `alt` attribute is appropriate. 
+
+
 ## Element IDs
 
 * A variety of accessibility code and functionality (such as the `label` element's `for` attribute, `aria-labelledby` and other `aria-` attributes) use the `id` attribute to reference other elements
