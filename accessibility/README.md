@@ -352,6 +352,102 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 </a>
 ```
 
+## Element IDs
+
+* A variety of accessibility code and functionality (such as the `label` element's `for` attribute, `aria-labelledby` and other `aria-` attributes) use the `id` attribute to reference other elements
+  * For example, linking a checkbox input with a label using `id`/`for` allows the user to click on the label to toggle the checkbox
+  * This helps make the input easier to trigger with a mouse, and also makes it possible to style custom inputs (for example custom checkboxes) by applying styles to the `<label>` element
+* When writing components that use the `id` attribute - ensure that the `id` will always be unique
+  * Avoid hard coding an id for an element unless you know it will only be used once
+  * This is particularly important when the component is designed to be re-used, for example a swatch or a line item component
+  * Unique ids can be generated using passed in data, and additionally namespaces if needed
+  * For section type Canvas components - you could also pass the Shopify `section.id` as a prop and use that in your element id
+
+Example of a dynamic id based on unique prop data: 
+```vue
+<template>
+  <div class="quantity-selector">
+    <label
+      :for="`quantity-selector-input-${lineItem.key}`"
+      class="visually-hidden"
+    >
+      Quantity
+    </label>
+
+    <input
+      :id="`quantity-selector-input-${lineItem.key}`"
+      type="number"
+      value="1" 
+    >
+  </div>
+</template>
+<script>
+export default {
+  name: 'QuantitySelector',
+  
+  props: {
+
+    // Cart line item data from Shopify
+    lineItem: {
+      type: Object,
+    }
+  }
+}
+</script>
+```
+
+Example of setting an explicit unique id with a `namespace` prop
+```vue
+<template>
+  <div class="variant-dropdown">
+    <label
+      :for="`${namespace}-variant-dropdown`"
+      class="visually-hidden"
+    >
+      Quantity
+    </label>
+
+    <select :id="`${namespace}-variant-dropdown`">
+      <option v-for="option in options">
+    </select>
+  </div>
+</template>
+<script>
+export default {
+  name: 'VariantDropdown',
+  
+  props: {
+    namespace: {
+      type: String,
+      default: 'default'
+      required: true,
+    },
+    
+    options: {
+      type: Array,
+      default: () => [],
+
+    }
+  }
+}
+</script>
+```
+
+```vue
+<!--- Usage -->
+<variant-dropdown namespace="product-form" :options="options" />
+<!-- Outputs select with the id `product-form-variant-dropdown` -->
+
+<variant-dropdown namespace="sticky-product-form" :options="options" />
+<!-- Outputs select with the id `sticky-product-form-variant-dropdown` -->
+```
+* Use unique data from the component's props, or add a `namespace` prop, or use a combination of both to ensure that the `id` is always unique
+* When using a `namespace` prop, make the prop `required` to ensure that its not missed
+* Utilise the browser tools and Storybook Accessibility checks that detect if an `id` is not unique
+* Consider your loading states as well as your standard/active states
+  * Often when a component is in a loading state it might not have access prop data that could be used for a unique id - For example using a `product.id` in an element's id, but the product is still being fetched and not yet set
+  * Consider testing your loading states to check for non-unique ids
+
 
 # Additional Resources
 https://www.powermapper.com/tests/screen-readers/aria/index.html
