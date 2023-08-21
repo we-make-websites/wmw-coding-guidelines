@@ -84,7 +84,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 </div>
 
 // Good
-<button @click=:handleClick>
+<button @click="handleClick">
   Click me
 </button>
 ```
@@ -118,7 +118,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 ```
 
 * If an element is not linking somewhere, it's better to use a `<button>` element instead
-  * `<a>` tags should not be used without a `href` attribute or with blank or javascript `href` attribute
+* `<a>` tags should not be used without a `href` attribute or with blank or javascript `href` attribute
 
 #### Exceptions
 * You should consider using a `<a>` element in cases where clicking on the element updates the URL and visiting that URL directly would display a different page
@@ -245,10 +245,10 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 >
 ```
 
-* Ensuring that you have that an `input` has a corresponding `label` element helps to describe the purpose and can provide instructions for the input for users
-* A `label` should be used even when the input has a `placeholder` attribute.
+* Ensuring that your `input` has a corresponding `label` element helps to describe the purpose of the input and can provide instructions for it for all users
+* A `label` should be used even when the input has a `placeholder` attribute
   * Assistive technology, such as screen-readers do not treat placeholder text as labels, so a `placeholder` should be used alongside a label, not instead of a label
-* In some cases, a site's design may show inputs without visible labels. Sometimes this may be because other elements on the page give the input some context - for example a search text input placed directly next to a "Search" button.
+* In some cases, a site's design may show inputs without visible labels, sometimes this may be because other elements on the page give the input some context - for example a search text input placed directly next to a 'Search' button
   * If a input does not have a visible label, a `<label>` element should still be added for the benefit of screen readers
   * A label can be hidden visually by adding the `visually-hidden` class to the `label`
   ```html
@@ -349,10 +349,10 @@ The examples given here will mainly be written in Vue, but the same rules apply 
   <!-- other content -->
 </section>
 ```
-* Ensure that the element referenced by `aria-labelledby` exists on the page.
+* Ensure that the element referenced by `aria-labelledby` exists on the page
   * If the referenced element is missing, screen readers will still read out the the other text content contained in the element, but users may be missing out on the additional context that the referenced element might be adding
 * When using `aria-labelledby` in a component, consider whether the element you are referencing existing inside the component's template code.
-  * If the element you are targeting with `aria-labelledby` is stored in another component or snippet, you may not be able to guarantee that it will always be on the page.
+  * If the element you are targeting with `aria-labelledby` is stored in another component or snippet, you may not be able to guarantee that it will always be on the page
   * In this case, opt to use `<span class="visually-hidden">` or `aria-label` instead.
 * Additional documentation: [MDN - aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby)
 
@@ -381,11 +381,11 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 [ꜛ Back to TOC](#table-of-contents)
 
 ## Alt Text
-* Alt text is extremely useful for ensuring that images on the site can be used by people with various disabilities.
+* Alt text is extremely useful for ensuring that images on the site can be used by people with various disabilities
 * Images can be categorised in different ways and there are some different recommendations for alt text depending on the type of image.
 * The W3C Web Accessibility Initiative has some good resources around Images:
   * [Images Tutorial](https://www.w3.org/WAI/tutorials/images/) - Outlines the different purposes an image might have and recommendations for adding accessible text
-  * [`alt` Decision Tree](https://www.w3.org/WAI/tutorials/images/decision-tree/) - Provides a helpful decision tree on how to handle different situations with images, including when an empty `alt` attribute is appropriate. 
+  * [`alt` Decision Tree](https://www.w3.org/WAI/tutorials/images/decision-tree/) - Provides a helpful decision tree on how to handle different situations with images, including when an empty `alt` attribute is appropriate
 
 [ꜛ Back to TOC](#table-of-contents)
 
@@ -395,12 +395,12 @@ The examples given here will mainly be written in Vue, but the same rules apply 
   * For example, linking a checkbox input with a label using `id`/`for` allows the user to click on the label to toggle the checkbox
   * This helps make the input easier to trigger with a mouse, and also makes it possible to style custom inputs (for example custom checkboxes) by applying styles to the `<label>` element
 * When writing components that use the `id` attribute - ensure that the `id` will always be unique
-  * Avoid hard coding an id for an element unless you know it will only be used once
+  * Avoid hard coding an `id` for an element unless you know it will only be used once
   * This is particularly important when the component is designed to be re-used, for example a swatch or a line item component
-  * Unique ids can be generated using passed in data, and additionally namespaces if needed
-  * For section type Canvas components - you could also pass the Shopify `section.id` as a prop and use that in your element id
+  * Unique IDs can be generated using passed in data, and additionally namespaces if needed
+  * For section type Canvas components - you could also pass the Shopify `section.id` as a prop and use that in your element `id`
 
-Example of a dynamic id based on unique prop data: 
+Example of a dynamic `id` based on unique prop data: 
 ```vue
 <template>
   <div class="quantity-selector">
@@ -481,7 +481,7 @@ export default {
 * When using a `namespace` prop, make the prop `required` to ensure that its not missed
 * Utilise the browser tools and Storybook Accessibility checks that detect if an `id` is not unique
 * Consider your loading states as well as your standard/active states
-  * Often when a component is in a loading state it might not have access prop data that could be used for a unique id - For example using a `product.id` in an element's id, but the product is still being fetched and not yet set
+  * Often when a component is in a loading state it might not have access prop data that could be used for a unique `id` - For example using a `product.id` in an element's `id`, but the product is still being fetched and not yet set
   * Consider testing your loading states to check for non-unique ids
 
 [ꜛ Back to TOC](#table-of-contents)
