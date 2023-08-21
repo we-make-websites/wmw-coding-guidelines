@@ -34,9 +34,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
   <icon-chevron-down />
 </div>
 
-<responsive-image
-  @click="handleImageClick"
-/>
+<responsive-image @click="handleImageClick" />
 
 <a @click="toggleItem">
   Click here
@@ -100,7 +98,10 @@ The examples given here will mainly be written in Vue, but the same rules apply 
   Click here
 </a>
 
-<a href="#" @click.prevent="doSomething">
+<a
+  href="#"
+  @click.prevent="doSomething"
+>
   Do Something
 </a>
 ```
@@ -149,6 +150,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
     type="checkbox"
     :value="item.value"
   >
+
   <label
     :for="item.id"
     v-text="item.label"
@@ -171,7 +173,10 @@ The examples given here will mainly be written in Vue, but the same rules apply 
     @change="filter($event.target.value)"
   >
 
-  <label :for="item.id" v-text="item.label" />
+  <label
+    :for="item.id"
+    v-text="item.label"
+  />
 </li>
 ```
 
@@ -192,7 +197,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 ### Test keyboard tab order
 * Ensure that keyboard focus order is correct
   * The order that items are focussed when tabbing should match the visual order of the elements on the page
-  * Try an ensure that the order elements in the DOM match the visual order on the site
+  * Try to ensure that the order elements in the DOM match the visual order on the site
 * Exceptions can be made here when the order changes responsively, e.g. when the order is correct on mobile screen sizes 
 
 ### Focus Trap
@@ -202,8 +207,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 * Ensure that the focus trap is updated when the overlay state changes
   * Example: if you have a multi-tiered navigation, ensure that the focus trap updates as the user navigates between tiers
   * Example: if you have a search overlay and the results update as you type, ensure that focus trap updates as the content changes
-* Focus trapping can be achieved in Canvas projects with the `focusTrap` and `previousElement` helpers in the `accessibility.js` store - see [Canvas Gitbook - accessibility.js](https://we-make-websites.gitbook.io/canvas/features/vuex-stores/accessibility.js)
-* Focus trapping can be achieved in Frame 3 projects by using the `@shopify/theme-a11y` package - see [@shopify/theme-ally docs](https://github.com/Shopify/theme-scripts/blob/master/packages/theme-a11y/README.md)
+* Focus trapping can be achieved with the `focusTrap` and `previousElement` helpers in the `accessibility.js` store - see [Canvas Gitbook - accessibility.js](https://we-make-websites.gitbook.io/canvas/features/vuex-stores/accessibility.js)
 
 #### Why
 
@@ -225,8 +229,8 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 <input
   id="newsletter-email"
   name="email" 
-  type="email"
   placeholder="Enter your email"
+  type="email"
 >
 ```
 
@@ -240,8 +244,8 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 <input
   id="newsletter-email"
   name="email" 
-  type="email"
   placeholder="Enter your email"
+  type="email"
 >
 ```
 
@@ -253,11 +257,18 @@ The examples given here will mainly be written in Vue, but the same rules apply 
   * A label can be hidden visually by adding the `visually-hidden` class to the `label`
   ```html
   <!-- Label will be available to assistive technology, but visually hidden -->
-  <label class="visually-hidden" for="search">
+  <label
+    class="visually-hidden"
+    for="search"
+  >
     Search the site
   </label>
 
-  <input id="search" type="text" name="search">
+  <input
+    id="search"
+    name="search"
+    type="text"
+  >
   ```
 
 ### Ensure interactive elements have accessible text
@@ -265,7 +276,10 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 #### Don't
 
 ```vue
-<a class="site-logo" href="/">
+<a
+  class="site-logo"
+  href="/"
+>
   <brand-logo />
 </a>
 
@@ -291,7 +305,10 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 #### Do
 
 ```vue
-<a class="site-logo" href="/">
+<a
+  class="site-logo"
+  href="/"
+>
   <brand-logo />
   
   <span class="visually-hidden">
@@ -320,7 +337,10 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 
 <a href="/sale">
   <!-- Image containing embedded text about a 10% off sale -->
-  <img src="10-off-promo-image.jpg" alt="Get 10% off">
+  <img
+    src="10-off-promo-image.jpg"
+    alt="Get 10% off"
+  >
 </a>
 ```
 
@@ -373,7 +393,10 @@ The examples given here will mainly be written in Vue, but the same rules apply 
   <icon-menu />
 </button>
 
-<a href="/account" aria-label="Account">
+<a
+  href="/account"
+  aria-label="Account"
+>
   <icon-account />
 </a>
 ```
@@ -418,12 +441,12 @@ Example of a dynamic `id` based on unique prop data:
     >
   </div>
 </template>
+
 <script>
 export default {
   name: 'QuantitySelector',
   
   props: {
-
     // Cart line item data from Shopify
     lineItem: {
       type: Object,
@@ -449,6 +472,7 @@ Example of setting an explicit unique id with a `namespace` prop
     </select>
   </div>
 </template>
+
 <script>
 export default {
   name: 'VariantDropdown',
@@ -459,7 +483,6 @@ export default {
       default: 'default'
       required: true,
     },
-    
     options: {
       type: Array,
       default: () => [],
@@ -471,10 +494,16 @@ export default {
 
 ```vue
 <!--- Usage -->
-<variant-dropdown namespace="product-form" :options="options" />
+<variant-dropdown
+  namespace="product-form"
+  :options="options"
+/>
 <!-- Outputs select with the id `product-form-variant-dropdown` -->
 
-<variant-dropdown namespace="sticky-product-form" :options="options" />
+<variant-dropdown
+  namespace="sticky-product-form"
+  :options="options"
+/>
 <!-- Outputs select with the id `sticky-product-form-variant-dropdown` -->
 ```
 * Use unique data from the component's props, or add a `namespace` prop, or use a combination of both to ensure that the `id` is always unique
