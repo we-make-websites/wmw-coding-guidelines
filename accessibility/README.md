@@ -370,7 +370,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 * In many cases, elements get accessible names from either their inner content (e.g. `<button>`, `<a>` or `<td>` elements), or from associated content (e.g. an `<input>` and it's `<label>` element), so there are many cases you won't need to reach for `aria-labelledby`
 * Ensure that the element referenced by `aria-labelledby` exists on the page
   * If the referenced element is missing, screen readers will still read out the the other text content contained in the element, but users may be missing out on the additional context that the referenced element might be adding
-* When using `aria-labelledby` in a component, consider whether the element you are referencing existing inside the component's template code
+* When using `aria-labelledby` in a component, consider whether the element you are referencing exists inside the component's template code
   * If the element you are targeting with `aria-labelledby` is stored in another component or snippet, you may not be able to guarantee that it will always be on the page
   * In this case, opt to use `<span class="visually-hidden">` or `aria-label` instead
 * There are some caveats to be aware of when using `aria-labelledby` on `<section>` elements - See [Ensure correct usage of `aria-labelledby` on `<section>` elements](#ensure-correct-usage-of-aria-labelledby-on-section-elements)
@@ -404,7 +404,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 ### Ensure correct usage of `aria-labelledby` on `<section>` elements
 
 * When a `<section>` element is given an accessible name, for example with the `aria-labelledby` or `aria-label` attribute, the element receives an implicit ARIA attribute [`role="region"`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/region_role) which marks it as a [landmark](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles#3._landmark_roles) for screen readers and other assistive technologies
-* These landmarks can then be used as another method for screen reader users to navigate around the page and understand it's contents
+* These landmarks can then be used as another method for screen reader users to navigate around the page and understand its contents
 * **However, creating additional landmarks with the `<section>` element must only be done when necessary**
   * Adding too many landmark roles on the page can create "noise" for screen readers and actually make the site harder to understand and use, so must be used sparingly
 * For Canvas projects, `aria-labelledby` should only be used on `<section>` elements that are used as the main section or main component for a page template, and not used on reusable 'sections everywhere' sections or components
