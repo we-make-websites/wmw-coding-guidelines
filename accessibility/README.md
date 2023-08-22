@@ -34,9 +34,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
   <icon-chevron-down />
 </div>
 
-<responsive-image
-  @click="handleImageClick"
-/>
+<responsive-image @click="handleImageClick" />
 
 <a @click="toggleItem">
   Click here
@@ -53,7 +51,6 @@ The examples given here will mainly be written in Vue, but the same rules apply 
   <span v-text="label">
   <icon-chevron-down />
 </button>
-
 
 <button @click="handleImageClick">
   <responsive-image />
@@ -85,7 +82,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 </div>
 
 <!-- Good -->
-<button @click=:handleClick>
+<button @click="handleClick">
   Click me
 </button>
 ```
@@ -122,7 +119,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 ```
 
 * If an element is not linking somewhere, it's better to use a `<button>` element instead
-  * `<a>` tags should not be used without a `href` attribute or with blank or javascript `href` attribute
+* `<a>` tags should not be used without a `href` attribute or with blank or javascript `href` attribute
 
 #### Exceptions
 * You should consider using a `<a>` element in cases where clicking on the element updates the URL and visiting that URL directly would display a different page
@@ -200,7 +197,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 ### Test keyboard tab order
 * Ensure that keyboard focus order is correct
   * The order that items are focussed when tabbing should match the visual order of the elements on the page
-  * Try an ensure that the order elements in the DOM match the visual order on the site
+  * Try to ensure that the order of elements in the DOM matches the visual order on the site
 * Exceptions can be made here when the order changes responsively, e.g. when the order is correct on mobile screen sizes
 
 ### Focus Trap
@@ -210,8 +207,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 * Ensure that the focus trap is updated when the overlay state changes
   * Example: if you have a multi-tiered navigation, ensure that the focus trap updates as the user navigates between tiers
   * Example: if you have a search overlay and the results update as you type, ensure that focus trap updates as the content changes
-* Focus trapping can be achieved in Canvas projects with the `focusTrap` and `previousElement` helpers in the `accessibility.js` store - see [Canvas Gitbook - accessibility.js](https://we-make-websites.gitbook.io/canvas/features/vuex-stores/accessibility.js)
-* Focus trapping can be achieved in Frame 3 projects by using the `@shopify/theme-a11y` package - see [@shopify/theme-ally docs](https://github.com/Shopify/theme-scripts/blob/master/packages/theme-a11y/README.md)
+* Focus trapping can be achieved with the `focusTrap` and `previousElement` helpers in the `accessibility.js` store - see [Canvas Gitbook - accessibility.js](https://we-make-websites.gitbook.io/canvas/features/vuex-stores/accessibility.js)
 
 #### Why
 
@@ -253,7 +249,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 >
 ```
 
-* Ensuring that you have that an `input` has a corresponding `label` element helps to describe the purpose and can provide instructions for the input for users
+* Ensuring that your `input` has a corresponding `label` element helps to describe the purpose of the input and can provide instructions for it for all users
 * A `label` should be used even when the input has a `placeholder` attribute
   * Assistive technology, such as screen-readers do not treat placeholder text as labels, so a `placeholder` should be used alongside a label, not instead of a label
 * In some cases, a site's design may show inputs without visible labels, sometimes this may be because other elements on the page give the input some context - for example a search text input placed directly next to a 'Search' button
@@ -419,9 +415,9 @@ The examples given here will mainly be written in Vue, but the same rules apply 
   * For example, linking a checkbox input with a label using `id`/`for` allows the user to click on the label to toggle the checkbox
   * This helps make the input easier to trigger with a mouse, and also makes it possible to style custom inputs (for example custom checkboxes) by applying styles to the `<label>` element
 * When writing components that use the `id` attribute - ensure that the `id` will always be unique
-  * Avoid hard coding an id for an element unless you know it will only be used once
+  * Avoid hard coding an `id` for an element unless you know it will only be used once
   * This is particularly important when the component is designed to be re-used, for example a swatch or a line item component
-  * Unique ids can be generated using passed in data, and additionally namespaces if needed
+  * Unique IDs can be generated using passed in data, and additionally namespaces if needed
   * For section type Canvas components - you could also pass the Shopify `section.id` as a prop and use that in your element `id`
 
 ### Example of a dynamic `id` based on unique prop data
@@ -484,7 +480,7 @@ export default {
   props: {
     namespace: {
       type: String,
-      default: 'default',
+      default: '',
       required: true,
     },
     options: {
