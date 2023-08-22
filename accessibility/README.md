@@ -220,6 +220,7 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 * [Ensure that `input` elements have corresponding `label` elements](#ensure-that-input-elements-have-corresponding-label-elements)
 * [Ensure interactive elements have accessible text](#ensure-interactive-elements-have-accessible-text)
 * [Ensure correct usage of `aria-labelledby` and `aria-label`](#ensure-correct-usage-of-aria-labelledby-and-aria-label)
+* [Ensure correct usage of `aria-labelledby` on `<section>` elements](#ensure-correct-usage-of-aria-labelledby-on-section-elements)
 
 ### Ensure that `input` elements have corresponding `label` elements
 
@@ -366,11 +367,13 @@ The examples given here will mainly be written in Vue, but the same rules apply 
 </section>
 ```
 
+* In many cases, elements get accessible names from either their inner content (e.g. `<button>`, `<a>` or `<td>` elements), or from associated content (e.g. an `<input>` and it's `<label>` element), so there are many cases you won't need to reach for `aria-labelledby`
 * Ensure that the element referenced by `aria-labelledby` exists on the page
   * If the referenced element is missing, screen readers will still read out the the other text content contained in the element, but users may be missing out on the additional context that the referenced element might be adding
 * When using `aria-labelledby` in a component, consider whether the element you are referencing existing inside the component's template code
   * If the element you are targeting with `aria-labelledby` is stored in another component or snippet, you may not be able to guarantee that it will always be on the page
   * In this case, opt to use `<span class="visually-hidden">` or `aria-label` instead
+* There are some caveats to be aware of when using `aria-labelledby` on `<section>` elements - See [Ensure correct usage of `aria-labelledby` on `<section>` elements](#ensure-correct-usage-of-aria-labelledby-on-section-elements)
 * Additional documentation available at [MDN - aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby)
 
 #### `aria-label`
@@ -397,6 +400,18 @@ The examples given here will mainly be written in Vue, but the same rules apply 
   <icon-account />
 </a>
 ```
+
+### Ensure correct usage of `aria-labelledby` on `<section>` elements
+
+* When a `<section>` element is given an accessible name, for example with the `aria-labelledby` or `aria-label` attribute, the element receives an implicit ARIA attribute [`role="region"`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/region_role) which marks it as a [landmark](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles#3._landmark_roles) for screen readers and other assistive technologies
+* These landmarks can then be used as another method for screen reader users to navigate around the page and understand it's contents
+* **However, creating additional landmarks with the `<section>` element must only be done when necessary**
+  * Adding too many landmark roles on the page can create "noise" for screen readers and actually make the site harder to understand and use, so must be used sparingly
+* For Canvas projects, `aria-labelledby` should only be used on `<section>` elements that are used as the main section or main component for a page template, and not used on reusable 'sections everywhere' sections or components
+  * See [Main components](https://we-make-websites.gitbook.io/canvas/components/other-types/main-components) for help identifying what the main component of a template should be
+* The standard for main components in Canvas is that they have a `<h1 id="template-title">` element containing relevant text, with the `<section>` element given the `aria-labelledby="template-title"` attribute
+* When replacing or updating one of the default Canvas main components, ensure that you still have an element with `id="template-title"` for the `aria-labelledby` attribute to reference
+
 
 [ꜛ Back to TOC](#table-of-contents)
 
