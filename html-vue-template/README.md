@@ -2,7 +2,7 @@
 
 These rules apply to all Liquid, HTML, and Vue `<template>` code.
 
-See also [Vue's style guide](https://v3.vuejs.org/style-guide/).
+See also [Vue's style guide](https://vuejs.org/style-guide/).
 
 ## Table of contents
 
