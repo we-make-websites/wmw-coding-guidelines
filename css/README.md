@@ -1435,6 +1435,7 @@ $LIGHT_GREY: #d4d7d9;
   // Before Canvas 3.0.0
   @include ms(0);
 }
+```
 
 * Use rem, relative ems
 * They're easier to understand as they're always relative to the base font-size
