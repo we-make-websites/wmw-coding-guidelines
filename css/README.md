@@ -203,6 +203,7 @@
 * We should always develop mobile first
 * This means we're expanding to fill desktop instead of cramming things in to fit mobile
 * If we fail to add desktop styles then the site will still be usable
+* It's still acceptable to use `$until` media queries for extensive mobile-only code which you'd only have to override in the desktop breakpoint
 
 ### Responsive banner padding
 
@@ -210,6 +211,7 @@
 
 ```scss
 .foo {
+  aspect-ratio: 16 / 9;
   padding-block-start: 60%;
 }
 ```
@@ -235,7 +237,7 @@
 
 * When using padding to create a responsive banner always use `padding-block-end`
 * Also add a preceding comment explaining the ratio of the banner
-* `aspect-ratio` is still not supported in all the browsers that we [support](https://wemakewebsites.com/msa/supported)
+* We don't recommend using [`aspect-ratio`](#aspect-ratio) because in browsers that don't support it (generally relatively recent versions of Safari) it would break the layout
 
 ### RTL
 
@@ -392,17 +394,22 @@
   @include transition(opacity);
   // Extends
   @extend .grid;
-  // SASS variables
-  $variable: var(--spacing-m);
   // CSS variables
   --variable: var(--spacing-m);
+  // SASS variables
+  $parent: &;
   // Properties in alphabetical order
   background-color: transparent;
   border: 0;
   display: flex;
+  // Prefixed properties should be in alphabetical order based on the property
+  // itself, ignoring the prefix
+  -webkit-line-clamp: unset;
+  z-index: var(--layer-raised);
 
-  // Pseudo-element
-  &::before {
+  // Pseudo-elements
+  &::before,
+  &::after {
     content: '';
   }
 
@@ -423,17 +430,22 @@
   }
 
   // Pseudo-selectors
-  &:focus,
-  &:hover {
+  &:hover,
+  &:focus {
     border: 1px solid var(--color-brand-1-default)
   }
 
   // Modifiers
   &#{&}--big {
     width: 100%;
+
+    // Use $parent SASS variable to avoid re-writing parent selector
+    #{$parent}__bar {
+      color: var(--color-neutral-1);
+    }
   }
 
-  // Parents
+  // Parent selectors
   .parent & {
     display: none;
   }
@@ -442,7 +454,7 @@
   @media print {}
 
   // @supports queries
-  @supports (display: flex) {}
+  @supports (grid-template-columns: subgrid) {}
 
   // mq media queries
   @include mq($from: l) {}
@@ -450,19 +462,20 @@
 ```
 
 The order should be as follows, all items within each group should be sorted alphabetically:
-1. Includes (e.g. `@include button-reset()`)
-1. Extends (e.g. `@extend %font`)
-1. SASS variables (e.g. `$local-margin`)
-1. CSS variables (e.g. `--local-padding`)
+1. Includes (e.g. `@include transition(opacity)`)
+1. Extends (e.g. `@extend .grid`)
+1. CSS variables (e.g. `--variable`)
+1. SASS variables (e.g. `$parent`)
 1. Properties (e.g. `background-color`)
-1. Pseudo-elements (e.g. `&::before`, `&::placeholder` etc.)
+1. Pseudo-elements (e.g. `&::before`, `&::after`, `&::placeholder` etc.)
 1. Nested elements (e.g. `&__bar`)
-1. Direct descendants (e.g. `> .baz`, `+ .baz`)
-1. Pseudo-selectors (e.g. `&:hover`), this way they can change nested elements
+1. Direct descendants (e.g. `> .baz`)
+1. Sibling selectors (e.g. `+ .bam`, `~ .bam`, etc.)
+1. Pseudo-selectors (e.g. `&:hover`, `&:focus`, etc.), this way they can change nested elements
 1. Modifiers (e.g. `&#{&}--big`), this gives them precedence over all nested elements
-1. Parents (e.g. `.parent &`), so that they have the greatest priority
+1. Parent selectors (e.g. `.parent &`), so that they have the greatest priority
 1. Media queries (e.g. `@media print`)
-1. Support queries (e.g. `@supports (display: flex)`)
+1. Support queries (e.g. `@supports (grid-template-columns: subgrid)`)
 1. MQ media queries (e.g. `@include mq($from: l)`)
 
 ### Pseudo-elements & -selectors
@@ -1303,8 +1316,8 @@ $LIGHT_GREY: #d4d7d9;
 
 ### `aspect-ratio`
 
-* The `aspect-ratio` property does not have the necessary browser support yet, avoid using it
-* See [responsive banner padding](#responsive-banner-padding)
+* We don't recommend using `aspect-ratio` because in browsers that don't support it (generally relatively recent versions of Safari) it would break the layout
+* See [responsive banner padding](#responsive-banner-padding) for an alternative
 
 ### `border`
 

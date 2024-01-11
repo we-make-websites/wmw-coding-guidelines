@@ -1,5 +1,13 @@
 # 📏 Coding Guidelines Changelog
 
+## 3.1.0 - 2024-01-11
+
+* Added _.github/_ folder
+* Home - General updates to _README.md_
+* CSS - Updated Property order rule
+* CSS - Updated Mobile first rule
+* CSS - Updated Responsive banner padding and `aspect-ratio` rules
+
 ## 3.0.1 - 2023-08-30
 
 * CSS - Fixed unclosed codeblock

@@ -1,0 +1,13 @@
+# GitHub code owners file
+# Each line is a file pattern followed by one or more owners.
+# Code owners are will be requested for review when someone opens a pull request.
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owners.
+# Space separated list of GitHub usernames.
+# Remove comment to enable.
+* @craigsbaldwin
+
+# Example of a JavaScript file owner.
+# The last matching pattern takes the most precedence.
+# *.js @js-owner

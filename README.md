@@ -30,8 +30,12 @@ When working on large, long-running projects, with dozens of developers of diffe
 
 When you are writing new code you are expected to maintain the guidelines, if you update an existing feature you are expected to update any non-adhering code that you interact with or change. This means you are not expected to fix the whole file when adding new functionality, just the code you write or change.
 
-Assuming you've followed [setup](https://we-make-websites.gitbook.io/canvas/guides/starting-a-new-project) then your JS, SCSS, and Vue files will be formatted when you save by `eslint --fix` and `stylelint --fix`. Other `eslint` and `stylelint` errors will be flagged when committing your changes. You will have to manually apply the guidelines to HTML and Liquid as there is no linter available.
+Assuming you've followed [project setup](https://we-make-websites.gitbook.io/canvas/guides/project-setup) then your JS, SCSS, and Vue files will be formatted by `eslint --fix` and `stylelint --fix` when you save a supported file. Other `eslint` and `stylelint` errors will be flagged when committing your changes.
+
+You will have to manually apply the guidelines to HTML and Liquid as there is no linter available. Certain Vue and SCSS rules must also be applied manually as their respective linters don't support them.
 
 ## Can I contribute to the guidelines?
 
-Please branch from `master` and submit a pull request for any suggested changes.
+Please branch from `main` and submit a pull request to the relevant code owner for review.
+
+See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for more details on process and code quality when contributing.
